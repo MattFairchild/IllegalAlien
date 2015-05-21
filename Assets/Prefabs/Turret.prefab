@@ -73,7 +73,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -103,7 +103,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 10.29
+  m_Time: 19.7999992
   m_StartWidth: .159999996
   m_EndWidth: .100000001
   m_Colors:
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c375f5ba2faaaf04588b24be9ea0d974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 5429728}
   velocity: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   distance: 0

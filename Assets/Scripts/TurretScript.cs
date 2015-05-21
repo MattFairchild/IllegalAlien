@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TurretScript : MonoBehaviour
 {
+    public Rigidbody rb;
 
     public Vector3 velocity;
     public Vector3 direction;
@@ -16,8 +17,8 @@ public class TurretScript : MonoBehaviour
     {
         planets = GameObject.FindGameObjectsWithTag("Planet");
         direction = Vector3.zero;
-        velocity = Vector3.zero;
-        gravitationalConstant = 0.3f;
+        rb.velocity = Vector3.zero;
+        gravitationalConstant = 30f;
 
     }
 
@@ -30,28 +31,27 @@ public class TurretScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(velocity * Time.deltaTime);
+        //transform.Translate(velocity * Time.deltaTime);
         Gravity();
-        speed = Vector3.Magnitude(velocity);
+        speed = Vector3.Magnitude(rb.velocity);
+        velocity = rb.velocity;
     }
 
     public void SetVelocity(Vector3 vel)
     {
-        velocity = vel;
+        rb.velocity = vel;
     }
 
     private void Gravity()
     {
         foreach (GameObject planet in planets)
         {
-            PlanetScript planetScript = planet.GetComponent<PlanetScript>();
+            Rigidbody planetRb = planet.GetComponent<Rigidbody>();
+            //PlanetScript planetScript = planet.GetComponent<PlanetScript>();
             direction = Vector3.Normalize(planet.transform.position - this.transform.position);
             distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
-            //if (distance < 1.3f*planet.transform.localScale.x)
-            //{
-            //    distance = 1.7f * planet.transform.localScale.x;
-            //}
-            velocity += (gravitationalConstant * planetScript.mass / Mathf.Pow(distance, 2)) * direction;
+            //velocity += (gravitationalConstant * planetScript.mass / Mathf.Pow(distance, 2)) * direction;
+            rb.velocity += ((gravitationalConstant * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
         }
     }
 
@@ -60,8 +60,15 @@ public class TurretScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Planet")
         {
-            Vector3 mov = Vector3.Reflect(velocity, collision.contacts[0].normal);
-            velocity = mov;
+            //Vector3 mov = Vector3.Reflect(velocity, collision.contacts[0].normal);
+            //velocity = mov;
+            rb.velocity = Vector3.Reflect(rb.velocity, collision.contacts[0].normal);
+            
         }
+    }
+
+    public float GetGravitationalConstant()
+    {
+        return gravitationalConstant;
     }
 }
