@@ -10,6 +10,7 @@ public class TurretScript : MonoBehaviour
     public float distance;
     public float speed;
     public float gravitationalConstant;
+    public bool affectedByGravity = false;
     public GameObject[] planets;
 
     // Use this for initialization
@@ -19,27 +20,28 @@ public class TurretScript : MonoBehaviour
         direction = Vector3.zero;
         rb.velocity = Vector3.zero;
         gravitationalConstant = 30f;
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
     {
         //transform.Translate(velocity * Time.deltaTime);
-        Gravity();
+        if (affectedByGravity)
+        {
+            Gravity();
+        }
         speed = Vector3.Magnitude(rb.velocity);
         velocity = rb.velocity;
     }
 
     public void SetVelocity(Vector3 vel)
     {
+        affectedByGravity = true;
         rb.velocity = vel;
+    }
+
+    public void setAffectedByGravity(bool affected)
+    {
+        affectedByGravity = affected;
     }
 
     private void Gravity()
