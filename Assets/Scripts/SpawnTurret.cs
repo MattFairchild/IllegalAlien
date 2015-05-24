@@ -29,7 +29,6 @@ public class SpawnTurret : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f)); // X-Z plane
 
         //init linerenderer
@@ -52,7 +51,7 @@ public class SpawnTurret : MonoBehaviour
 
         if (!placed)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 tempTurret = (GameObject)GameObject.Instantiate(turretPrefab, mousePos, Quaternion.identity);
 
@@ -63,7 +62,7 @@ public class SpawnTurret : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 tempTurret.GetComponent<TurretScript>().SetVelocity(velocity);
 
