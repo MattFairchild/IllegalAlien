@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GravityTexture : MonoBehaviour 
 {
+    public GameManager gm;
 
     private Texture2D mask;
     private int textureSize;
@@ -13,7 +14,9 @@ public class GravityTexture : MonoBehaviour
 
 	// Use this for initialization
 	void Start () 
-    {    
+    {
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
         float mass = GetComponentInParent<Rigidbody>().mass;
         textureSize = 512;
         //grav = GetComponent<TurretScript>().gravitationalConstant; //gameManager
@@ -58,5 +61,18 @@ public class GravityTexture : MonoBehaviour
         mask.Apply();
         gameObject.GetComponent<Renderer>().material.mainTexture = mask;
 	}
-	
+
+
+    void Update()
+    {
+        if (gm.showRadius)
+        {
+            gameObject.GetComponent<Renderer>().enabled = true;
+        }
+        else
+        {
+            gameObject.GetComponent<Renderer>().enabled = false;
+        }
+    }
+
 }

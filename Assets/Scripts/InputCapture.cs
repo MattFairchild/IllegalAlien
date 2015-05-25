@@ -33,7 +33,6 @@ public class InputCapture : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
         //update the angle to rotate
         //Gamepad
         if ((numOfPads = numberOfGamepads()) != 0)

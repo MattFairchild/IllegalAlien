@@ -3,6 +3,8 @@ using System.Collections;
 
 public class InputActions : MonoBehaviour {
 
+    public GameManager gm;
+
     public GameObject turretPrefab;
     public GameObject bulletPrefab;
     public InputCapture input;
@@ -21,6 +23,7 @@ public class InputActions : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         cam = GameObject.FindGameObjectWithTag("MainCamera");
         screenUp = cam.transform.up;
         screenRight = cam.transform.right;
@@ -91,6 +94,11 @@ public class InputActions : MonoBehaviour {
         {
             if (!bumperPressed)
             {
+                //if radius should only be shown while having turret hovering, set variable
+                if (!gm.alwayShowRadius)
+                {
+                    gm.showRadius = true;
+                }
                 bumperPressed = true;
                 bumperReleased = false;
 
@@ -104,6 +112,12 @@ public class InputActions : MonoBehaviour {
         {
             if (bumperPressed && !bumperReleased)
             {
+                //if radius should only be shown while having turret hovering, set variable
+                if (!gm.alwayShowRadius)
+                {
+                    gm.showRadius = false;
+                }
+
                 bumperPressed = false;
                 bumperReleased = true;
 
