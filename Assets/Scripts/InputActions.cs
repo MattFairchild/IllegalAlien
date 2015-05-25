@@ -30,8 +30,6 @@ public class InputActions : MonoBehaviour {
     void FixedUpdate()
     {
 
-        Debug.Log(maxSpeed);
-
         //if shooting on CD, then decrease cd with every update
         if (bulletCooldown > 0.0f)
         {

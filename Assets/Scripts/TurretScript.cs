@@ -4,11 +4,8 @@ using System.Collections;
 public class TurretScript : MonoBehaviour
 {
     public Rigidbody rb;
-
-    public Vector3 velocity;
     public Vector3 direction;
     public float distance;
-    public float speed;
     public float gravitationalConstant;
     public bool affectedByGravity = false;
     public GameObject[] planets;
@@ -24,13 +21,10 @@ public class TurretScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        //transform.Translate(velocity * Time.deltaTime);
         if (affectedByGravity)
         {
             Gravity();
         }
-        speed = Vector3.Magnitude(rb.velocity);
-        velocity = rb.velocity;
     }
 
     public void SetVelocity(Vector3 vel)
@@ -49,10 +43,8 @@ public class TurretScript : MonoBehaviour
         foreach (GameObject planet in planets)
         {
             Rigidbody planetRb = planet.GetComponent<Rigidbody>();
-            //PlanetScript planetScript = planet.GetComponent<PlanetScript>();
             direction = Vector3.Normalize(planet.transform.position - this.transform.position);
             distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
-            //velocity += (gravitationalConstant * planetScript.mass / Mathf.Pow(distance, 2)) * direction;
             rb.velocity += ((gravitationalConstant * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
         }
     }
@@ -62,11 +54,9 @@ public class TurretScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Planet")
         {
-            //Vector3 mov = Vector3.Reflect(velocity, collision.contacts[0].normal);
-            //velocity = mov;
-            rb.velocity = Vector3.Reflect(rb.velocity, collision.contacts[0].normal);
-            
+			Destroy(this.gameObject);    
         }
+        //TODO: Collision with other turrets
     }
 
     public float GetGravitationalConstant()
