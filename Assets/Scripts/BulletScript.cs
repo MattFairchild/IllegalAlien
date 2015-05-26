@@ -5,12 +5,13 @@ public class BulletScript : MonoBehaviour {
 
     public Rigidbody rb;
     public float speed = 25.0f;
-    public float lifetime = 10.0f;
+    public float lifetime;
 
 	// Use this for initialization
 	void Start () {
         this.transform.rotation = Quaternion.AngleAxis(90.0f, this.transform.right);
         rb.velocity = this.transform.up * speed;
+        lifetime = 4.0f;
 	}
 
     public void Update()
@@ -29,7 +30,10 @@ public class BulletScript : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision)
-    { 
-        GameObject.Destroy(this.gameObject);
+    {
+        if (collision.collider.tag != "Player" && collision.collider.tag != "Gun")
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }

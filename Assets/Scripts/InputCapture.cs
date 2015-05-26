@@ -4,7 +4,8 @@ using System.Collections;
 public class InputCapture : MonoBehaviour {
 
     private float speed;
-    private float angle;
+    private float flightAngle;
+    private float shootAngle;
 
     private float speedR;
     private float speedU;
@@ -42,11 +43,13 @@ public class InputCapture : MonoBehaviour {
             speedU = Input.GetAxis("VerticalLeft");
             speed = new Vector3(speedR, 0.0f, speedU).magnitude;
 
+
             //rotate towards how the right analog stick is facing
             float y = Input.GetAxis("HorizontalRight");
             float x = Input.GetAxis("VerticalRight");
 
-            angle = (Mathf.Atan2(y, x) * Mathf.Rad2Deg) + 90.0f;
+            flightAngle = (Mathf.Atan2(speedU,speedR) * Mathf.Rad2Deg) - 90.0f;
+            shootAngle = (Mathf.Atan2(y, x) * Mathf.Rad2Deg) + 90.0f;
 
 
             if (Input.GetAxis("ShootGamepad") > 0.1f)
@@ -71,7 +74,6 @@ public class InputCapture : MonoBehaviour {
         //Mouse&Keyboard
         else
         {
-
             //see where the mouse is and calculate angle to rotate
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (plane.Raycast(ray, out hit))
@@ -81,13 +83,13 @@ public class InputCapture : MonoBehaviour {
             }
 
             //only in range [0, 180], so use cross prodcut to know direction
-            angle = Vector3.Angle(screenUp, mouseAngle);
+            shootAngle = Vector3.Angle(screenUp, mouseAngle);
 
             //use cross product to in the end have the [0, 360] degree range
             Vector3 cross = Vector3.Cross(screenUp, mouseAngle);
             if (cross.y > 0.0f)
             {
-                angle = 360 - angle;
+                shootAngle = 360 - shootAngle;
             }
 
 
@@ -124,7 +126,7 @@ public class InputCapture : MonoBehaviour {
 
     //go through the Joystick array and check if any entries are non-empty.
     //If so, return number of Joysticks
-    private int numberOfGamepads()
+    public int numberOfGamepads()
     {
         int count = 0;
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
@@ -149,9 +151,14 @@ public class InputCapture : MonoBehaviour {
         return speed;
     }
 
-    public float getAngle()
+    public float getFlightAngle()
     {
-        return angle;
+        return flightAngle;
+    }
+
+    public float getShootAngle()
+    {
+        return shootAngle;
     }
 
     public bool isShooting()

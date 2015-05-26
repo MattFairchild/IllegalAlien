@@ -6,38 +6,25 @@ public class InputActions : MonoBehaviour {
     public GameManager gm;
 
     public GameObject turretPrefab;
-    public GameObject bulletPrefab;
     public InputCapture input;
 
-    public float bulletCooldown, boostCooldown;
+    public float boostCooldown;
 
     private float maxSpeed = 7.0f;
     private Quaternion rot;
-    private GameObject cam;
     private GameObject tempTurret;
 
-
-    private Vector3 screenUp, screenRight;
     private bool bumperPressed = false, bumperReleased = false;
 
     // Use this for initialization
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
-        screenUp = cam.transform.up;
-        screenRight = cam.transform.right;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        //if shooting on CD, then decrease cd with every update
-        if (bulletCooldown > 0.0f)
-        {
-            bulletCooldown -= Time.deltaTime;
-        }
 
         //if player has short boost after setting turret, decrease the bosst time every update
         if (boostCooldown > 0.0f)
@@ -51,38 +38,29 @@ public class InputActions : MonoBehaviour {
         }
 
         //adjust position according to speed etc.
-        transform.position = transform.position + input.getSpeedRight() * maxSpeed * screenRight * Time.deltaTime;
-        transform.position = transform.position + input.getSpeedUp() * maxSpeed * screenUp * Time.deltaTime;
+        transform.position = transform.position + input.getSpeedRight() * maxSpeed * gm.screenRight * Time.deltaTime;
+        transform.position = transform.position + input.getSpeedUp() * maxSpeed * gm.screenUp * Time.deltaTime;
         transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
 
 
         //if the player is currently dragging a turret behind him, keep the position updated
-        if (bumperPressed && !bumperReleased)
+        if (bumperPressed && !bumperReleased && tempTurret)
         {
             tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z);
         }
 
-        //rotate the palyer according to the angle
-        rot = Quaternion.AngleAxis(input.getAngle(), cam.transform.forward);
-        transform.rotation = rot;
-
-
-
-        /*
-            Shooting
-         */
-
-        if (input.isShooting())
+        //rotate the palyer according to the angle. Mouse has only one rotation, Gamepad 2 seperate ones
+        if (input.numberOfGamepads() > 0)
         {
-            if (bulletCooldown <= 0.0f)
-            {
-                bulletCooldown = 0.2f;
-                Vector3 spawnPos = this.transform.position + this.transform.forward * transform.localScale.z;
-                GameObject.Instantiate(bulletPrefab, spawnPos, this.transform.rotation);
-            }
+            rot = Quaternion.AngleAxis(input.getFlightAngle(), gm.screenNormal);
         }
-
-
+        else //keyboard&mouse
+        {
+            rot = Quaternion.AngleAxis(input.getShootAngle(), gm.screenNormal);
+        }
+     
+            
+        transform.rotation = rot;
 
 
         /*
@@ -121,7 +99,12 @@ public class InputActions : MonoBehaviour {
                 bumperPressed = false;
                 bumperReleased = true;
 
-                tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
+                //check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
+                if (tempTurret)
+                { 
+                    tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);                
+                }
+
                 boostCooldown = 0.5f;
             }
         }
