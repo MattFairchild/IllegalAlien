@@ -171,6 +171,7 @@ MonoBehaviour:
   screenUp: {x: 0, y: 0, z: 0}
   screenRight: {x: 0, y: 0, z: 0}
   screenNormal: {x: 0, y: 0, z: 0}
+  autoShoot: 0
 --- !u!4 &260282852
 Transform:
   m_ObjectHideFlags: 0

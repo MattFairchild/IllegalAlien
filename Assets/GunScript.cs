@@ -40,8 +40,7 @@ public class GunScript : MonoBehaviour {
         /*
         Shooting
         */
-
-        if (input.isShooting())
+        if ((input.isShooting() && !gm.autoShoot) || (input.rightAnalogMoving() && gm.autoShoot))
         {
             if (bulletCooldown <= 0.0f)
             {

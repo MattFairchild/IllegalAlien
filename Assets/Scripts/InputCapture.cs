@@ -180,4 +180,19 @@ public class InputCapture : MonoBehaviour {
     {
         return speedU;
     }
+
+    public bool rightAnalogMoving()
+    {
+        float y = Mathf.Abs(Input.GetAxis("HorizontalRight"));
+        float x = Mathf.Abs(Input.GetAxis("VerticalRight"));
+
+        if (y > 0.1f || x > 0.1f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
