@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputActions : MonoBehaviour {
+public class InputActions : MonoBehaviour
+{
 
     public GameManager gm;
 
@@ -46,7 +47,7 @@ public class InputActions : MonoBehaviour {
         //if the player is currently dragging a turret behind him, keep the position updated
         if (bumperPressed && !bumperReleased && tempTurret)
         {
-            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z);
+            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
         }
 
         //rotate the palyer according to the angle. Mouse has only one rotation, Gamepad 2 seperate ones
@@ -58,8 +59,8 @@ public class InputActions : MonoBehaviour {
         {
             rot = Quaternion.AngleAxis(input.getShootAngle(), gm.screenNormal);
         }
-     
-            
+
+
         transform.rotation = rot;
 
 
@@ -80,7 +81,7 @@ public class InputActions : MonoBehaviour {
                 bumperPressed = true;
                 bumperReleased = false;
 
-                Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z);
+                Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
                 tempTurret = (GameObject)GameObject.Instantiate(turretPrefab, spawnPos, this.transform.rotation);
                 tempTurret.GetComponent<TurretScript>().setAffectedByGravity(false);
             }
@@ -101,8 +102,8 @@ public class InputActions : MonoBehaviour {
 
                 //check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
                 if (tempTurret)
-                { 
-                    tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);                
+                {
+                    tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
                 }
 
                 boostCooldown = 0.5f;
