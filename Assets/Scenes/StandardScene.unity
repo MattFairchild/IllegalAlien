@@ -174,13 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bf56c2fa92ac544abf822e80aa0fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showRadius: 0
-  alwayShowRadius: 0
+  gravitationalConstant: 30
+  showRadius: 1
+  alwayShowRadius: 1
   onlyNearest: 0
   screenUp: {x: 0, y: 0, z: 0}
   screenRight: {x: 0, y: 0, z: 0}
   screenNormal: {x: 0, y: 0, z: 0}
-  autoShoot: 0
+  autoShoot: 1
 --- !u!4 &260282852
 Transform:
   m_ObjectHideFlags: 0
@@ -390,7 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c54a1661a6d89ec4095911472b5a529d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
   input: {fileID: 1188404503}
   bulletPrefab: {fileID: 101722, guid: bc5d3e80da072ae4fad03b5349e3b73f, type: 2}
   bulletCooldown: 0
@@ -425,7 +425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2b2a5dc6849324c97576dec4dfe59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
   turretPrefab: {fileID: 123672, guid: 5764b9ee814c26148a8bf35491e3d4fd, type: 2}
   input: {fileID: 1188404503}
   boostCooldown: 0

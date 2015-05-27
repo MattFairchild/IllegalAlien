@@ -3,23 +3,18 @@ using System.Collections;
 
 public class TurretScript : MonoBehaviour
 {
-    public GameManager gm;
-
     public Rigidbody rb;
     public Vector3 direction;
     public float distance;
-    public float gravitationalConstant;
     public bool affectedByGravity = false;
     public GameObject[] planets;
 
     // Use this for initialization
     void Start()
     {
-        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         planets = GameObject.FindGameObjectsWithTag("Planet");
         direction = Vector3.zero;
         rb.velocity = Vector3.zero;
-        gravitationalConstant = 30f;
     }
 
     void FixedUpdate()
@@ -56,7 +51,7 @@ public class TurretScript : MonoBehaviour
         foreach (GameObject planet in planets)
         {
             //if we only want the nearest panet to attract, then use the loop only to find the nearest planet
-            if (gm.onlyNearest && planets.Length > 0)
+            if (GameManager.getOnlyNearest() && planets.Length > 0)
             {
                 if (Vector3.Magnitude(planet.transform.position - this.transform.position) < tempDistance)
                 {
@@ -70,18 +65,18 @@ public class TurretScript : MonoBehaviour
                 Rigidbody planetRb = planet.GetComponent<Rigidbody>();
                 direction = Vector3.Normalize(planet.transform.position - this.transform.position);
                 distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
-                rb.velocity += ((gravitationalConstant * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;       
+                rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;       
             }
         }
 
 
         //if only the nearest planet should be used, calc same equation as above, but for the nearest planet only
-        if (gm.onlyNearest && planets.Length > 0)
+        if (GameManager.getOnlyNearest() && planets.Length > 0)
         {
             Rigidbody planetRb = nearestPlanet.GetComponent<Rigidbody>();
             direction = Vector3.Normalize(nearestPlanet.transform.position - this.transform.position);
             distance = Vector3.Magnitude(nearestPlanet.transform.position - this.transform.position);
-            rb.velocity += ((gravitationalConstant * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;         
+            rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;         
         }
 
     }
@@ -96,8 +91,4 @@ public class TurretScript : MonoBehaviour
         //TODO: Collision with other turrets
     }
 
-    public float GetGravitationalConstant()
-    {
-        return gravitationalConstant;
-    }
 }

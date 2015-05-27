@@ -3,16 +3,9 @@ using System.Collections;
 
 public class GunScript : MonoBehaviour {
 
-    public GameManager gm;
-
     public InputCapture input;
     public GameObject bulletPrefab;
     public float bulletCooldown;
-
-    void Start()
-    {
-        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-    }
 
 	// Update is called once per frame
 	void Update () {
@@ -27,11 +20,11 @@ public class GunScript : MonoBehaviour {
         //depending on inout method different direction to face
         if (input.numberOfGamepads() > 0)
         {
-            rot = Quaternion.AngleAxis(input.getShootAngle(), gm.screenNormal);
+            rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
         }
         else //keyboard&mouse
         {
-            rot = Quaternion.AngleAxis(input.getShootAngle(), gm.screenNormal);
+            rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
         }
 
         this.transform.rotation = rot;
@@ -40,7 +33,7 @@ public class GunScript : MonoBehaviour {
         /*
         Shooting
         */
-        if ((input.isShooting() && !gm.autoShoot) || (input.rightAnalogMoving() && gm.autoShoot))
+        if ((input.isShooting() && !GameManager.getAutoShoot()) || (input.rightAnalogMoving() && GameManager.getAutoShoot()))
         {
             if (bulletCooldown <= 0.0f)
             {

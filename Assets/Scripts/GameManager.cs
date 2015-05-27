@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//Class that should hold any type of infprmation needed in multiple other different scripts
+
 public class GameManager : MonoBehaviour {
+
+    private static GameManager instance;
+
+ 
+    public float gravitationalConstant;
 
     public bool showRadius = false;
     public bool alwayShowRadius = false;
@@ -16,12 +21,66 @@ public class GameManager : MonoBehaviour {
     //Control Options
     public bool autoShoot = false;  //Shoot & rotate gun both with RT, only for gamepad
 
-    void Start()
+    void Awake()
     {
-        Transform cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        if (instance != null)
+			return;
+		
+		instance = this;
+
+    }
+	// Use this for initialization
+	void Start () {
+	    Transform cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
         screenUp = cam.up;
         screenRight = cam.right;
         screenNormal = cam.forward;
+	}
+	
+
+    public static float getGravitationalConstant()
+    {
+        return instance.gravitationalConstant;
     }
+
+    public static bool getShowRadius()
+    {
+        return instance.showRadius;
+    }
+
+    public static void setShowRadius(bool show)
+    {
+        instance.showRadius = show;
+    }
+
+    public static bool getOnlyNearest()
+    {
+        return instance.onlyNearest;
+    }
+
+    public static bool getAlwaysShowRadius()
+    {
+        return instance.alwayShowRadius;
+    }
+
+    public static Vector3 getScreenUp()
+    {
+        return instance.screenUp;
+    }
+    public static Vector3 getScreenRight()
+    {
+        return instance.screenRight;
+    }
+
+    public static Vector3 getScreenNormal()
+    {
+        return instance.screenNormal;
+    }
+
+    public static bool getAutoShoot()
+    {
+        return instance.autoShoot;
+    }
+    
 }
