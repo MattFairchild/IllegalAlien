@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bf56c2fa92ac544abf822e80aa0fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravitationalConstant: 30
+  gravitationalConstant: 20
   showRadius: 0
   alwayShowRadius: 0
   onlyNearest: 0
@@ -1808,6 +1808,7 @@ MonoBehaviour:
   turretPrefab: {fileID: 123672, guid: 5764b9ee814c26148a8bf35491e3d4fd, type: 2}
   input: {fileID: 1188404503}
   boostCooldown: 0
+  maxSpeed: 5
 --- !u!23 &1188404499
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -8,8 +8,9 @@ public class InputActions : MonoBehaviour
     public InputCapture input;
 
     public float boostCooldown;
-
-    private float maxSpeed = 7.0f;
+    
+    public float maxSpeed;
+    private float currentMaxSpeed;
     private Quaternion rot;
     private GameObject tempTurret;
 
@@ -23,17 +24,17 @@ public class InputActions : MonoBehaviour
         //if player has short boost after setting turret, decrease the bosst time every update
         if (boostCooldown > 0.0f)
         {
-            maxSpeed = 10.0f;
+            currentMaxSpeed = 1.5f * maxSpeed;
             boostCooldown -= Time.deltaTime;
         }
         else
         {
-            maxSpeed = 7.0f;
+            currentMaxSpeed = maxSpeed;
         }
 
         //adjust position according to speed etc.
-        transform.position = transform.position + input.getSpeedRight() * maxSpeed * GameManager.getScreenRight() * Time.deltaTime;
-        transform.position = transform.position + input.getSpeedUp() * maxSpeed * GameManager.getScreenUp() * Time.deltaTime;
+        transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
+        transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
         transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
 
 
@@ -96,7 +97,7 @@ public class InputActions : MonoBehaviour
                 //check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
                 if (tempTurret)
                 {
-                    tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
+                    tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * currentMaxSpeed);
                 }
 
                 boostCooldown = 0.5f;
