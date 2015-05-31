@@ -6,6 +6,7 @@ public class TurretScript : MonoBehaviour
     public Rigidbody rb;
     public Vector3 direction;
     public float distance;
+    public float orbitalSpeed;
     public bool affectedByGravity = false;
     public GameObject[] planets;
 
@@ -65,7 +66,14 @@ public class TurretScript : MonoBehaviour
                 Rigidbody planetRb = planet.GetComponent<Rigidbody>();
                 direction = Vector3.Normalize(planet.transform.position - this.transform.position);
                 distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
-                rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;       
+
+                //limit range of gravity depending on orbital speed
+                orbitalSpeed = Mathf.Sqrt(GameManager.getGravitationalConstant() * planetRb.mass / distance);
+                if (orbitalSpeed >= 1.5f)
+                {
+                    rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
+                }
+                       
             }
         }
 
