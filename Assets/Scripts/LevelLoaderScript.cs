@@ -3,12 +3,12 @@ using System.Collections;
 
 public class LevelLoaderScript : MonoBehaviour {
 
-	public void loadLevel(int levelNum)
+	public void LoadLevel(int levelNum)
 	{
 		Application.LoadLevel (levelNum);
 	}
 	
-	public void exitGame()
+	public void ExitGame()
 	{
 		Application.Quit ();
 	}
