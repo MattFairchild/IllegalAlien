@@ -82,5 +82,5 @@ public class GameManager : MonoBehaviour {
     {
         return instance.autoShoot;
     }
-    
+	
 }
