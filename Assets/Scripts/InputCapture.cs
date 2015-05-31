@@ -101,7 +101,7 @@ public class InputCapture : MonoBehaviour {
             Vector3 screenPos = camera.WorldToScreenPoint(this.transform.position);
 
 
-            if (Input.GetAxis("ShootMouse") > 0.1f)
+            if (Input.GetMouseButton(0))
             {
                 shoot = true;
             }

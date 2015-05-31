@@ -1,11 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class GunScript : MonoBehaviour {
 
+	public AudioClip shotSound;
     public InputCapture input;
     public GameObject bulletPrefab;
     public float bulletCooldown;
+
+	private AudioSource audio;
+
+	void Start()
+	{
+		audio = GetComponent<AudioSource> ();
+	}
+
 
 	// Update is called once per frame
 	void Update () {
@@ -37,6 +47,7 @@ public class GunScript : MonoBehaviour {
         {
             if (bulletCooldown <= 0.0f)
             {
+				audio.PlayOneShot(shotSound, 0.1f);
                 bulletCooldown = 0.25f;
                 float safetyDistance = transform.localScale.z + bulletPrefab.transform.localScale.y / 2;
                 Vector3 spawnPos = this.transform.position + this.transform.forward * safetyDistance;
