@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 88d3c5049549b404eba459c6c7d5d10d
-timeCreated: 1433094546
+guid: 737308da4831d434ab14cc46a9b7bf22
+timeCreated: 1433094305
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: IconCenter_0
-    21300002: IconCenter_1
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,7 +37,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,27 +48,7 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: IconCenter_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: IconCenter_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 128, y: 128, z: 128, w: 128}
+    sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

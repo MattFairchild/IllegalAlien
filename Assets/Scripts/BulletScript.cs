@@ -5,13 +5,13 @@ public class BulletScript : MonoBehaviour {
 
     public Rigidbody rb;
     public float speed = 25.0f;
-    public float lifetime;
+    public float lifetime = 4.0f;
 
 	// Use this for initialization
 	void Start () {
         this.transform.rotation = Quaternion.AngleAxis(90.0f, this.transform.right);
         rb.velocity = this.transform.up * speed;
-        lifetime = 4.0f;
+        //lifetime = 4.0f;
 	}
 
     public void Update()
