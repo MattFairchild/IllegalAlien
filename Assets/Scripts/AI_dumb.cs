@@ -5,10 +5,13 @@ using System.Collections;
 public class AI_dumb : MonoBehaviour {
 	public bool big = false;
 
+    public int resources;
 	protected GameObject spaceStation;
 	protected GameObject player;
 	protected new Rigidbody rigidbody;
 	protected float health = 1.0f;
+
+    public GameObject scrapPrefab;
 
 	[SerializeField]protected Image hpBar;
 
@@ -37,6 +40,9 @@ public class AI_dumb : MonoBehaviour {
 		if(collision.gameObject.tag == "Bullet"){
 			health -= big ? 0.05f : 0.20f;
 			if(health <= 0){
+                GameObject scrap = (GameObject)Instantiate(scrapPrefab, transform.position, Quaternion.identity);
+                ResourcesScript rs = scrap.GetComponent<ResourcesScript>();
+                rs.resources = resources;
 				Destroy(gameObject);
 			}
 			hpBar.fillAmount = health;

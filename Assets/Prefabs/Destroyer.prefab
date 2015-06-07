@@ -47,6 +47,7 @@ GameObject:
   - 64: {fileID: 6470368}
   - 54: {fileID: 5419536}
   - 114: {fileID: 11477892}
+  - 114: {fileID: 11488628}
   m_Layer: 0
   m_Name: Destroyer
   m_TagString: Enemy
@@ -280,12 +281,29 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174132}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a8536674c659ca47bc240d827def275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   big: 1
+  resources: 10
+  scrapPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
+  hpBar: {fileID: 11435314}
+--- !u!114 &11488628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49691a9e0136fe429563ad883ef2a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  resources: 10
+  scrapPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
   hpBar: {fileID: 11435314}
 --- !u!114 &11488678
 MonoBehaviour:

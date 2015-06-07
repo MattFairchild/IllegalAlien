@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     private static GameManager instance;
 
- 
+    
     public float gravitationalConstant;
 
     public bool showRadius = false;
@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 
     //Control Options
     public bool autoShoot = false;  //Shoot & rotate gun both with RT, only for gamepad
+
+    public int resources;
 
     void Awake()
     {
@@ -36,6 +38,9 @@ public class GameManager : MonoBehaviour {
         screenUp = cam.up;
         screenRight = cam.right;
         screenNormal = cam.forward;
+
+        //set starting values
+        resources = 0;
 	}
 	
 
@@ -81,6 +86,22 @@ public class GameManager : MonoBehaviour {
     public static bool getAutoShoot()
     {
         return instance.autoShoot;
+    }
+
+    public static int getResources()
+    {
+        return instance.resources;
+    }
+
+    public static void addResouces(int value)
+    {
+        instance.resources += value;
+
+        if (instance.resources > 100)
+            instance.resources = 100;
+
+        else if (instance.resources < 0)
+            instance.resources = 0;
     }
 	
 }

@@ -8,6 +8,7 @@ public class GravityTexture : MonoBehaviour
     private float boxSize;
     private float distance;
     private float speed;
+    
 
     // Use this for initialization
     void Start()
@@ -29,6 +30,7 @@ public class GravityTexture : MonoBehaviour
 
                 distance = 2f * boxSize * Mathf.Sqrt(Mathf.Pow(((float)i - (float)textureSize / 2f) / (float)textureSize / 2f, 2f) + Mathf.Pow(((float)j - (float)textureSize / 2f) / (float)textureSize / 2f, 2f));
                 speed = Mathf.Sqrt(mass * GameManager.getGravitationalConstant() / distance);
+
                 Color tex = new Color(0, 0, 0, 0);
                 if (speed < 2f)
                 {
@@ -154,6 +156,27 @@ public class GravityTexture : MonoBehaviour
 
 //}
 
+//                Color tex = new Color(0, 0, 0, 0);
+//                if (speed < 2f)
+//                {
+//                    tex = new Color((2 * speed - 3f), 0, 0, 0.25f * (2 * speed - 3f));
+//                }
+//                else if (speed >= 2f && speed < 3f)
+//                {
+//                    tex = new Color(1, speed - 2f, 0, 0.25f);
+//                }
+//                else if (speed >= 3f && speed < 4f)
+//                {
+//                    tex = new Color(4f - speed, 1, 0, 0.25f);
+//                }
+//                else if (speed >= 4f && speed < 6f)
+//                {
+//                    tex = new Color(0, (speed - 6f) / -2, 1 - (speed - 6f) / -2, 0.25f);
+//                }
+//                else if (speed >= 6f)
+//                {
+//                    tex = new Color(0, 0, (speed - 8f) / -2, 0.25f);
+//                }
 
 
 
@@ -162,7 +185,10 @@ public class GravityTexture : MonoBehaviour
 
 
 
-
+//public Texture2D colors;
+//private int colorsX;
+//colorsX = (int)((speed - 1.5f) / 6f * (float)colors.width);
+//tex = colors.GetPixel(colorsX, 1);
 
 
 

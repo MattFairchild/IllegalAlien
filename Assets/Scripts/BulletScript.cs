@@ -6,6 +6,7 @@ public class BulletScript : MonoBehaviour {
     public Rigidbody rb;
     public float speed = 25.0f;
     public float lifetime = 4.0f;
+    public int damage = 1;
 
 	// Use this for initialization
 	void Start () {
