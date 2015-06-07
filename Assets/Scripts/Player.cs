@@ -7,8 +7,7 @@ public class Player : MonoBehaviour {
 	[SerializeField]protected float maxHealth;
 	[SerializeField]protected float curHealth;
 
-	[SerializeField]protected int maxShards;
-	[SerializeField]protected int curShards;
+	[SerializeField]protected int maxResources;
 
 	[SerializeField]protected Image healthBar;
 	[SerializeField]protected Image shieldBar;
@@ -20,13 +19,12 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		curHealth = maxHealth;
-		curShards = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		healthBar.fillAmount = curHealth/maxHealth;
-		shardsBar.fillAmount = 1.0f*curShards/maxShards;
+		shardsBar.fillAmount = (float)GameManager.getResources() / (float)maxResources;
 	}
 
 	void FixedUpdate () {

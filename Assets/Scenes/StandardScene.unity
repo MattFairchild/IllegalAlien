@@ -4181,8 +4181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   curHealth: 0
-  maxShards: 31
-  curShards: 0
+  maxResources: 100
   healthBar: {fileID: 720065266}
   shieldBar: {fileID: 1430493456}
   shardsBar: {fileID: 1744612221}
