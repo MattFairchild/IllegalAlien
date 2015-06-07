@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
 	[SerializeField]protected Image shieldBar;
 	[SerializeField]protected Image shardsBar;
 	[SerializeField]protected Slider speedBar;
+	[SerializeField]protected Image healthBarOverlay;
 
 	protected Vector3 lastPos = Vector3.zero;
 
@@ -23,7 +24,9 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		healthBar.fillAmount = curHealth/maxHealth;
+		float percentOfHealth = curHealth/maxHealth;
+		healthBarOverlay.fillAmount = percentOfHealth;
+		healthBar.fillAmount = percentOfHealth;
 		shardsBar.fillAmount = (float)GameManager.getResources() / (float)maxResources;
 	}
 
@@ -32,7 +35,7 @@ public class Player : MonoBehaviour {
 		lastPos = transform.position;
 	}
 
-	protected void Hit (float damage) {
+	public void Hit (float damage) {
 		curHealth -= damage;
 		if(curHealth <= 0){
 			Debug.Log("Game over!");
@@ -42,10 +45,10 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter (Collision collision) {
 		switch(collision.gameObject.tag){
 		case "Enemy":
-			Hit (1);
+			Hit (0.2f * collision.relativeVelocity.magnitude);
 			break;
 		case "Planet":
-			Hit (2);
+			Hit (0.5f * collision.relativeVelocity.magnitude);
 			break;
 		default:
 			break;

@@ -9,7 +9,7 @@ public class GunScript : MonoBehaviour {
     public GameObject bulletPrefab;
     public float bulletCooldown;
 
-	private AudioSource audio;
+	private new AudioSource audio;
 
 	void Start()
 	{
