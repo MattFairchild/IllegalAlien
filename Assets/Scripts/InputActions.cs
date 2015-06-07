@@ -11,7 +11,8 @@ public class InputActions : MonoBehaviour
     
     public float maxSpeed;
     private float currentMaxSpeed;
-    private Quaternion rot;
+	private Quaternion rot; 
+	private Quaternion defaultRot;
     private GameObject tempTurret;
 
     private bool bumperPressed = false, bumperReleased = false;
@@ -20,51 +21,23 @@ public class InputActions : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        //if player has short boost after setting turret, decrease the bosst time every update
-        if (boostCooldown > 0.0f)
-        {
-            currentMaxSpeed = 1.5f * maxSpeed;
-            boostCooldown -= Time.deltaTime;
-        }
-        else
-        {
-            currentMaxSpeed = maxSpeed;
-        }
-
-        //adjust position according to speed etc.
-        transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
-        transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-
-
-        //if the player is currently dragging a turret behind him, keep the position updated
-        if (bumperPressed && !bumperReleased && tempTurret)
-        {
-            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
-        }
-
-        //rotate the palyer according to the angle. Mouse has only one rotation, Gamepad 2 seperate ones
-        if (input.numberOfGamepads() > 0)
-        {
-            rot = Quaternion.AngleAxis(input.getFlightAngle(), GameManager.getScreenNormal());
-        }
-        else //keyboard&mouse
-        {
-            rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
-        }
-
-
-        transform.rotation = rot;
-
-
         /*
             Placing Turret
          */
 
+		if (!GameManager.mixedControls ()) 
+		{
+			placingMovement();
+		}
+
         //when first pressing place turret button, spawn turret attached to players rear
         if (input.placingTurret())
         {
+			if (GameManager.mixedControls ()) 
+			{	
+				placingMovement();
+			}
+
             if (!bumperPressed)
             {
                 //if radius should only be shown while having turret hovering, set variable
@@ -81,8 +54,13 @@ public class InputActions : MonoBehaviour
             }
         }
         //when releasing place turret button, let turret go
-        if (!input.placingTurret())
+        else
         {
+			if (GameManager.mixedControls ()) 
+			{	
+				normalMovement();
+			}
+
             if (bumperPressed && !bumperReleased)
             {
                 //if radius should only be shown while having turret hovering, set variable
@@ -104,5 +82,81 @@ public class InputActions : MonoBehaviour
             }
         }
 
+		if (input.rightAnalogMoving ()) 
+		{
+			transform.rotation = rot;
+		} 
+		else 
+		{
+			transform.rotation = defaultRot;
+		}
     }
+
+	void placingMovement()
+	{
+		//if player has short boost after setting turret, decrease the bosst time every update
+		if (boostCooldown > 0.0f)
+		{
+			currentMaxSpeed = 1.5f * maxSpeed;
+			boostCooldown -= Time.deltaTime;
+		}
+		else
+		{
+			currentMaxSpeed = maxSpeed;
+		}
+		
+		//adjust position according to speed etc.
+		transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
+		transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
+		transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+		
+		
+		//if the player is currently dragging a turret behind him, keep the position updated
+		if (bumperPressed && !bumperReleased && tempTurret)
+		{
+			tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
+		}
+		
+		//rotate the palyer according to the angle. Mouse has only one rotation, Gamepad 2 seperate ones
+		if (input.numberOfGamepads() > 0)
+		{
+			rot = Quaternion.AngleAxis(input.getFlightAngle(), GameManager.getScreenNormal());
+		}
+		else //keyboard&mouse
+		{
+			rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
+		}
+
+		defaultRot = rot;
+	}
+
+
+	void normalMovement()
+	{	
+		//if player has short boost after setting turret, decrease the bosst time every update
+		if (boostCooldown > 0.0f)
+		{
+			currentMaxSpeed = 1.5f * maxSpeed;
+			boostCooldown -= Time.deltaTime;
+		}
+		else
+		{
+			currentMaxSpeed = maxSpeed;
+		}
+
+		//adjust position according to speed etc.
+		transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
+		transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
+		transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+		
+		//rotate the player according to the angle of the right analog stick if he is currently not placing a turret
+		if (input.numberOfGamepads() > 0)
+		{
+			rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
+		}
+		else //keyboard&mouse
+		{
+			rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
+		}
+	}
 }

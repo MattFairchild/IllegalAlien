@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
  
     public float gravitationalConstant;
 
+	public bool controlsMixed = false;
+
     public bool showRadius = false;
     public bool alwayShowRadius = false;
     public bool onlyNearest = false;
@@ -82,5 +84,10 @@ public class GameManager : MonoBehaviour {
     {
         return instance.autoShoot;
     }
+
+	public static bool mixedControls()
+	{
+		return instance.controlsMixed;
+	}
 	
 }

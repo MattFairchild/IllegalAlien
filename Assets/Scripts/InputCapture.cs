@@ -29,6 +29,7 @@ public class InputCapture : MonoBehaviour {
         screenUp = camera.transform.up;
         screenRight = camera.transform.right;
         plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f)); // X-Z plane
+		turret = false;
 	}
 	
 	// Update is called once per frame

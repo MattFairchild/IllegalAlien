@@ -7,6 +7,7 @@ public class GunScript : MonoBehaviour {
 	public AudioClip shotSound;
     public InputCapture input;
     public GameObject bulletPrefab;
+	public Transform parent;
     public float bulletCooldown;
 
 	private AudioSource audio;
@@ -14,6 +15,7 @@ public class GunScript : MonoBehaviour {
 	void Start()
 	{
 		audio = GetComponent<AudioSource> ();
+		parent = GameObject.FindGameObjectWithTag ("Player").transform;
 	}
 
 
@@ -30,7 +32,14 @@ public class GunScript : MonoBehaviour {
         //depending on inout method different direction to face
         if (input.numberOfGamepads() > 0)
         {
-            rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
+			if(GameManager.mixedControls())
+			{
+				rot = parent.rotation;
+			}
+			else
+			{
+				rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
+			}
         }
         else //keyboard&mouse
         {

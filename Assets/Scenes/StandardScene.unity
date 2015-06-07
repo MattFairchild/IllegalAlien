@@ -851,6 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalConstant: 20
+  controlsMixed: 0
   showRadius: 0
   alwayShowRadius: 0
   onlyNearest: 0
@@ -883,7 +884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallShip: {fileID: 184320, guid: 120d988c356e411488194b031efd10bd, type: 2}
   bigShip: {fileID: 174132, guid: 07b98b2dbbfe8d348b22b37b09969ba7, type: 2}
-  spawnInterval: 5
+  spawnInterval: 20
   spawnBorderX: 40
   spawnBorderZ: 30
 --- !u!1 &272757677
