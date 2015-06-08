@@ -7,14 +7,16 @@ public class Player : MonoBehaviour {
 	[SerializeField]protected float maxHealth;
 	[SerializeField]protected float curHealth;
 
-	[SerializeField]protected int maxResources;
+	//[SerializeField]protected int maxResources;
 
 	[SerializeField]protected Image healthBar;
 	[SerializeField]protected Image shieldBar;
-	[SerializeField]protected Image shardsBar;
-	[SerializeField]protected Slider speedBar;
+	//[SerializeField]protected Image shardsBar;
+	//[SerializeField]protected Slider speedBar;
+	[SerializeField]protected Image healthBarOverlay;
 
 	protected Vector3 lastPos = Vector3.zero;
+	public float speed;
 
 	// Use this for initialization
 	void Start () {
@@ -23,16 +25,20 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		healthBar.fillAmount = curHealth/maxHealth;
-		shardsBar.fillAmount = (float)GameManager.getResources() / (float)maxResources;
+		float percentOfHealth = curHealth/maxHealth;
+		healthBarOverlay.fillAmount = percentOfHealth;
+		healthBar.fillAmount = percentOfHealth;
+		//shardsBar.fillAmount = (float)GameManager.curResources / (float)maxResources;
+		//ddd move to GUI script!
 	}
 
 	void FixedUpdate () {
-		speedBar.value = (transform.position - lastPos).magnitude * 6;
+		//speedBar.value = speed;
+		speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
 		lastPos = transform.position;
 	}
 
-	protected void Hit (float damage) {
+	public void Hit (float damage) {
 		curHealth -= damage;
 		if(curHealth <= 0){
 			Debug.Log("Game over!");
@@ -42,10 +48,10 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter (Collision collision) {
 		switch(collision.gameObject.tag){
 		case "Enemy":
-			Hit (1);
+			Hit (0.2f * collision.relativeVelocity.magnitude);
 			break;
 		case "Planet":
-			Hit (2);
+			Hit (0.5f * collision.relativeVelocity.magnitude);
 			break;
 		default:
 			break;

@@ -14,7 +14,7 @@ public class InputCapture : MonoBehaviour {
     private bool shoot;
 
     private int numOfPads;
-    private Camera camera;
+    private new Camera camera;
     private Vector3 screenUp, screenRight;
 
     //variables for mouse rotation

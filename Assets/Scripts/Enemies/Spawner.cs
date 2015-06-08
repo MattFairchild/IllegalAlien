@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
@@ -9,13 +10,24 @@ public class Spawner : MonoBehaviour {
 	[SerializeField] protected float spawnBorderX = 40.0f;
 	[SerializeField] protected float spawnBorderZ = 30.0f;
 
+	protected List<EnemyScript> enemies = new List<EnemyScript>();
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(SpawnShips());
 	}
 
+	void Update () {
+		if(Input.GetKeyDown(KeyCode.K)){
+			foreach(EnemyScript enemy in enemies){
+				if(enemy) { enemy.Hit(9001); }
+			}
+			enemies.Clear();
+		}
+	}
+
 	protected IEnumerator SpawnShips () {
-		while(true){
+		while(isActiveAndEnabled){
 			yield return new WaitForSeconds(spawnInterval);
 			SpawnShip(Random.value > 0.75f);
 		}
@@ -33,6 +45,6 @@ public class Spawner : MonoBehaviour {
 			spawnZ = spawnBorderZ * (Random.value > 0.5f ? 1 : -1);
 		}
 		Vector3 spawnPos = new Vector3(spawnX, 0, spawnZ);
-		Instantiate(big ? bigShip : smallShip, spawnPos, Quaternion.identity);
+		enemies.Add((Instantiate(big ? bigShip : smallShip, spawnPos, Quaternion.identity) as GameObject).GetComponent<EnemyScript>());
 	}
 }

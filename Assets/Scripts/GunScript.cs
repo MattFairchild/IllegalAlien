@@ -10,7 +10,7 @@ public class GunScript : MonoBehaviour {
 	public Transform parent;
     public float bulletCooldown;
 
-	private AudioSource audio;
+	private new AudioSource audio;
 
 	void Start()
 	{

@@ -6,15 +6,11 @@ public class GameManager : MonoBehaviour {
 
     private static GameManager instance;
 
-    
-    public float gravitationalConstant;
-
-	public float boost = 1.0f;
+	public float gravitationalConstant;
 
     public bool showRadius = false;
     public bool alwayShowRadius = false;
     public bool onlyNearest = false;
-	public bool controlsMixed = false;
 
     //vectors that indicate the different directions on the screen
     public Vector3 screenUp;
@@ -24,7 +20,9 @@ public class GameManager : MonoBehaviour {
     //Control Options
     public bool autoShoot = false;  //Shoot & rotate gun both with RT, only for gamepad
 
-    public int resources;
+    public int m_curResources;
+	public int m_maxResources = 100;
+	public int m_score;
 
     void Awake()
     {
@@ -43,8 +41,10 @@ public class GameManager : MonoBehaviour {
         screenNormal = cam.forward;
 
         //set starting values
-        resources = 0;
+        m_curResources = 0;
+		m_score = 0;
 	}
+	
 
     public static float getGravitationalConstant()
     {
@@ -90,34 +90,31 @@ public class GameManager : MonoBehaviour {
         return instance.autoShoot;
     }
 
-    public static int getResources()
-    {
-        return instance.resources;
+    public static int curResources {
+		get { return instance.m_curResources; }
+		protected set { instance.m_curResources = value; }
     }
 
-    public static void addResouces(int value)
-    {
-        instance.resources += value;
+	public static int maxResources {
+		get { return instance.m_maxResources; }
+		protected set { instance.m_maxResources = value; }
+	}
 
-        if (instance.resources > 100)
-            instance.resources = 100;
-
-        else if (instance.resources < 0)
-            instance.resources = 0;
+    public static void addResouces (int value) {
+        if(value > 0){
+			curResources += value;
+			Mathf.Clamp(curResources, 0, maxResources);
+		}
     }
 
-	public static bool mixedControls()
-	{
-		return instance.controlsMixed;
+	public static int score {
+		get { return instance.m_score; }
+		protected set { instance.m_score = value; }
 	}
 
-	public static void setBoost(float val)
-	{
-		instance.boost = val;
-	}
-
-	public static float getBoostTime()
-	{
-		return instance.boost;
+	public static void addScore (int value) {
+		if(value > 0){
+			score += value;
+		}
 	}
 }
