@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour {
 	public int m_maxResources = 100;
 	public int m_score;
 
+	public bool controlsMixed = false;
+	public float boostTimer;
+
     void Awake()
     {
         if (instance != null)
@@ -116,5 +119,20 @@ public class GameManager : MonoBehaviour {
 		if(value > 0){
 			score += value;
 		}
+	}
+
+	public static void setBoost(float val)
+	{
+		instance.boostTimer = val;
+	}
+
+	public static bool mixedControls()
+	{
+		return instance.controlsMixed;
+	}
+
+	public static float getBoostTime()
+	{
+		return instance.boostTimer;
 	}
 }
