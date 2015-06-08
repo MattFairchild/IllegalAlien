@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.K)){
 			foreach(EnemyScript enemy in enemies){
-				enemy.Hit(9001);
+				if(enemy) { enemy.Hit(9001); }
 			}
 			enemies.Clear();
 		}

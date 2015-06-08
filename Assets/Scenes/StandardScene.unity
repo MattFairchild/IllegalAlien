@@ -908,7 +908,9 @@ MonoBehaviour:
   screenRight: {x: 0, y: 0, z: 0}
   screenNormal: {x: 0, y: 0, z: 0}
   autoShoot: 0
-  resources: 0
+  m_curResources: 0
+  m_maxResources: 100
+  m_score: 0
 --- !u!4 &260282852
 Transform:
   m_ObjectHideFlags: 0
@@ -1611,7 +1613,7 @@ GameObject:
   - 222: {fileID: 489974002}
   - 114: {fileID: 489974001}
   m_Layer: 5
-  m_Name: BarTop
+  m_Name: BarHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2096,7 +2098,7 @@ GameObject:
   - 222: {fileID: 579000173}
   - 114: {fileID: 579000172}
   m_Layer: 5
-  m_Name: BarBottom
+  m_Name: BarShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2218,7 +2220,7 @@ GameObject:
   - 222: {fileID: 643486573}
   - 114: {fileID: 643486572}
   m_Layer: 5
-  m_Name: BarTop
+  m_Name: BarHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3268,7 +3270,7 @@ GameObject:
   - 222: {fileID: 944752347}
   - 114: {fileID: 944752346}
   m_Layer: 5
-  m_Name: BarBottom
+  m_Name: BarShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3583,6 +3585,7 @@ GameObject:
   - 223: {fileID: 997557131}
   - 114: {fileID: 997557130}
   - 114: {fileID: 997557129}
+  - 114: {fileID: 997557133}
   m_Layer: 5
   m_Name: GUI Canvas Foreground
   m_TagString: Untagged
@@ -3670,6 +3673,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &997557133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997557128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15e7c3bc5acb3e42a3e7f1e4691f28e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 974667376}
+  playerHealth: {fileID: 720065266}
+  playerShield: {fileID: 1430493456}
+  playerShards: {fileID: 1744612221}
+  playerSpeed: {fileID: 2126577423}
+  baseHealth: {fileID: 489974001}
+  baseShield: {fileID: 944752346}
+  bossHealth: {fileID: 643486572}
+  bossShield: {fileID: 579000172}
+  player: {fileID: 0}
 --- !u!1 &1019190340
 GameObject:
   m_ObjectHideFlags: 0

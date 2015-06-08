@@ -43,7 +43,9 @@ public abstract class EnemyScript : MonoBehaviour
 		rbS.velocity = rbE.velocity;
 		rbS.angularVelocity = rbE.angularVelocity;
 
-		Destroy(gameObject);
+		GameManager.addScore((int)maxHealth);
+
+		Destroy(gameObject, 0.01f);
 	}
 
     void OnCollisionEnter(Collision collision)
