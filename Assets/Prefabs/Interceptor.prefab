@@ -83,6 +83,7 @@ GameObject:
   - 64: {fileID: 6426692}
   - 54: {fileID: 5430502}
   - 114: {fileID: 11415818}
+  - 114: {fileID: 11462800}
   m_Layer: 0
   m_Name: Interceptor
   m_TagString: Enemy
@@ -217,6 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   big: 0
+  resources: 5
+  scrapPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
   hpBar: {fileID: 11456714}
 --- !u!114 &11428702
 MonoBehaviour:
@@ -287,6 +290,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11462800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c1f1ccfeaf71c45902765be776e604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  resources: 5
+  scrapPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
+  hpBar: {fileID: 11456714}
 --- !u!114 &11489918
 MonoBehaviour:
   m_ObjectHideFlags: 1

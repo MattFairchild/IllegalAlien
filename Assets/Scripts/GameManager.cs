@@ -6,14 +6,15 @@ public class GameManager : MonoBehaviour {
 
     private static GameManager instance;
 
- 
+    
     public float gravitationalConstant;
 
-	public bool controlsMixed = false;
+	public float boost = 1.0f;
 
     public bool showRadius = false;
     public bool alwayShowRadius = false;
     public bool onlyNearest = false;
+	public bool controlsMixed = false;
 
     //vectors that indicate the different directions on the screen
     public Vector3 screenUp;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour {
 
     //Control Options
     public bool autoShoot = false;  //Shoot & rotate gun both with RT, only for gamepad
+
+    public int resources;
 
     void Awake()
     {
@@ -38,8 +41,10 @@ public class GameManager : MonoBehaviour {
         screenUp = cam.up;
         screenRight = cam.right;
         screenNormal = cam.forward;
+
+        //set starting values
+        resources = 0;
 	}
-	
 
     public static float getGravitationalConstant()
     {
@@ -85,9 +90,34 @@ public class GameManager : MonoBehaviour {
         return instance.autoShoot;
     }
 
+    public static int getResources()
+    {
+        return instance.resources;
+    }
+
+    public static void addResouces(int value)
+    {
+        instance.resources += value;
+
+        if (instance.resources > 100)
+            instance.resources = 100;
+
+        else if (instance.resources < 0)
+            instance.resources = 0;
+    }
+
 	public static bool mixedControls()
 	{
 		return instance.controlsMixed;
 	}
-	
+
+	public static void setBoost(float val)
+	{
+		instance.boost = val;
+	}
+
+	public static float getBoostTime()
+	{
+		return instance.boost;
+	}
 }

@@ -8,6 +8,7 @@ public class InputActions : MonoBehaviour
     public InputCapture input;
 
     public float boostCooldown;
+	public float boost;
     
     public float maxSpeed;
     private float currentMaxSpeed;
@@ -18,12 +19,42 @@ public class InputActions : MonoBehaviour
     private bool bumperPressed = false, bumperReleased = false;
 
 
+	void Start()
+	{
+		boost = 1.0f; 
+	}
+
     // Update is called once per frame
     void FixedUpdate()
     {
         /*
             Placing Turret
          */
+
+		if (input.leftTrigger ()) 
+		{
+			if(boost > 0.0f)
+			{
+				boost -= 0.25f*Time.deltaTime;
+				currentMaxSpeed = 2.0f*maxSpeed;
+			}
+		}
+		else 
+		{
+			if(GameManager.getBoostTime() < 1.0f)
+			{
+				boost += 0.1f*Time.deltaTime;
+			}
+		}
+
+		if (boost < 0.0f)
+			boost = 0.0f;
+		if (boost > 1.0f)
+			boost = 1.0f;
+
+
+		GameManager.setBoost (boost);
+
 
 		if (!GameManager.mixedControls ()) 
 		{
@@ -95,14 +126,17 @@ public class InputActions : MonoBehaviour
 	void placingMovement()
 	{
 		//if player has short boost after setting turret, decrease the bosst time every update
-		if (boostCooldown > 0.0f)
+		if (!input.leftTrigger ()) 
 		{
-			currentMaxSpeed = 1.5f * maxSpeed;
-			boostCooldown -= Time.deltaTime;
-		}
-		else
-		{
-			currentMaxSpeed = maxSpeed;
+			if (boostCooldown > 0.0f)
+			{
+				currentMaxSpeed = 1.5f * maxSpeed;
+				boostCooldown -= Time.deltaTime;
+			}
+			else
+			{
+				currentMaxSpeed = maxSpeed;
+			}
 		}
 		
 		//adjust position according to speed etc.
@@ -134,15 +168,19 @@ public class InputActions : MonoBehaviour
 	void normalMovement()
 	{	
 		//if player has short boost after setting turret, decrease the bosst time every update
-		if (boostCooldown > 0.0f)
+		if (!input.leftTrigger ()) 
 		{
-			currentMaxSpeed = 1.5f * maxSpeed;
-			boostCooldown -= Time.deltaTime;
+			if (boostCooldown > 0.0f)
+			{
+				currentMaxSpeed = 1.5f * maxSpeed;
+				boostCooldown -= Time.deltaTime;
+			}
+			else
+			{
+				currentMaxSpeed = maxSpeed;
+			}
 		}
-		else
-		{
-			currentMaxSpeed = maxSpeed;
-		}
+
 
 		//adjust position according to speed etc.
 		transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;

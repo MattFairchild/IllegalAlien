@@ -182,6 +182,14 @@ public class InputCapture : MonoBehaviour {
         return speedU;
     }
 
+	public bool leftTrigger()
+	{
+		if (Input.GetAxis ("Controller Trigger L") > 0.1f)
+			return true;
+		else
+			return false;
+	}
+
     public bool rightAnalogMoving()
     {
         float y = Mathf.Abs(Input.GetAxis("HorizontalRight"));
