@@ -2,32 +2,30 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Player : MonoBehaviour {
-
-	[SerializeField]protected float maxHealth;
-	[SerializeField]protected float curHealth;
+public class Player : Agent, IHittable {
 
 	//[SerializeField]protected int maxResources;
 
-	[SerializeField]protected Image healthBar;
-	[SerializeField]protected Image shieldBar;
+	//[SerializeField]protected Image healthBar;
+	//[SerializeField]protected Image shieldBar;
 	//[SerializeField]protected Image shardsBar;
 	//[SerializeField]protected Slider speedBar;
-	[SerializeField]protected Image healthBarOverlay;
+	public Image healthBarOverlay;
 
 	protected Vector3 lastPos = Vector3.zero;
 	public float speed;
 
 	// Use this for initialization
 	void Start () {
-		curHealth = maxHealth;
+		InitializeAgent();
+		percentOfHealth = 1.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float percentOfHealth = curHealth/maxHealth;
-		healthBarOverlay.fillAmount = percentOfHealth;
-		healthBar.fillAmount = percentOfHealth;
+		percentOfHealth = curHealth/maxHealth;
+		//healthBarOverlay.fillAmount = percentOfHealth;
+		//healthBar.fillAmount = percentOfHealth;
 		//shardsBar.fillAmount = (float)GameManager.curResources / (float)maxResources;
 		//ddd move to GUI script!
 	}

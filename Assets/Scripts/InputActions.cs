@@ -106,7 +106,10 @@ public class InputActions : MonoBehaviour
                 //check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
                 if (tempTurret)
                 {
-                    tempTurret.GetComponent<TurretScript>().SetVelocity(this.transform.forward * input.getSpeed() * currentMaxSpeed);
+					TurretScript trt = tempTurret.GetComponent<TurretScript>();
+					if(trt){
+						trt.SetVelocity(this.transform.forward * input.getSpeed() * currentMaxSpeed);
+					}
                 }
 
                 boostCooldown = 0.5f;

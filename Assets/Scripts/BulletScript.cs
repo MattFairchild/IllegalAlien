@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class BulletScript : MonoBehaviour {
 
     public Rigidbody rb;
     public float speed = 25.0f;
     public float lifetime = 4.0f;
-    public int damage = 1;
+    public float damage = 1;
+	public GameManager.Factions faction = GameManager.Factions.Player;
 
 	// Use this for initialization
 	void Start () {
@@ -15,8 +17,7 @@ public class BulletScript : MonoBehaviour {
         //lifetime = 4.0f;
 	}
 
-    public void Update()
-    {
+    public void Update () {
         lifetime -= Time.deltaTime;
 
         if (lifetime < 0.0f)
@@ -30,11 +31,30 @@ public class BulletScript : MonoBehaviour {
         rb.velocity = vel;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag != "Player" && collision.collider.tag != "Gun")
-        {
-            GameObject.Destroy(this.gameObject);
-        }
+    protected void OnCollisionEnter(Collision collision) {
+		switch(faction){
+		case GameManager.Factions.Player:
+			//enemy faction member hit
+	        if(GameManager.FactionTagsEnemy.Contains(collision.gameObject.tag)){
+				collision.gameObject.GetComponent<EnemyScript>().Hit(damage);
+				Destroy(gameObject);
+			}
+			else if (collision.gameObject.tag != "Player" && collision.collider.tag != "Gun"){
+	            Destroy(gameObject);
+	        }
+			break;
+		case GameManager.Factions.Enemy:
+			if(GameManager.FactionTagsPlayer.Contains(collision.gameObject.tag)){
+				collision.gameObject.GetComponent<IHittable>().Hit(damage);
+				Destroy(gameObject);
+			}
+			else if(collision.gameObject.tag != "Enemy"){
+				Destroy(gameObject);
+			}
+			break;
+		case GameManager.Factions.None:
+			Destroy(gameObject);
+			break;
+		}
     }
 }

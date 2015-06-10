@@ -2,11 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public abstract class EnemyScript : MonoBehaviour 
-{
+public abstract class EnemyScript : Agent, IHittable {
 
-    [SerializeField]protected float maxHealth;
-    protected float curHealth;
 	[SerializeField]protected int resources;
 	[SerializeField]protected GameObject scrapPrefab;
     protected new Rigidbody rigidbody;
@@ -17,11 +14,11 @@ public abstract class EnemyScript : MonoBehaviour
 	protected GameObject target;
 
 	protected void InitializeEnemy () {
-		player = GameObject.FindGameObjectWithTag("Player");
-		spaceStation = GameObject.FindGameObjectWithTag("SpaceStation");
+		InitializeAgent();
+		player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
+		spaceStation = GameManager.spaceStation;//GameObject.FindGameObjectWithTag("SpaceStation");
 		
 		rigidbody = gameObject.GetComponent<Rigidbody>();
-		curHealth = maxHealth;
 	}
 
 	public void Hit (float damage) {
@@ -48,11 +45,11 @@ public abstract class EnemyScript : MonoBehaviour
 		Destroy(gameObject, 0.01f);
 	}
 
-    void OnCollisionEnter(Collision collision)
-    {
+    void OnCollisionEnter (Collision collision) {
         switch (collision.gameObject.tag){
 		case "Bullet":
-			Hit (collision.gameObject.GetComponent<BulletScript>().damage);
+			//now handled by bullet!
+			//Hit (collision.gameObject.GetComponent<BulletScript>().damage);
 			break;
 		case "Planet":
 			Hit (0.25f * collision.relativeVelocity.magnitude);
@@ -69,5 +66,6 @@ public abstract class EnemyScript : MonoBehaviour
 		default:
 			break;
         }
+		//Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + 15f * collision.contacts[0].normal, Color.white);
     }
 }

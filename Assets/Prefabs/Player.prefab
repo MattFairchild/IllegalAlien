@@ -196,7 +196,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.522000015, y: .162, z: .81099999}
+  m_LocalPosition: {x: -.5, y: .162, z: .800000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 437194}
@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .522000015, y: .162, z: .81099999}
+  m_LocalPosition: {x: .5, y: .162, z: .800000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 437194}
@@ -484,6 +484,7 @@ MonoBehaviour:
   turretPrefab: {fileID: 123672, guid: 5764b9ee814c26148a8bf35491e3d4fd, type: 2}
   input: {fileID: 11441072}
   boostCooldown: 0
+  boost: 0
   maxSpeed: 5
 --- !u!114 &11409130
 MonoBehaviour:
@@ -498,12 +499,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   curHealth: 0
-  maxResources: 100
-  healthBar: {fileID: 0}
-  shieldBar: {fileID: 0}
-  shardsBar: {fileID: 0}
-  speedBar: {fileID: 0}
   healthBarOverlay: {fileID: 11405510}
+  speed: 0
+  percentOfHealth: 0
 --- !u!114 &11432344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,6 +516,7 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 484af2d5b8ffe5f4d91034ab2b5fe0cb, type: 3}
   input: {fileID: 11441072}
   bulletPrefab: {fileID: 101722, guid: bc5d3e80da072ae4fad03b5349e3b73f, type: 2}
+  parent: {fileID: 0}
   bulletCooldown: 0
 --- !u!114 &11441072
 MonoBehaviour:
@@ -608,7 +607,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1.5
+      scalar: 1.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1651,7 +1650,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1.5
+      scalar: 1.25
       maxCurve:
         serializedVersion: 2
         m_Curve:

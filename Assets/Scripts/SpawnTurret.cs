@@ -64,7 +64,8 @@ public class SpawnTurret : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                tempTurret.GetComponent<TurretScript>().SetVelocity(velocity);
+				TurretScript trt = tempTurret.GetComponent<TurretScript>();
+				trt.SetVelocity(velocity);
 
                 lR.GetComponent<Renderer>().enabled = false;
                 placed = !placed;
