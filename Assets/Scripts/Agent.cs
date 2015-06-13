@@ -13,5 +13,6 @@ public abstract class Agent : MonoBehaviour {
 
 	protected void InitializeAgent () {
 		curHealth = maxHealth;
+		percentOfHealth = 1.0f;
 	}
 }

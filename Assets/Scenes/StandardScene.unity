@@ -667,7 +667,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 436732, guid: 68975b7977a0ebe4c8cbff305911bb9c, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 68975b7977a0ebe4c8cbff305911bb9c, type: 2}
@@ -6838,10 +6838,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11407320, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
-      propertyPath: turretPrefab
-      value: 
-      objectReference: {fileID: 185624, guid: 68975b7977a0ebe4c8cbff305911bb9c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
   m_IsPrefabParent: 0

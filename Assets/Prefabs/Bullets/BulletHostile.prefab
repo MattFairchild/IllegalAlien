@@ -14,7 +14,7 @@ GameObject:
   - 54: {fileID: 5401722}
   - 114: {fileID: 11401722}
   m_Layer: 0
-  m_Name: BulletFriendly
+  m_Name: BulletHostile
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7a274a17bd7b40849b916c699ff5cb33, type: 2}
+  - {fileID: 2100000, guid: 479bb7e162cd66740b4a2ecbefc0d6a9, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -93,7 +93,9 @@ MonoBehaviour:
   speed: 25
   lifetime: 4
   damage: 1
-  faction: 0
+  faction: 1
+  target: {fileID: 0}
+  targetSeeking: 0
 --- !u!136 &13601722
 CapsuleCollider:
   m_ObjectHideFlags: 1

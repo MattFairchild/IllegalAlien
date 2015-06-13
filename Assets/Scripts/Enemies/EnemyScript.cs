@@ -17,13 +17,14 @@ public abstract class EnemyScript : Agent, IHittable {
 		InitializeAgent();
 		player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
 		spaceStation = GameManager.spaceStation;//GameObject.FindGameObjectWithTag("SpaceStation");
-		
+		healthBar.fillAmount = percentOfHealth;
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 	}
 
 	public void Hit (float damage) {
 		curHealth -= damage;
-		healthBar.fillAmount = curHealth/maxHealth;
+		percentOfHealth = curHealth/maxHealth;
+		healthBar.fillAmount = percentOfHealth;
 		//Color change?
 		if (curHealth <= 0)	{
 			Die ();
@@ -47,10 +48,10 @@ public abstract class EnemyScript : Agent, IHittable {
 
     void OnCollisionEnter (Collision collision) {
         switch (collision.gameObject.tag){
-		case "Bullet":
+		//case "Bullet":
 			//now handled by bullet!
 			//Hit (collision.gameObject.GetComponent<BulletScript>().damage);
-			break;
+			//break;
 		case "Planet":
 			Hit (0.25f * collision.relativeVelocity.magnitude);
 			break;

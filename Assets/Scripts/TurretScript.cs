@@ -23,6 +23,8 @@ public class TurretScript : Agent, IHittable {
 	[SerializeField]protected float shootingInterval = 1.0f;
 	[SerializeField]protected float shootingRange = 5.0f;
 
+	[SerializeField]protected float projectileSpeed = 25.0f;
+
 	protected new AudioSource audio;
 
     // Use this for initialization
@@ -118,10 +120,9 @@ public class TurretScript : Agent, IHittable {
 			Die();
 			break;
 		case "Turret":
-			break;
 		case "Player":
-			break;
 		case "Enemy":
+			Hit (0.2f * collision.relativeVelocity.magnitude);
 			break;
 		default:
 			break;
@@ -151,25 +152,62 @@ public class TurretScript : Agent, IHittable {
 			}
 			enemiesInRange.RemoveAll(item => item == null);
 			if(enemiesInRange.Count > 0){
-				FireProjectile();
+				EnemyScript enemy = PickEnemy();
+				if(enemy){
+					FireProjectile(enemy);
+				}
 			}
 			yield return new WaitForSeconds(shootingInterval);
 		}
 	}
 
-	protected void FireProjectile () {
-		Vector3 dir = (enemiesInRange[0].transform.position - transform.position).normalized;
+	protected EnemyScript PickEnemy () {
+		Transform spaceStation = GameManager.spaceStation.transform;
+		EnemyScript nearestEnemy = null;
+		float minDist = float.PositiveInfinity;
+		foreach(EnemyScript enemy in enemiesInRange){
+			float curDist = Vector3.Distance(spaceStation.position, enemy.transform.position);
+			if(curDist < minDist){
+				minDist = curDist;
+				nearestEnemy = enemy;
+			}
+		}
+		return nearestEnemy;
+	}
+
+	protected void FireProjectile (EnemyScript target) {
 		audio.PlayOneShot(audio.clip);
+		Vector3 dir = ComputeFiringDirection(target);
+		BulletScript bs = (GameObject.Instantiate(bulletPrefab, ComputeProtectilePosition(dir), Quaternion.LookRotation(dir)) as GameObject).GetComponent<BulletScript>();
+		bs.damage = damagePerShot;
+		//bs.targetSeeking = true;
+		bs.target = target.transform;
+		//bs.faction = GameManager.Factions.Enemy;
+	}
+
+	protected Vector3 ComputeFiringDirection (EnemyScript target) {
+		float dist = Vector3.Distance(target.transform.position, transform.position);
+		Vector3 estimatedMovement = target.gameObject.GetComponent<Rigidbody>().velocity * dist / projectileSpeed;
+		Vector3 dir = ((target.transform.position + estimatedMovement) - transform.position).normalized;
+		//apply directional inaccuracy
+		float inaccuracyAngle = Random.Range(-5.0f, +5.0f);
+		dir = Quaternion.Euler(0, inaccuracyAngle, 0) * dir;
+		return dir;
+	}
+
+	protected Vector3 ComputeProtectilePosition (Vector3 firingDirection) {
 		Vector3 tmp = transform.localScale;
 		float safetyDistance = Mathf.Max(Mathf.Max(tmp.x, tmp.y), tmp.z) + bulletPrefab.transform.localScale.y / 2;
-		Vector3 spawnPos = this.transform.position + dir * safetyDistance;
-		BulletScript bs = (GameObject.Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(dir)) as GameObject).GetComponent<BulletScript>();
-		bs.damage = damagePerShot;
-		bs.faction = GameManager.Factions.Enemy;
+		return (this.transform.position + firingDirection * safetyDistance);
 	}
 
 	public void Hit (float damage) {
-		Debug.Log("not implemented yet!");
+		curHealth -= damage;
+		//healthBar.fillAmount = curHealth/maxHealth;
+		//Color change?
+		if (curHealth <= 0)	{
+			Die ();
+		}
 	}
 
 	protected void Die () {

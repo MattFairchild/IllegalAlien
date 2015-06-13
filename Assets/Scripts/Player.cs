@@ -18,19 +18,17 @@ public class Player : Agent, IHittable {
 	// Use this for initialization
 	void Start () {
 		InitializeAgent();
-		percentOfHealth = 1.0f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		percentOfHealth = curHealth/maxHealth;
+	/*void Update () {
 		//healthBarOverlay.fillAmount = percentOfHealth;
 		//healthBar.fillAmount = percentOfHealth;
 		//shardsBar.fillAmount = (float)GameManager.curResources / (float)maxResources;
 		//ddd move to GUI script!
-	}
+	}*/
 
-	void FixedUpdate () {
+	void Update () {
 		//speedBar.value = speed;
 		speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
 		lastPos = transform.position;
@@ -38,6 +36,7 @@ public class Player : Agent, IHittable {
 
 	public void Hit (float damage) {
 		curHealth -= damage;
+		percentOfHealth = curHealth/maxHealth;
 		if(curHealth <= 0){
 			Debug.Log("Game over!");
 		}
