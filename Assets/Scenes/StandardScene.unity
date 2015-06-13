@@ -5261,7 +5261,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22404140, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .921000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404140, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMax.y
@@ -5269,11 +5269,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438664, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMin.x
-      value: .921000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438664, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .921000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438664, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMax.y
@@ -5295,6 +5295,10 @@ Prefab:
     - target: {fileID: 11432558, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_FontData.m_FontStyle
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415066, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}

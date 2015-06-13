@@ -123,8 +123,6 @@ public class KDMapGenerator : MonoBehaviour {
 		rects.RemoveAt(indexLargest);
 		rects.Add(rec1);
 		rects.Add(rec2);
-		
-		Debug.Log("new size: " + rects.Count);
 	}
 	
 	private void splitHorizontally(Rect rec)
@@ -207,7 +205,6 @@ public class KDMapGenerator : MonoBehaviour {
 			
 			counter++;
 		}
-		Debug.Log(counter);
 		return pos;
 	}
 }
