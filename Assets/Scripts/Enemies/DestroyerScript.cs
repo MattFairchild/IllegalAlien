@@ -15,8 +15,9 @@ public class DestroyerScript : EnemyScript
 	// Update is called once per frame
 	void Update () 
     {
-        Vector3 direction;
+        agent.destination = target.transform.position;
+        /*Vector3 direction;
         direction = target.transform.position - transform.position;
-        rigidbody.AddForce(4 * direction.normalized);
+        rigidbody.AddForce(direction.normalized);*/
 	}
 }

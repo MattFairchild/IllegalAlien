@@ -13,11 +13,14 @@ public abstract class EnemyScript : Agent, IHittable {
 	protected GameObject player;
 	protected GameObject target;
 
+    protected NavMeshAgent agent;
+
 	protected void InitializeEnemy () {
 		InitializeAgent();
 		player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
 		spaceStation = GameManager.spaceStation;//GameObject.FindGameObjectWithTag("SpaceStation");
 		healthBar.fillAmount = percentOfHealth;
+        agent = GetComponent<NavMeshAgent>();
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 	}
 
