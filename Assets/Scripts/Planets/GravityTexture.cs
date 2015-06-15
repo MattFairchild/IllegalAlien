@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class GravityTexture : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GravityTexture : MonoBehaviour
     private float boxSize;
     private float distance;
     private float speed;
+    private float alpha;
+    public Texture2D inputTexture;
+    private int inputTextureX;
     
 
     // Use this for initialization
@@ -16,6 +20,8 @@ public class GravityTexture : MonoBehaviour
         float mass = GetComponentInParent<Rigidbody>().mass;
         textureSize = 512;
 
+        alpha = 0.15f;
+
         boxSize = 2 * mass * GameManager.getGravitationalConstant() / Mathf.Pow(1.5f, 2);
         transform.localScale = new Vector3(boxSize, 0, boxSize);
 
@@ -23,8 +29,6 @@ public class GravityTexture : MonoBehaviour
 
         for (int j = 0; j < textureSize; j++)
         {
-
-
             for (int i = 0; i < textureSize; i++)
             {
 
@@ -32,30 +36,32 @@ public class GravityTexture : MonoBehaviour
                 speed = Mathf.Sqrt(mass * GameManager.getGravitationalConstant() / distance);
 
                 Color tex = new Color(0, 0, 0, 0);
+                
                 if (speed < 2f)
                 {
-                    tex = new Color((2 * speed - 3f), 0, 0, 0.25f * (2 * speed - 3f));
+                    if (speed >= 1.5f)
+                    {
+                        inputTextureX = (int)((speed / 10f) * (float)(inputTexture.width));
+                        tex = inputTexture.GetPixel(inputTextureX, 1);
+                        tex.a = (speed - 1.5f) * 2f * alpha;
+                    }
                 }
-                else if (speed >= 2f && speed < 3f)
+                else if (speed > 6f)
                 {
-                    tex = new Color(1, speed - 2f, 0, 0.25f);
+                    inputTextureX = (int)((speed / 10f) * (float)(inputTexture.width));
+                    tex = inputTexture.GetPixel(inputTextureX, 1);
+                    tex.a = (speed - 6f) * 0.5f * alpha;
                 }
-                else if (speed >= 3f && speed < 4f)
+                else
                 {
-                    tex = new Color(4f - speed, 1, 0, 0.25f);
+                    inputTextureX = (int)((speed / 10f) * (float)(inputTexture.width));
+                    tex = inputTexture.GetPixel(inputTextureX, 1);
+                    tex.a = alpha;
                 }
-                else if (speed >= 4f && speed < 6f)
-                {
-                    tex = new Color(0, (speed - 6f) / -2, 1 - (speed - 6f) / -2, 0.25f);
-                }
-                else if (speed >= 6f)
-                {
-                    tex = new Color(0, 0, (speed - 8f) / -2, 0.25f);
-                }
-
+                
                 mask.SetPixel(i, j, tex);
             }
-
+         
         }
         mask.Apply();
         gameObject.GetComponent<Renderer>().material.mainTexture = mask;
@@ -156,39 +162,50 @@ public class GravityTexture : MonoBehaviour
 
 //}
 
-//                Color tex = new Color(0, 0, 0, 0);
-//                if (speed < 2f)
+//if (speed < 2f)
 //                {
-//                    tex = new Color((2 * speed - 3f), 0, 0, 0.25f * (2 * speed - 3f));
+//                    tex = new Color((2 * speed - 3f), 0, 0, alpha * (2 * speed - 3f));
 //                }
 //                else if (speed >= 2f && speed < 3f)
 //                {
-//                    tex = new Color(1, speed - 2f, 0, 0.25f);
+//                    tex = new Color(1, speed - 2f, 0, alpha);
 //                }
 //                else if (speed >= 3f && speed < 4f)
 //                {
-//                    tex = new Color(4f - speed, 1, 0, 0.25f);
+//                    tex = new Color(4f - speed, 1, 0, alpha);
 //                }
 //                else if (speed >= 4f && speed < 6f)
 //                {
-//                    tex = new Color(0, (speed - 6f) / -2, 1 - (speed - 6f) / -2, 0.25f);
+//                    tex = new Color(0, (speed - 6f) / -2, 1 - (speed - 6f) / -2, alpha);
 //                }
 //                else if (speed >= 6f)
 //                {
-//                    tex = new Color(0, 0, (speed - 8f) / -2, 0.25f);
+//                    tex = new Color(0, 0, (speed - 8f) / -2, alpha);
+//                }      
+
+
+
+//              public Texture2D inputTexture;
+//              private int inputTextureX;
+//              inputTextureX = (int)((speed - 1.5f) / 6f * (float)inputTexture.width);
+//              tex = colors.GetPixel(inputTextureX, 1);
+
+
+//if (speed < 2f)
+//                {
+//                    tex = EditorGUIUtility.HSVToRGB(0, 1f, 1f);
+//                    tex.a = (speed - 1.5f) * 2f * alpha;
 //                }
-
-
-
-
-
-
-
-
-//public Texture2D colors;
-//private int colorsX;
-//colorsX = (int)((speed - 1.5f) / 6f * (float)colors.width);
-//tex = colors.GetPixel(colorsX, 1);
+//                else if (speed > 6f)
+//                {
+//                    tex = EditorGUIUtility.HSVToRGB(0.9f, 1f, 1f);
+//                    tex.a = (speed - 6f) * 0.5f * alpha;
+//                }
+//                else
+//                {
+//                    tex = EditorGUIUtility.HSVToRGB((speed - 2f) / 4.444f, 1f, 1f);
+//                    tex.a = alpha;
+//                }   
 
 
 
