@@ -11,6 +11,10 @@ public class BulletScript : MonoBehaviour {
 	public GameManager.Factions faction = GameManager.Factions.Player;
 	public Transform target = null;
 	public bool targetSeeking = false;
+	public bool areaOfEffect = false;
+	public float aoeRadius = 0;
+	public float aoeDamageModifier = 0;
+	public GameObject explosionPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -49,6 +53,9 @@ public class BulletScript : MonoBehaviour {
 			//enemy faction member hit
 	        if(GameManager.FactionTagsEnemy.Contains(collision.gameObject.tag)){
 				collision.gameObject.GetComponent<EnemyScript>().Hit(damage);
+				if(areaOfEffect){
+					PerformAreaOfEffect(collision.gameObject);
+				}
 				//Destroy(gameObject);
 			}/*
 			else if (collision.gameObject.tag != "Player" && collision.collider.tag != "Gun"){
@@ -67,5 +74,17 @@ public class BulletScript : MonoBehaviour {
 			Destroy(gameObject);
 			break;
 		}
+		if(explosionPrefab){
+			Instantiate(explosionPrefab, collision.contacts[0].point, Quaternion.identity);
+		}
     }
+
+	protected void PerformAreaOfEffect (GameObject obj) {
+		Collider[] colliders = Physics.OverlapSphere(obj.transform.position, aoeRadius);
+		foreach(Collider col in colliders){
+			if(GameManager.FactionTagsEnemy.Contains(col.tag)){
+				col.GetComponent<EnemyScript>().Hit(aoeDamageModifier * damage);
+			}
+		}
+	}
 }

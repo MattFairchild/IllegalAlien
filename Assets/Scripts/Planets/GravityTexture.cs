@@ -64,7 +64,7 @@ public class GravityTexture : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.getShowRadius())
+        if (GameManager.showRadius)
         {
             gameObject.GetComponent<Renderer>().enabled = true;
         }

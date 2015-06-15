@@ -103,7 +103,7 @@ GameObject:
   - 114: {fileID: 11468290}
   - 82: {fileID: 8287934}
   m_Layer: 0
-  m_Name: TurretShooting
+  m_Name: TurretShootingLvl4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,22 +428,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c375f5ba2faaaf04588b24be9ea0d974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 9.765625
   percentOfHealth: 0
-  rb: {fileID: 5487290}
   direction: {x: 0, y: 0, z: 0}
   distance: 0
   orbitalSpeed: 0
   affectedByGravity: 1
   planets: []
+  rb: {fileID: 5487290}
   turretObject: {fileID: 138148}
   trail: {fileID: 9650142}
   trigger: {fileID: 13598634}
-  bulletPrefab: {fileID: 101722, guid: bc5d3e80da072ae4fad03b5349e3b73f, type: 2}
-  damagePerShot: .5
-  shootingInterval: .5
-  shootingRange: 10
+  bulletPrefab: {fileID: 101722, guid: 39ece7f732320f5418548c0c88ac580e, type: 2}
+  towerGUI: {fileID: 0}
+  numberOfShots: 1
+  damagePerShot: 2.5
+  shootingFrequency: 1
+  shootingRange: 19.53125
+  directionalInaccuracyExtent: 0
   projectileSpeed: 25
+  towerLevel: 4
 --- !u!114 &11481526
 MonoBehaviour:
   m_ObjectHideFlags: 1

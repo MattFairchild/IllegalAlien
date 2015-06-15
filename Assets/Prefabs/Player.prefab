@@ -482,6 +482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 185624, guid: 68975b7977a0ebe4c8cbff305911bb9c, type: 2}
+  warningParticlePrefab: {fileID: 122670, guid: 09e98d045b7aac841b1046518a3bd8bd,
+    type: 2}
   input: {fileID: 11441072}
   turretSpeed: 5
 --- !u!114 &11409130

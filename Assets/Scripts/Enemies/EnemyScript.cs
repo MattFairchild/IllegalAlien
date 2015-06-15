@@ -22,6 +22,7 @@ public abstract class EnemyScript : Agent, IHittable {
 	}
 
 	public void Hit (float damage) {
+		float tmp = healthBar.fillAmount;
 		curHealth -= damage;
 		percentOfHealth = curHealth/maxHealth;
 		healthBar.fillAmount = percentOfHealth;
@@ -29,6 +30,12 @@ public abstract class EnemyScript : Agent, IHittable {
 		if (curHealth <= 0)	{
 			Die ();
 		}
+		if (tmp < healthBar.fillAmount){
+			Debug.Log("?!?");
+			Debug.Log(damage + " --> " + tmp + " to " + healthBar.fillAmount);
+		}
+		if (damage < 0)
+			Debug.Log("!!!");
 	}
 
 	protected void Die () {
@@ -44,6 +51,7 @@ public abstract class EnemyScript : Agent, IHittable {
 		GameManager.addScore((int)maxHealth);
 
 		Destroy(gameObject, 0.01f);
+		enabled = false;
 	}
 
     void OnCollisionEnter (Collision collision) {
