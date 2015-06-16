@@ -165,8 +165,9 @@ public class TurretScript : Agent, IHittable {
 				EnemyScript enemy = PickEnemy();
 				if(enemy){
 					audio.PlayOneShot(audio.clip);
-					for(int i = 0; i < numberOfShots; i++){
+					for(int i = 0; i < numberOfShots && enemy; i++){
 						FireProjectile(enemy);
+                        yield return new WaitForSeconds(0.1f);
 					}
 				}
 			}
