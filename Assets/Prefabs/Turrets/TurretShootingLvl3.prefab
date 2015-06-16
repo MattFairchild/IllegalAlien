@@ -217,7 +217,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185624}
   serializedVersion: 2
-  m_Mass: .5
+  m_Mass: .78125
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -245,7 +245,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -319,7 +319,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: 20
-  m_StartWidth: .25
+  m_StartWidth: .75
   m_EndWidth: .150000006
   m_Colors:
     m_Color[0]:
@@ -434,19 +434,23 @@ MonoBehaviour:
   distance: 0
   orbitalSpeed: 0
   affectedByGravity: 1
+  launched: 0
   planets: []
   rb: {fileID: 5487290}
   turretObject: {fileID: 138148}
   trail: {fileID: 9650142}
+  collider: {fileID: 13656310}
   trigger: {fileID: 13598634}
   bulletPrefab: {fileID: 101722, guid: bc5d3e80da072ae4fad03b5349e3b73f, type: 2}
   towerGUI: {fileID: 0}
-  numberOfShots: 1
+  numberOfShots: 4
   damagePerShot: 1.125
   shootingFrequency: 1.5625
   shootingRange: 15.625
   directionalInaccuracyExtent: 2.5
   projectileSpeed: 39.0625
+  collidingPanicRange: 3.5
+  preferredRange: 2.5
   towerLevel: 3
 --- !u!114 &11481526
 MonoBehaviour:

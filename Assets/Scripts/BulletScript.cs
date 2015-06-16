@@ -37,7 +37,9 @@ public class BulletScript : MonoBehaviour {
 			return;
 		}
 		Vector3 dir = (target.position - transform.position).normalized;
-		rb.MoveRotation(Quaternion.LookRotation(dir));
+		Quaternion rot = Quaternion.LookRotation(dir);
+        Quaternion x90 = Quaternion.AngleAxis(90, Vector3.right);
+        rb.MoveRotation(rot * x90); //default rotation for capsule is facing up, not forward as desired for projectiles
 		SetVelocity(dir * speed);
 		//rb.velocity += dir * Time.fixedDeltaTime - rb.velocity.normalized * Time.fixedDeltaTime;
 	}
