@@ -13,8 +13,8 @@ GameObject:
   - 23: {fileID: 2301722}
   - 54: {fileID: 5401722}
   - 114: {fileID: 11401722}
-  m_Layer: 0
-  m_Name: BulletFriendly
+  m_Layer: 9
+  m_Name: BulletFriendlyAoE
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 101722}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .140000001, y: .140000001, z: .140000001}
+  m_LocalScale: {x: .180000007, y: .180000007, z: .180000007}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +42,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7a274a17bd7b40849b916c699ff5cb33, type: 2}
+  - {fileID: 2100000, guid: d32289da2f234164e9fb324a8f3bcd64, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -96,6 +96,10 @@ MonoBehaviour:
   faction: 0
   target: {fileID: 0}
   targetSeeking: 0
+  areaOfEffect: 1
+  aoeRadius: 3
+  aoeDamageModifier: 1
+  explosionPrefab: {fileID: 124620, guid: fbd4d8e8edf84cb46821a5c91b8f2346, type: 2}
 --- !u!136 &13601722
 CapsuleCollider:
   m_ObjectHideFlags: 1

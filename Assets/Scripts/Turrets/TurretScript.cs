@@ -4,28 +4,53 @@ using System.Collections.Generic;
 
 public class TurretScript : Agent, IHittable {
 
-    public Rigidbody rb;
+	/*Gravity stuff*/
     public Vector3 direction;
     public float distance;
     public float orbitalSpeed;
     public bool affectedByGravity = false;
-	protected bool launched = false;
+	[SerializeField]protected bool launched = false;
     public GameObject[] planets;
 
+	/*References*/
+	[SerializeField]protected Rigidbody rb;
 	[SerializeField]protected GameObject turretObject;
 	[SerializeField]protected TrailRenderer trail;
+    [SerializeField]protected new CapsuleCollider collider;
 	[SerializeField]protected SphereCollider trigger;
-
 	[SerializeField]protected GameObject bulletPrefab;
+	[SerializeField]protected Canvas towerGUI;
+
+	/*Shooting stuff*/
+	[SerializeField]protected int numberOfShots = 1;
+	[SerializeField]protected float damagePerShot = 0.5f;
+	[SerializeField]protected float shootingFrequency = 1.0f;
+	[SerializeField]protected float shootingRange = 10.0f;
+	[SerializeField]protected float directionalInaccuracyExtent = 7.5f;
+	[SerializeField]protected float projectileSpeed = 25.0f;
+    [SerializeField]protected float collidingPanicRange = 3.5f;
+    [SerializeField]protected float preferredRange = 2.5f;
 
 	protected List<EnemyScript> enemiesInRange = new List<EnemyScript>();
-	[SerializeField]protected float damagePerShot = 0.5f;
-	[SerializeField]protected float shootingInterval = 1.0f;
-	[SerializeField]protected float shootingRange = 5.0f;
 
-	[SerializeField]protected float projectileSpeed = 25.0f;
-
+	/*more stuff*/
+	[SerializeField]protected int towerLevel = 1;
+	//[SerializeField]protected int shardCost = 5;
+	protected int killCount = 0;
 	protected new AudioSource audio;
+
+
+    //GUI:
+    //health
+    //killCount
+    //range
+    //estimated DPS
+    //lvl
+    //state?
+    //
+    //
+    //
+    //
 
     // Use this for initialization
     void Start(){
@@ -37,6 +62,11 @@ public class TurretScript : Agent, IHittable {
 		trigger.radius = shootingRange;
 
 		audio = GetComponent<AudioSource>();
+        audio.maxDistance = shootingRange * 2;
+
+        if(launched){
+            SetVelocity(Vector3.zero);
+        }
     }
 
     void FixedUpdate()
@@ -54,6 +84,7 @@ public class TurretScript : Agent, IHittable {
 		launched = true;
 		
 		StartCoroutine(Fight());
+		StartCoroutine(FightSpreadshot());
     }
 
     public void setAffectedByGravity(bool affected)
@@ -154,44 +185,88 @@ public class TurretScript : Agent, IHittable {
 			if(enemiesInRange.Count > 0){
 				EnemyScript enemy = PickEnemy();
 				if(enemy){
-					FireProjectile(enemy);
+					audio.PlayOneShot(audio.clip);
+					for(int i = 0; i < numberOfShots && enemy; i++){
+						FireProjectile(enemy);
+                        yield return new WaitForSeconds(0.1f);
+					}
 				}
 			}
-			yield return new WaitForSeconds(shootingInterval);
+			yield return new WaitForSeconds(1/shootingFrequency);
+		}
+	}
+
+	protected IEnumerator FightSpreadshot () {
+		while(enabled){
+			if(enemiesInRange.Count >= 3){
+				FireSpreadshot();
+				audio.PlayOneShot(audio.clip);
+			}
+			yield return new WaitForSeconds(16 - 2*towerLevel);
 		}
 	}
 
 	protected EnemyScript PickEnemy () {
 		Transform spaceStation = GameManager.spaceStation.transform;
-		EnemyScript nearestEnemy = null;
-		float minDist = float.PositiveInfinity;
+		EnemyScript nearestToBaseEnemy = null;
+        EnemyScript nearestToTowerEnemy = null;
+        EnemyScript nearestCollidingEnemy = null;
+		float minDistToBase = float.PositiveInfinity;
+        float minDistToTower = float.PositiveInfinity;
+        float minDistToColliding = float.PositiveInfinity;
+
 		foreach(EnemyScript enemy in enemiesInRange){
-			float curDist = Vector3.Distance(spaceStation.position, enemy.transform.position);
-			if(curDist < minDist){
-				minDist = curDist;
-				nearestEnemy = enemy;
+			float curDistToBase = Vector3.Distance(spaceStation.position, enemy.transform.position);
+            float curDistToTower = Vector3.Distance(transform.position, enemy.transform.position);
+            
+			if(curDistToBase < minDistToBase){
+				minDistToBase = curDistToBase;
+				nearestToBaseEnemy = enemy;
 			}
+
+            if(curDistToTower < minDistToTower){
+                minDistToTower = curDistToTower;
+                nearestToTowerEnemy = enemy;
+            }
+
+            Ray ray = new Ray(enemy.transform.position, transform.forward);
+            RaycastHit hit = new RaycastHit();
+            if(curDistToTower < minDistToColliding && collider.Raycast(ray, out hit, shootingRange)){
+                nearestCollidingEnemy = enemy;
+                minDistToColliding = curDistToTower;
+            }
 		}
-		return nearestEnemy;
+
+        if(minDistToColliding < collidingPanicRange || percentOfHealth < lowHealthPercentage) {
+            return nearestCollidingEnemy;
+        }
+        else if(minDistToTower < preferredRange  || percentOfHealth < lowHealthPercentage) {
+            return nearestToTowerEnemy;
+        }
+        else {
+		    return nearestToBaseEnemy;
+        }
 	}
 
 	protected void FireProjectile (EnemyScript target) {
-		audio.PlayOneShot(audio.clip);
 		Vector3 dir = ComputeFiringDirection(target);
 		BulletScript bs = (GameObject.Instantiate(bulletPrefab, ComputeProtectilePosition(dir), Quaternion.LookRotation(dir)) as GameObject).GetComponent<BulletScript>();
 		bs.damage = damagePerShot;
-		//bs.targetSeeking = true;
-		bs.target = target.transform;
+		if(towerLevel == 4){
+			bs.targetSeeking = true;
+			bs.target = target.transform;
+		}
 		//bs.faction = GameManager.Factions.Enemy;
 	}
 
 	protected Vector3 ComputeFiringDirection (EnemyScript target) {
 		float dist = Vector3.Distance(target.transform.position, transform.position);
-		Vector3 estimatedMovement = target.gameObject.GetComponent<Rigidbody>().velocity * dist / projectileSpeed;
-		Vector3 dir = ((target.transform.position + estimatedMovement) - transform.position).normalized;
+		//Vector3 estimatedMovement = target.gameObject.GetComponent<Rigidbody>().velocity * dist / projectileSpeed;
+        Vector3 estimatedMovement = target.gameObject.transform.forward * target.gameObject.GetComponent<Rigidbody>().velocity.magnitude * dist / projectileSpeed;
+		Vector3 dir = ((target.transform.position + 1.2f * estimatedMovement) - transform.position).normalized;
 		//apply directional inaccuracy
-		float inaccuracyAngle = Random.Range(-5.0f, +5.0f);
-		dir = Quaternion.Euler(0, inaccuracyAngle, 0) * dir;
+		float curInaccuracyAngle = Random.Range(-directionalInaccuracyExtent, +directionalInaccuracyExtent);
+		dir = Quaternion.Euler(0, curInaccuracyAngle, 0) * dir;
 		return dir;
 	}
 
@@ -201,8 +276,19 @@ public class TurretScript : Agent, IHittable {
 		return (this.transform.position + firingDirection * safetyDistance);
 	}
 
+	protected void FireSpreadshot () {
+		float angle = Random.value * 360;
+		int shots = 4 + towerLevel;
+		for(int i = 0; i < shots; i++){
+			Vector3 dir = Quaternion.AngleAxis(angle + i*360.0f/shots, Vector3.up) * Vector3.forward;
+			BulletScript bs = (GameObject.Instantiate(bulletPrefab, ComputeProtectilePosition(dir), Quaternion.LookRotation(dir)) as GameObject).GetComponent<BulletScript>();
+			bs.damage = 2 * damagePerShot;
+		}
+	}
+
 	public void Hit (float damage) {
 		curHealth -= damage;
+        percentOfHealth = curHealth / maxHealth;
 		//healthBar.fillAmount = curHealth/maxHealth;
 		//Color change?
 		if (curHealth <= 0)	{

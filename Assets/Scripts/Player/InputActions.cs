@@ -3,8 +3,12 @@ using System.Collections;
 
 public class InputActions : MonoBehaviour
 {
-    public GameObject turretPrefab;
-    public InputCapture input;
+    public GameObject turretPrefabLvl1;
+	public GameObject turretPrefabLvl2;
+	public GameObject turretPrefabLvl3;
+	public GameObject turretPrefabLvl4;
+	public GameObject warningParticlePrefab;
+	public InputCapture input;
 
     private float boostCooldown;
     
@@ -27,6 +31,39 @@ public class InputActions : MonoBehaviour
         }
     }
 
+	protected void TryToSpawnTurret () {
+		int lvl = GameManager.BuyMaxCurAvailableTower();
+		if(lvl > 0){
+			SpawnTurret(lvl);
+		}
+		else{
+			ShowWarning();
+		}
+	}
+
+	protected void SpawnTurret (int lvl = 1) {
+		GameObject turretPrefab = 1 == lvl ? turretPrefabLvl1 : 2 == lvl ? turretPrefabLvl2 : 3 == lvl ? turretPrefabLvl3 : turretPrefabLvl4;
+		Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefabLvl1.transform.localScale.z / 2);
+		tempTurret = (GameObject)Instantiate(turretPrefab, spawnPos, this.transform.rotation);
+		tempTurret.GetComponent<TurretScript>().setAffectedByGravity(false);
+	}
+
+	protected void ReleaseTurret () {
+		//check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
+		if (tempTurret){
+			TurretScript trt = tempTurret.GetComponent<TurretScript>();
+			if(trt){
+				trt.SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
+			}
+			tempTurret = null;
+		}
+	}
+
+	protected void ShowWarning () {
+		Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + warningParticlePrefab.transform.localScale.z / 2) + Vector3.up;
+		(Instantiate(warningParticlePrefab, spawnPos, Quaternion.identity) as GameObject).transform.SetParent(this.transform);
+	}
+
     // Update is called once per frame
     void normalMovement()
     {
@@ -40,14 +77,12 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.setShowRadius(true);
+                    GameManager.showRadius = true;
                 }
                 bumperPressed = true;
                 bumperReleased = false;
 
-                Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
-                tempTurret = (GameObject)Instantiate(turretPrefab, spawnPos, this.transform.rotation);
-                tempTurret.GetComponent<TurretScript>().setAffectedByGravity(false);
+				TryToSpawnTurret();
             }
         }
         //when releasing place turret button, let turret go
@@ -60,20 +95,13 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.setShowRadius(false);
+                    GameManager.showRadius = false;
                 }
 
                 bumperPressed = false;
                 bumperReleased = true;
 
-                //check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
-                if (tempTurret)
-                {
-					TurretScript trt = tempTurret.GetComponent<TurretScript>();
-					if(trt){
-						trt.SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
-					}
-                }
+				ReleaseTurret();
             }
         }
 
@@ -81,7 +109,7 @@ public class InputActions : MonoBehaviour
         //if the player is currently dragging a turret behind him, keep the position updated
         if (bumperPressed && !bumperReleased && tempTurret)
         {
-            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
+            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefabLvl1.transform.localScale.z / 2);
         }
 
         //rotate the palyer according to the angle. Mouse has only one rotation, Gamepad 2 seperate ones
@@ -117,14 +145,12 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.setShowRadius(true);
+                    GameManager.showRadius = true;
                 }
                 bumperPressed = true;
                 bumperReleased = false;
 
-                Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
-                tempTurret = (GameObject)Instantiate(turretPrefab, spawnPos, this.transform.rotation);
-                tempTurret.GetComponent<TurretScript>().setAffectedByGravity(false);
+				TryToSpawnTurret();
             }
         }
         //when releasing place turret button, let turret go
@@ -137,21 +163,13 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.setShowRadius(false);
+                    GameManager.showRadius = false;
                 }
 
                 bumperPressed = false;
                 bumperReleased = true;
 
-                //check if there is a tempTurret. (possible error: turret hit planet while player was setting it)
-                if (tempTurret)
-                {
-                    TurretScript trt = tempTurret.GetComponent<TurretScript>();
-                    if (trt)
-                    {
-                        trt.SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
-                    }
-                }
+				ReleaseTurret();
             }
         }
 
@@ -159,7 +177,7 @@ public class InputActions : MonoBehaviour
         //if the player is currently dragging a turret behind him, keep the position updated
         if (bumperPressed && !bumperReleased && tempTurret)
         {
-            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefab.transform.localScale.z / 2);
+            tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefabLvl1.transform.localScale.z / 2);
         }
 
         //rotate the palyer according to the angle. Mouse has only one rotation, Gamepad 2 seperate ones

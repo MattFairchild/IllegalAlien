@@ -18,6 +18,6 @@ public class DestroyerScript : EnemyScript
         agent.destination = target.transform.position;
         /*Vector3 direction;
         direction = target.transform.position - transform.position;
-        rigidbody.AddForce(direction.normalized);*/
+        rigidbody.AddForce(4 * direction.normalized);*/
 	}
 }

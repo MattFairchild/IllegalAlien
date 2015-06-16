@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2301722}
   - 54: {fileID: 5401722}
   - 114: {fileID: 11401722}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BulletHostile
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -96,6 +96,10 @@ MonoBehaviour:
   faction: 1
   target: {fileID: 0}
   targetSeeking: 0
+  areaOfEffect: 0
+  aoeRadius: 0
+  aoeDamage: 0
+  explosionPrefab: {fileID: 112498, guid: 31d84847dfc81a04c8354a25f71f6d3c, type: 2}
 --- !u!136 &13601722
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
 	public float gravitationalConstant;
 
-    public bool showRadius = false;
+    public bool m_showRadius = false;
     public bool alwayShowRadius = false;
     public bool onlyNearest = false;
 
@@ -26,11 +26,16 @@ public class GameManager : MonoBehaviour {
 
     public int m_curResources;
 	public int m_maxResources = 100;
+	public int m_resourceCostPerTowerLevel = 20;
 	public int m_score;
 
 	public bool controlsMixed = false;
-	public float boostTimer;
+	public float m_boostTimer;
 
+	public float m_gameDuration = 300;
+	public float m_startTime;
+	public float m_endTime;
+	
 	public enum Factions{
 		Player,
 		Enemy,
@@ -61,6 +66,8 @@ public class GameManager : MonoBehaviour {
         //set starting values
         m_curResources = 0;
 		m_score = 0;
+		m_startTime = Time.time;
+		m_endTime = m_startTime + m_gameDuration;
 	}
 	
 
@@ -69,14 +76,9 @@ public class GameManager : MonoBehaviour {
         return instance.gravitationalConstant;
     }
 
-    public static bool getShowRadius()
-    {
-        return instance.showRadius;
-    }
-
-    public static void setShowRadius(bool show)
-    {
-        instance.showRadius = show;
+    public static bool showRadius {
+		get { return instance.m_showRadius; }
+		set { instance.m_showRadius = value; }
     }
 
     public static bool getOnlyNearest()
@@ -151,18 +153,55 @@ public class GameManager : MonoBehaviour {
 		protected set { instance.m_spaceStation = value; }
 	}
 
-	public static void setBoost(float val)
-	{
-		instance.boostTimer = val;
+	public static float boostTimer {
+		get { return instance.m_boostTimer; }
+		set{ instance.m_boostTimer = value; }
 	}
+
+	public static int maxCurAvailableTowerLevel {
+		get { return curResources/resourceCostPerTowerLevel; }
+	}
+
+	public static int BuyMaxCurAvailableTower () {
+		int lvl = maxCurAvailableTowerLevel;
+		curResources -= lvl * resourceCostPerTowerLevel;
+		return lvl;
+	}
+
+	public static int resourceCostPerTowerLevel {
+		get { return instance.m_resourceCostPerTowerLevel; }
+		protected set { instance.m_resourceCostPerTowerLevel = value; }
+	}
+
+	public static float startTime {
+		get { return instance.m_startTime; }
+	}
+	
+	public static float endTime {
+		get { return instance.m_endTime; }
+	}
+	
+	public static float gameDuration {
+		get { return instance.m_gameDuration; }
+	}
+	
+	/*public static int TowerResourceCost (int towerLevel) {
+		switch(towerLevel){
+		case 1:
+			return 20;
+		case 2:
+			return 40;
+		case 3:
+			return 60;
+		case 4:
+			return 80;
+		default:
+			return 999; //-1 wouldn't be a good idea here, I guess
+		}
+	}*/
 
 	public static bool mixedControls()
 	{
 		return instance.controlsMixed;
-	}
-
-	public static float getBoostTime()
-	{
-		return instance.boostTimer;
 	}
 }
