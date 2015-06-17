@@ -11,6 +11,7 @@ public class Player : Agent, IHittable {
 	//[SerializeField]protected Image shardsBar;
 	//[SerializeField]protected Slider speedBar;
 	public Image healthBarOverlay;
+    public InputCapture input;
 
 	protected Vector3 lastPos = Vector3.zero;
 	public float speed;
@@ -30,8 +31,16 @@ public class Player : Agent, IHittable {
 
 	void Update () {
 		//speedBar.value = speed;
-		speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
-		lastPos = transform.position;
+		//speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
+		//lastPos = transform.position;
+        if (input.placingTurret())
+        {
+            speed = 0.5f * input.getSpeed();
+        }
+        else
+        {
+            speed = input.getSpeed();
+        }
 	}
 
 	public void Hit (float damage, Agent attacker = null) {

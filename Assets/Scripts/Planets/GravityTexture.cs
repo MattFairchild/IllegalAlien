@@ -20,13 +20,31 @@ public class GravityTexture : MonoBehaviour
         float mass = GetComponentInParent<Rigidbody>().mass;
         textureSize = 512;
 
-        alpha = 0.15f;
+        alpha = 0.20f;
 
         boxSize = 2 * mass * GameManager.getGravitationalConstant() / Mathf.Pow(1.5f, 2);
         transform.localScale = new Vector3(boxSize, 0, boxSize);
 
         mask = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, true);
 
+        StartCoroutine(CreateTexture(mass));
+        
+    }
+
+    void Update()
+    {
+        if (GameManager.showRadius)
+        {
+            gameObject.GetComponent<Renderer>().enabled = true;
+        }
+        else
+        {
+            gameObject.GetComponent<Renderer>().enabled = false;
+        }
+    }
+
+    IEnumerator CreateTexture(float mass)
+    {
         for (int j = 0; j < textureSize; j++)
         {
             for (int i = 0; i < textureSize; i++)
@@ -48,9 +66,12 @@ public class GravityTexture : MonoBehaviour
                 }
                 else if (speed > 6f)
                 {
-                    inputTextureX = (int)((speed / 10f) * (float)(inputTexture.width));
-                    tex = inputTexture.GetPixel(inputTextureX, 1);
-                    tex.a = (speed - 6f) * 0.5f * alpha;
+                    if (speed <= 10f)
+                    {
+                        inputTextureX = (int)((speed / 10f) * (float)(inputTexture.width));
+                        tex = inputTexture.GetPixel(inputTextureX, 1);
+                        tex.a = (-speed + 10f) * 0.25f * alpha;
+                    }
                 }
                 else
                 {
@@ -59,25 +80,15 @@ public class GravityTexture : MonoBehaviour
                     tex.a = alpha;
                 }
                 
+                
                 mask.SetPixel(i, j, tex);
             }
          
         }
         mask.Apply();
         gameObject.GetComponent<Renderer>().material.mainTexture = mask;
-    }
 
-
-    void Update()
-    {
-        if (GameManager.showRadius)
-        {
-            gameObject.GetComponent<Renderer>().enabled = true;
-        }
-        else
-        {
-            gameObject.GetComponent<Renderer>().enabled = false;
-        }
+        yield break;
     }
 
 

@@ -1558,6 +1558,12 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 110952, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
   m_PrefabInternal: {fileID: 1845044200}
+--- !u!114 &463512598 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11441072, guid: 0a2d22d80ecb1c046938095fec696afd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1845044200}
+  m_Script: {fileID: 11500000, guid: e4bd6e3e11612ae4f8d0c0bc3a31c9e3, type: 3}
 --- !u!81 &463512603
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6472,6 +6478,10 @@ Prefab:
       propertyPath: turretPrefabLvl4
       value: 
       objectReference: {fileID: 185624, guid: 1590fd5120ae4da49b231e259a7ad7a9, type: 2}
+    - target: {fileID: 11409130, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 463512598}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
   m_IsPrefabParent: 0

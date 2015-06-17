@@ -129,7 +129,7 @@ public class TurretScript : Agent, IHittable {
                 distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
 
                 //limit range of gravity depending on orbital speed
-                orbitalSpeed = Mathf.Sqrt(GameManager.getGravitationalConstant() * planetRb.mass / distance);
+                orbitalSpeed = GameManager.getGravitationalConstant() * planetRb.mass / distance;
                 if (orbitalSpeed >= 1.5f)
                 {
                     rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
