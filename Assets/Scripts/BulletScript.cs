@@ -14,7 +14,8 @@ public class BulletScript : MonoBehaviour {
 	public bool areaOfEffect = false;
 	public float aoeRadius = 0;
 	public float aoeDamageModifier = 0;
-	public GameObject explosionPrefab;
+	public Agent sender = null;
+	[SerializeField]protected GameObject explosionPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -54,7 +55,7 @@ public class BulletScript : MonoBehaviour {
 		case GameManager.Factions.Player:
 			//enemy faction member hit
 	        if(GameManager.FactionTagsEnemy.Contains(collision.gameObject.tag)){
-				collision.gameObject.GetComponent<EnemyScript>().Hit(damage);
+				collision.gameObject.GetComponent<EnemyScript>().Hit(damage, sender);
 				if(areaOfEffect){
 					PerformAreaOfEffect(collision.gameObject);
 				}
@@ -67,7 +68,7 @@ public class BulletScript : MonoBehaviour {
 			break;
 		case GameManager.Factions.Enemy:
 			if(GameManager.FactionTagsPlayer.Contains(collision.gameObject.tag)){
-				collision.gameObject.GetComponent<IHittable>().Hit(damage);
+				collision.gameObject.GetComponent<IHittable>().Hit(damage, sender);
 			}
 			//else if(collision.gameObject.tag != "Enemy"){
 			Destroy(gameObject);
@@ -85,7 +86,7 @@ public class BulletScript : MonoBehaviour {
 		Collider[] colliders = Physics.OverlapSphere(obj.transform.position, aoeRadius);
 		foreach(Collider col in colliders){
 			if(GameManager.FactionTagsEnemy.Contains(col.tag)){
-				col.GetComponent<EnemyScript>().Hit(aoeDamageModifier * damage);
+				col.GetComponent<EnemyScript>().Hit(aoeDamageModifier * damage, sender);
 			}
 		}
 	}

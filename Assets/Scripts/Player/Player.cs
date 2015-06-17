@@ -34,12 +34,16 @@ public class Player : Agent, IHittable {
 		lastPos = transform.position;
 	}
 
-	public void Hit (float damage) {
+	public void Hit (float damage, Agent attacker = null) {
 		curHealth -= damage;
 		percentOfHealth = curHealth/maxHealth;
 		if(curHealth <= 0){
 			Debug.Log("Game over!");
 		}
+	}
+
+	public override void IncreaseKillCount () {
+		killCount++;
 	}
 
 	void OnCollisionEnter (Collision collision) {

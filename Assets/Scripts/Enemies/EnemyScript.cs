@@ -24,7 +24,7 @@ public abstract class EnemyScript : Agent, IHittable {
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 	}
 
-	public void Hit (float damage) {
+	public void Hit (float damage, Agent attacker = null) {
 		float tmp = healthBar.fillAmount;
 		curHealth -= damage;
 		percentOfHealth = curHealth/maxHealth;
@@ -32,6 +32,9 @@ public abstract class EnemyScript : Agent, IHittable {
 		//Color change?
 		if (curHealth <= 0)	{
 			Die ();
+			if(attacker){
+				attacker.IncreaseKillCount();
+			}
 		}
 		if (tmp < healthBar.fillAmount){
 			Debug.Log("?!?");
@@ -55,6 +58,10 @@ public abstract class EnemyScript : Agent, IHittable {
 
 		Destroy(gameObject, 0.01f);
 		enabled = false;
+	}
+
+	public override void IncreaseKillCount () {
+		killCount++;
 	}
 
     void OnCollisionEnter (Collision collision) {

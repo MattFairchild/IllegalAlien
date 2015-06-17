@@ -6,10 +6,10 @@ using System.Collections.Generic;
 public class TurretScript : Agent, IHittable {
 
 	/*Gravity stuff*/
-    public Vector3 direction;
-    public float distance;
-    public float orbitalSpeed;
-    public bool affectedByGravity = false;
+    protected Vector3 direction = Vector3.zero;
+	protected float distance = 0;
+	protected float orbitalSpeed;
+	[SerializeField]protected bool affectedByGravity = false;
 	[SerializeField]protected bool launched = false;
     public GameObject[] planets;
 
@@ -29,18 +29,20 @@ public class TurretScript : Agent, IHittable {
 	[SerializeField]protected float directionalInaccuracyExtent = 7.5f;
 	[SerializeField]protected float projectileSpeed = 25.0f;
     [SerializeField]protected float collidingPanicRange = 3.5f;
-    [SerializeField]protected float preferredRange = 2.5f;
+	[SerializeField]protected float preferredRange = 2.5f;
+	
+	protected float ComputeEstimatedDPS () {
+		return numberOfShots * damagePerShot * shootingFrequency * (100 - 2*directionalInaccuracyExtent)/100;
+	}
 
 	protected List<EnemyScript> enemiesInRange = new List<EnemyScript>();
 
 	/*more stuff*/
 	[SerializeField]protected int towerLevel = 1;
-	//[SerializeField]protected int shardCost = 5;
-	protected int killCount = 0;
 	protected new AudioSource audio;
 
 	/*GUI stuff*/
-	[SerializeField]protected Canvas towerGUI;
+	[SerializeField]protected Canvas towerGUICanvas;
 	[SerializeField]protected Text textHealth;
 	[SerializeField]protected Text textKillCount;
 	[SerializeField]protected Text textRange;
@@ -51,20 +53,32 @@ public class TurretScript : Agent, IHittable {
     // Use this for initialization
     void Start(){
 		InitializeAgent();
-        planets = GameObject.FindGameObjectsWithTag("Planet");
-        direction = Vector3.zero;
-        rb.velocity = Vector3.zero;
-
-		trigger.radius = shootingRange;
-
-		audio = GetComponent<AudioSource>();
-        audio.maxDistance = shootingRange * 2;
+		InitializeTower();
+		InitializeTowerGUI();
     }
+
+	protected void InitializeTower () {
+		planets = GameObject.FindGameObjectsWithTag("Planet");
+		
+		rb.velocity = Vector3.zero;
+		trigger.radius = shootingRange;
+		
+		audio = GetComponent<AudioSource>();
+		audio.maxDistance = shootingRange * 2;
+	}
+
+	protected void InitializeTowerGUI () {
+		textHealth.text = "Health := " + maxHealth.ToString("0.00");
+		textKillCount.text = "KillCount := 0";
+		textRange.text = "Range := " + shootingRange.ToString("0.00");
+		textDPS.text = "est. DPS :~ " + ComputeEstimatedDPS().ToString("0.00");
+		textState.text = "State := <color=#22B2FF>" + "unlaunched" + "</color>";
+		textLvl.text = "<color=orange>" + towerLevel + "</color>\n<size=20><color=white>LVL</color></size>";
+	}
 
     void FixedUpdate()
     {
-        if (launched && affectedByGravity)
-        {
+        if (launched && affectedByGravity){
             Gravity();
         }
     }
@@ -136,6 +150,11 @@ public class TurretScript : Agent, IHittable {
 
     }
 
+	public override void IncreaseKillCount () {
+		killCount++;
+		textKillCount.text = "KillCount := <color=#22B2FF>" + killCount + "</color>";
+	}
+
     // Collision with other objects
     void OnCollisionEnter (Collision collision) {
 		switch(collision.gameObject.tag){
@@ -154,17 +173,27 @@ public class TurretScript : Agent, IHittable {
     }
 
 	void OnTriggerEnter (Collider other) {
-		if(other.tag == "Enemy"){
+		switch(other.tag){
+		case "Enemy":
 			EnemyScript newEnemy = other.GetComponent<EnemyScript>();
 			if(newEnemy && !enemiesInRange.Contains(newEnemy)){
 				enemiesInRange.Add(newEnemy);
 			}
+			break;
+		case "Player":
+			towerGUICanvas.enabled = true;
+			break;
 		}
 	}
 
 	void OnTriggerExit (Collider other) {
-		if(other.tag == "Enemy"){
+		switch(other.tag){
+		case "Enemy":
 			enemiesInRange.Remove(other.GetComponent<EnemyScript>());
+			break;
+		case "Player":
+			towerGUICanvas.enabled = false;
+			break;
 		}
 	}
 
@@ -244,6 +273,7 @@ public class TurretScript : Agent, IHittable {
 	protected void FireProjectile (EnemyScript target) {
 		Vector3 dir = ComputeFiringDirection(target);
 		BulletScript bs = (GameObject.Instantiate(bulletPrefab, ComputeProtectilePosition(dir), Quaternion.LookRotation(dir)) as GameObject).GetComponent<BulletScript>();
+		bs.sender = this;
 		bs.damage = damagePerShot;
 		if(towerLevel == 4){
 			bs.targetSeeking = true;
@@ -279,13 +309,17 @@ public class TurretScript : Agent, IHittable {
 		}
 	}
 
-	public void Hit (float damage) {
+	public void Hit (float damage, Agent attacker = null) {
 		curHealth -= damage;
         percentOfHealth = curHealth / maxHealth;
+		textHealth.text = "Health := <color=#22B2FF>" + curHealth.ToString("0.00") + "</color>";
 		//healthBar.fillAmount = curHealth/maxHealth;
 		//Color change?
 		if (curHealth <= 0)	{
 			Die ();
+			if(attacker){
+				attacker.IncreaseKillCount();
+			}
 		}
 	}
 
@@ -298,6 +332,7 @@ public class TurretScript : Agent, IHittable {
 		trail.startWidth *= 1.5f;
 		trail.material.SetColor("_TintColor", new Color(1.0f, 0.0f, 0.125f, 1));
 		trigger.enabled = false;
+		textState.text = "State := <color=#22B2FF>" + "dead" + "</color>";
 		Destroy(this);
 	}
 

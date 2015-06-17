@@ -103,7 +103,7 @@ GameObject:
   - 114: {fileID: 11468290}
   - 82: {fileID: 8287934}
   m_Layer: 0
-  m_Name: TurretShootingLvl2
+  m_Name: TurretShootingLvl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185624}
   serializedVersion: 2
-  m_Mass: .625
+  m_Mass: .5
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -319,7 +319,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: 20
-  m_StartWidth: .5
+  m_StartWidth: .25
   m_EndWidth: .150000006
   m_Colors:
     m_Color[0]:
@@ -428,11 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c375f5ba2faaaf04588b24be9ea0d974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6.25
+  maxHealth: 5
+  lowHealthPercentage: .200000003
   percentOfHealth: 0
-  direction: {x: 0, y: 0, z: 0}
-  distance: 0
-  orbitalSpeed: 0
   affectedByGravity: 1
   launched: 0
   planets: []
@@ -442,16 +440,22 @@ MonoBehaviour:
   collider: {fileID: 13656310}
   trigger: {fileID: 13598634}
   bulletPrefab: {fileID: 101722, guid: bc5d3e80da072ae4fad03b5349e3b73f, type: 2}
-  towerGUI: {fileID: 0}
-  numberOfShots: 3
-  damagePerShot: .75
-  shootingFrequency: 1.25
-  shootingRange: 12.5
-  directionalInaccuracyExtent: 5
-  projectileSpeed: 31.25
+  numberOfShots: 2
+  damagePerShot: .5
+  shootingFrequency: 1
+  shootingRange: 10
+  directionalInaccuracyExtent: 7.5
+  projectileSpeed: 25
   collidingPanicRange: 3.5
   preferredRange: 2.5
-  towerLevel: 2
+  towerLevel: 1
+  towerGUI: {fileID: 0}
+  textHealth: {fileID: 0}
+  textKillCount: {fileID: 0}
+  textRange: {fileID: 0}
+  textDPS: {fileID: 0}
+  textState: {fileID: 0}
+  textLvl: {fileID: 0}
 --- !u!114 &11481526
 MonoBehaviour:
   m_ObjectHideFlags: 1
