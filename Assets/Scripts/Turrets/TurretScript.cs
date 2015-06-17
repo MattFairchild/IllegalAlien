@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,14 +13,13 @@ public class TurretScript : Agent, IHittable {
 	[SerializeField]protected bool launched = false;
     public GameObject[] planets;
 
-	/*References*/
+	/*References stuff*/
 	[SerializeField]protected Rigidbody rb;
 	[SerializeField]protected GameObject turretObject;
 	[SerializeField]protected TrailRenderer trail;
     [SerializeField]protected new CapsuleCollider collider;
 	[SerializeField]protected SphereCollider trigger;
 	[SerializeField]protected GameObject bulletPrefab;
-	[SerializeField]protected Canvas towerGUI;
 
 	/*Shooting stuff*/
 	[SerializeField]protected int numberOfShots = 1;
@@ -39,18 +39,14 @@ public class TurretScript : Agent, IHittable {
 	protected int killCount = 0;
 	protected new AudioSource audio;
 
-
-    //GUI:
-    //health
-    //killCount
-    //range
-    //estimated DPS
-    //lvl
-    //state?
-    //
-    //
-    //
-    //
+	/*GUI stuff*/
+	[SerializeField]protected Canvas towerGUI;
+	[SerializeField]protected Text textHealth;
+	[SerializeField]protected Text textKillCount;
+	[SerializeField]protected Text textRange;
+	[SerializeField]protected Text textDPS;
+	[SerializeField]protected Text textState;
+	[SerializeField]protected Text textLvl;
 
     // Use this for initialization
     void Start(){
@@ -63,10 +59,6 @@ public class TurretScript : Agent, IHittable {
 
 		audio = GetComponent<AudioSource>();
         audio.maxDistance = shootingRange * 2;
-
-        if(launched){
-            SetVelocity(Vector3.zero);
-        }
     }
 
     void FixedUpdate()
@@ -186,8 +178,9 @@ public class TurretScript : Agent, IHittable {
 				EnemyScript enemy = PickEnemy();
 				if(enemy){
 					audio.PlayOneShot(audio.clip);
-					for(int i = 0; i < numberOfShots && enemy; i++){
+					for(int i = 0; (i < numberOfShots) && enemy; i++){
 						FireProjectile(enemy);
+						Debug.Log(i+1);
                         yield return new WaitForSeconds(0.1f);
 					}
 				}
