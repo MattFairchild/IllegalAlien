@@ -49,6 +49,7 @@ public class TurretScript : Agent, IHittable {
 	[SerializeField]protected Text textDPS;
 	[SerializeField]protected Text textState;
 	[SerializeField]protected Text textLvl;
+    protected bool guiVisible = true;
 
     // Use this for initialization
     void Start(){
@@ -74,6 +75,7 @@ public class TurretScript : Agent, IHittable {
 		textDPS.text = "est. DPS :~ " + ComputeEstimatedDPS().ToString("0.00");
 		textState.text = "State := <color=#22B2FF>" + "unlaunched" + "</color>";
 		textLvl.text = "<color=orange>" + towerLevel + "</color>\n<size=20><color=white>LVL</color></size>";
+        StartCoroutine(FadeTowerGUI());
 	}
 
     void FixedUpdate()
@@ -165,6 +167,7 @@ public class TurretScript : Agent, IHittable {
 		case "Player":
 		case "Enemy":
 			Hit (0.2f * collision.relativeVelocity.magnitude);
+            collision.gameObject.GetComponent<IHittable>().Hit(0.2f * collision.relativeVelocity.magnitude);
 			break;
 		default:
 			break;
@@ -181,7 +184,7 @@ public class TurretScript : Agent, IHittable {
 			}
 			break;
 		case "Player":
-			towerGUICanvas.enabled = true;
+            guiVisible = true;
 			break;
 		}
 	}
@@ -192,10 +195,19 @@ public class TurretScript : Agent, IHittable {
 			enemiesInRange.Remove(other.GetComponent<EnemyScript>());
 			break;
 		case "Player":
-			towerGUICanvas.enabled = false;
+            guiVisible = false;
 			break;
 		}
 	}
+
+    protected IEnumerator FadeTowerGUI () {
+        //towerGUICanvas.enabled = visible;
+        CanvasGroup gui = towerGUICanvas.GetComponent<CanvasGroup>();
+        while (enabled) {
+            gui.alpha = Mathf.Clamp01(gui.alpha + (guiVisible ? Time.fixedDeltaTime : -Time.fixedDeltaTime));
+            yield return new WaitForFixedUpdate();
+        }
+    }
 
 	protected IEnumerator Fight () {
 		while(enabled){

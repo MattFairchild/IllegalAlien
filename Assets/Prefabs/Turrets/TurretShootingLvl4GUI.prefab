@@ -257,6 +257,7 @@ GameObject:
   - 114: {fileID: 11419166}
   - 114: {fileID: 11497892}
   - 114: {fileID: 11454000}
+  - 225: {fileID: 22597102}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1394,6 +1395,17 @@ RectTransform:
   m_AnchoredPosition: {x: -150, y: 0}
   m_SizeDelta: {x: 500, y: 350}
   m_Pivot: {x: .5, y: .5}
+--- !u!225 &22597102
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190420}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
