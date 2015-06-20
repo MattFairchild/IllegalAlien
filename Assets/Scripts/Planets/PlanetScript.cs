@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PlanetScript : MonoBehaviour
 {
     public Rigidbody rb;
+    public float range;
 
     // Use this for initialization
     void Awake()

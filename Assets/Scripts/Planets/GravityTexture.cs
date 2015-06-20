@@ -24,7 +24,7 @@ public class GravityTexture : MonoBehaviour
 
         boxSize = 2 * mass * GameManager.getGravitationalConstant() / Mathf.Pow(1.5f, 2);
         transform.localScale = new Vector3(boxSize, 0, boxSize);
-
+        GetComponentInParent<PlanetScript>().range = boxSize;
         mask = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, true);
 
         StartCoroutine(CreateTexture(mass));
