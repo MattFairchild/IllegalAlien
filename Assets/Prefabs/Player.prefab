@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &110952
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +32,8 @@ GameObject:
   - 114: {fileID: 11407320}
   - 54: {fileID: 5457934}
   - 114: {fileID: 11409130}
+  - 81: {fileID: 8135302}
+  - 208: {fileID: 20893522}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -66,7 +68,7 @@ GameObject:
   - 114: {fileID: 11468148}
   - 114: {fileID: 11446582}
   - 114: {fileID: 11493822}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +326,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110952}
-  m_Mesh: {fileID: 4300002, guid: 784c359b57b3c3849b9d22958b4dc655, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 784c359b57b3c3849b9d22958b4dc655, type: 3}
 --- !u!33 &3373046
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -355,10 +357,17 @@ BoxCollider:
   m_GameObject: {fileID: 187154}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!81 &8135302
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110952}
+  m_Enabled: 1
 --- !u!82 &8209972
 AudioSource:
   m_ObjectHideFlags: 1
@@ -481,10 +490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2b2a5dc6849324c97576dec4dfe59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretPrefabLvl1: {fileID: 0}
-  turretPrefabLvl2: {fileID: 0}
-  turretPrefabLvl3: {fileID: 0}
-  turretPrefabLvl4: {fileID: 0}
+  turretPrefabLvl1: {fileID: 163572, guid: 0d31c26946612fb419deeeccfdd958e6, type: 2}
+  turretPrefabLvl2: {fileID: 185624, guid: 352b0d4e6a33d9349a01d0990d863fb2, type: 2}
+  turretPrefabLvl3: {fileID: 185624, guid: 6edaaafeede668347bd3298f7c3d017b, type: 2}
+  turretPrefabLvl4: {fileID: 185624, guid: 1590fd5120ae4da49b231e259a7ad7a9, type: 2}
   warningParticlePrefab: {fileID: 122670, guid: 09e98d045b7aac841b1046518a3bd8bd,
     type: 2}
   input: {fileID: 11441072}
@@ -504,7 +513,7 @@ MonoBehaviour:
   lowHealthPercentage: .200000003
   percentOfHealth: 0
   healthBarOverlay: {fileID: 11405510}
-  input: {fileID: 0}
+  input: {fileID: 11441072}
   speed: 0
 --- !u!114 &11432344
 MonoBehaviour:
@@ -2767,6 +2776,21 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+--- !u!208 &20893522
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110952}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1.25, z: 1.25}
+  m_MoveThreshold: .100000001
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: .5
 --- !u!222 &22225214
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2811,7 +2835,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 225, y: 225}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22472356
 RectTransform:
@@ -2820,7 +2844,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132454}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: .157000005}
   m_LocalScale: {x: .00999999978, y: .0100000035, z: .0100000035}
   m_Children:
   - {fileID: 22472552}
@@ -2828,7 +2852,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: .349999994}
+  m_AnchoredPosition: {x: 0, y: -.270000011}
   m_SizeDelta: {x: 500, y: 350}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22472552

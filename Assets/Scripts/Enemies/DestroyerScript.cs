@@ -33,7 +33,7 @@ public class DestroyerScript : EnemyScript
     {
         while (true)
         {
-            //enemiesInRange.RemoveAll(item => item == null);
+			enemiesInRange.RemoveAll(item => item == null);
             if (enemiesInRange.Count > 0)
             {
                 GameObject pickedTarget = PickTarget();
@@ -67,13 +67,13 @@ public class DestroyerScript : EnemyScript
     {
         GameObject pickedEnemy = null;
         float distance = 100f;
-        for (int i = 0; i < enemiesInRange.Count; i++ )
-        {
-            if (enemiesInRange[i] == null)
+		for (int i = 0; i < enemiesInRange.Count; i++ ) {
+			//this code doesn't make sense!!
+            /*if (enemiesInRange[i] == null)
             {
                 enemiesInRange.Remove(enemiesInRange[i]);
-            }
-            else if (Vector3.Distance(transform.position, enemiesInRange[i].transform.position) < distance)
+            }*/
+            if (Vector3.Distance(transform.position, enemiesInRange[i].transform.position) < distance)
             {
                 distance = Vector3.Distance(transform.position, enemiesInRange[i].transform.position);
                 pickedEnemy = enemiesInRange[i];

@@ -409,7 +409,7 @@ MonoBehaviour:
   shootingFrequency: 1
   shootingRange: 10
   projectileSpeed: 25
-  torpedoPrefab: {fileID: 101722, guid: 94c8ce3b03706c043ad86b3ab70d3841, type: 2}
+  torpedoPrefab: {fileID: 101722, guid: 9fe3ba4bd6b4ad7439ee739d779af580, type: 2}
   damagePerTorpedo: 10
   torpedoShootingFrequency: .300000012
   torpedoShootingRange: 18

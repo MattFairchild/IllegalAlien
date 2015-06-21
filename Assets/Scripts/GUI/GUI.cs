@@ -20,14 +20,18 @@ public class GUI : MonoBehaviour {
 	[SerializeField]protected Image bossShield;
 
 	protected Player player;
+	protected SpaceStationScript spaceStation;
 	protected Image playerHealthOverlay;
+	protected Image baseHealthOverlay;
 
 	//ddd move to GUI script!
 
 	// Use this for initialization
 	void Start () {
 		player = GameManager.player;
+		spaceStation = GameManager.spaceStation;
 		playerHealthOverlay = player.healthBarOverlay;
+		baseHealthOverlay = spaceStation.healthBarOverlay;
 	}
 	
 	// Update is called once per frame
@@ -39,5 +43,6 @@ public class GUI : MonoBehaviour {
 		playerShards.fillAmount = 1.0f*GameManager.curResources/GameManager.maxResources;
 		playerSpeed.value = player.speed;
 		playerHealth.fillAmount = playerHealthOverlay.fillAmount = player.percentOfHealth;
+		baseHealth.fillAmount = baseHealthOverlay.fillAmount = spaceStation.percentOfHealth;
 	}
 }

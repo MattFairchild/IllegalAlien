@@ -95,6 +95,7 @@ public class TurretScript : Agent, IHittable {
 		
 		StartCoroutine(Fight());
 		StartCoroutine(FightSpreadshot());
+		textState.text = "State := <color=#22B2FF>" + "active" + "</color>";
     }
 
     public void setAffectedByGravity(bool affected)
@@ -345,6 +346,7 @@ public class TurretScript : Agent, IHittable {
 		trail.startWidth *= 1.5f;
 		trail.material.SetColor("_TintColor", new Color(1.0f, 0.0f, 0.125f, 1));
 		trigger.enabled = false;
+		imageRange.enabled = false;
 		textState.text = "State := <color=#22B2FF>" + "dead" + "</color>";
 		Destroy(this);
 	}

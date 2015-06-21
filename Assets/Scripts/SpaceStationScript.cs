@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class SpaceStationScript : Agent, IHittable
-{
+public class SpaceStationScript : Agent, IHittable {
+
+	public Image healthBarOverlay;
 
 	// Use this for initialization
 	void Start () {
-        InitializeAgent();
+		InitializeAgent();
 	}
 	
 	// Update is called once per frame
@@ -14,25 +16,22 @@ public class SpaceStationScript : Agent, IHittable
 
 	}
 
-    public void Hit(float damage, Agent attacker = null)
-    {
+	protected void Die () {
+		Debug.Log("Game Over!");
+	}
+
+    public void Hit (float damage, Agent attacker = null) {
         curHealth -= damage;
-        if (curHealth <= 0)
-        {
+		percentOfHealth = curHealth/maxHealth;
+        if (curHealth <= 0){
             Die();
-            if (attacker)
-            {
+            if (attacker){
                 attacker.IncreaseKillCount();
             }
         }
     }
-    public override void IncreaseKillCount()
-    {
-        killCount++;
-    }
 
-    void Die()
-    {
-        Debug.Log("Game Over!!");
+    public override void IncreaseKillCount () {
+        killCount++;
     }
 }
