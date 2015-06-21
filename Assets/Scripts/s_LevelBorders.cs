@@ -8,11 +8,13 @@ public class s_LevelBorders : MonoBehaviour {
 
 	void Awake () {
 		foreach(Transform child in transform){
-			child.position *= borderCubeRadius;
+			Vector3 newPos = child.localPosition *= borderCubeRadius;
 			Vector3 newScale = child.localScale * borderCubeRadius;
 			for(int i = 0; i < 3; i++){
+				newPos[i] += newScale[i] == 0 ? Mathf.Sign(newPos[i]) * borderThickness/2 : 0;
 				newScale[i] = newScale[i] == 0 ? borderThickness : newScale[i];
 			}
+			child.localPosition = newPos;
 			child.localScale = newScale;
 		}
 	}

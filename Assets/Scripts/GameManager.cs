@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
     private static GameManager instance;
 
 	public Player m_player;
-	public GameObject m_spaceStation;
+	public SpaceStationScript m_spaceStation;
 	public GUI m_gui;
 
 	public float gravitationalConstant;
@@ -138,17 +138,17 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public static Player player {
-		get { return instance.m_player; }
-		protected set { instance.m_player = value; }
-	}
-
 	public static GUI gui {
 		get { return instance.m_gui; }
 		protected set { instance.m_gui = value; }
 	}
 
-	public static GameObject spaceStation {
+	public static Player player {
+		get { return instance.m_player; }
+		protected set { instance.m_player = value; }
+	}
+	
+	public static SpaceStationScript spaceStation {
 		get { return instance.m_spaceStation; }
 		protected set { instance.m_spaceStation = value; }
 	}

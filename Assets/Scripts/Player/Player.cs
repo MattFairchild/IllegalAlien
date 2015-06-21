@@ -43,11 +43,18 @@ public class Player : Agent, IHittable {
         }
 	}
 
+	protected void Die () {
+		Debug.Log("Game over");
+	}
+
 	public void Hit (float damage, Agent attacker = null) {
 		curHealth -= damage;
 		percentOfHealth = curHealth/maxHealth;
 		if(curHealth <= 0){
-			Debug.Log("Game over!");
+			Die();
+			if (attacker){
+				attacker.IncreaseKillCount();
+			}
 		}
 	}
 
