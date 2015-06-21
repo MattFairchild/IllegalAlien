@@ -4,26 +4,23 @@ using UnityEngine;
 using System.Collections;
 
 
-public class chaseTarget : State, combat
+public class ChaseTarget : State, ICombat
 {
-    private NavMeshAgent agent;
-    private GameObject bulletPrefab;
-    private AudioSource audio;
+    protected GameObject bulletPrefab;
 
-
-    public void Start()
+    void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.destination = transform.position;
-        audio = GetComponent<AudioSource>();
-
         bulletPrefab = (GameObject)Resources.Load("/Prefabs/Bullets/BulletHostile");
     }
 
-
     public override void run()
     {
-        shoot();
+        agent.destination = player.transform.position;
+
+        /*
+        CAREFUL: shooting is weird at the moment + enemies shoot through other script atm (related?)
+        */
+        //shoot();
     }
 
 

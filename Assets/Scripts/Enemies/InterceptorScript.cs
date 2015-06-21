@@ -3,24 +3,25 @@ using System.Collections;
 
 public class InterceptorScript : EnemyScript
 {
-    
-	// Use this for initialization
-    void Start() 
+
+    // Use this for initialization
+    void Start()
     {
-		InitializeEnemy();
-		target = player;
+        InitializeEnemy();
+        target = player;
         StartCoroutine(Fight());
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         agent.destination = target.transform.position;
-	}
+    }
 
     IEnumerator Fight()
     {
-        while (true) { 
+        while (true)
+        {
 
             if (Vector3.Distance(player.transform.position, transform.position) <= shootingRange && Vector3.Angle(transform.forward, player.transform.position - transform.position) < 15f)
             {
@@ -34,20 +35,21 @@ public class InterceptorScript : EnemyScript
         }
     }
 
-    void Shoot(){
-        Vector3 position = transform.TransformPoint(new Vector3(0.7f, 0, 1.0f));
+    void Shoot()
+    {
+        Vector3 position = transform.TransformPoint(new Vector3(0.7f, 0, 2.0f));
 
         BulletScript bs1 = (GameObject.Instantiate(bulletPrefab, position, Quaternion.LookRotation(transform.forward)) as GameObject).GetComponent<BulletScript>();
         bs1.sender = this;
         bs1.damage = damagePerShot;
-        bs1.speed =  projectileSpeed;
+        bs1.speed = projectileSpeed;
 
-        position = transform.TransformPoint(new Vector3(-0.7f, 0, 1.0f));
+        position = transform.TransformPoint(new Vector3(-0.7f, 0, 2.0f));
         BulletScript bs2 = (GameObject.Instantiate(bulletPrefab, position, Quaternion.LookRotation(transform.forward)) as GameObject).GetComponent<BulletScript>();
         bs2.sender = this;
         bs2.damage = damagePerShot;
         bs2.speed = projectileSpeed;
-        
+
         audio[0].PlayOneShot(audio[0].clip);
     }
 }

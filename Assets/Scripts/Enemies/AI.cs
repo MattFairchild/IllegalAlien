@@ -2,38 +2,45 @@
 using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AI : MonoBehaviour {
+public class AI : MonoBehaviour
+{
+
+    private float time = 0.0f;
+    private bool change = false;
 
     public float minRange = 30.0f;
 
+    public State[] allStates;
     private State currentState;
-    private Transform player, station;
-    private NavMeshAgent agent;
-    private float playerDistance, stationDistance;
 
-    stationaryBattle sb;
+    private Transform player, station;
+    private float playerDistance, stationDistance;
 
     void Start()
     {
-        sb = new stationaryBattle();
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
         station = GameObject.FindGameObjectWithTag("SpaceStation").transform;
-        agent = GetComponent<NavMeshAgent>();
 
         //update variables needed to decide on next state
         playerDistance = Vector3.Magnitude(player.position - transform.position);
         stationDistance = Vector3.Magnitude(station.position - transform.position);
 
-        currentState = new DoNothing();
+        currentState = allStates[0];
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
+        time += Time.deltaTime;
+        if (time > 5.0f)
+        {
+            time = 0.0f;
+            change = !change;
+        }
+
         decide();
         run();
-	}
+    }
 
     public void run()
     {
@@ -42,18 +49,34 @@ public class AI : MonoBehaviour {
 
     public void decide()
     {
-        if (playerDistance < minRange)
-            changeState(sb);
+        if (change)
+        {
+            Debug.Log("STATE CHANGED");
+            changeState("DoNothing");
+        }
+        else
+        {
+            Debug.Log("STATE CHANGED");
+            changeState("ChaseTarget");
+        }
+
     }
 
-    public void changeState(State desiredState)
+    public void changeState(string stateName)
     {
-        System.Type type = desiredState.GetType();
-
-        if (!currentState.Equals(type))
+        if (currentState.gameObject.name == stateName)
         {
-            currentState = desiredState;
+            return;
+        }
+
+        foreach (State state in allStates)
+        {
+            if (state.gameObject.name == stateName)
+            {
+                currentState = state;
+            }
         }
     }
+
 }
 
