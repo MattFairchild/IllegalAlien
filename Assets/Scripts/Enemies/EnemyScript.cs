@@ -22,7 +22,7 @@ public abstract class EnemyScript : Agent, IHittable {
     [SerializeField]protected float shootingRange = 15.0f;
     [SerializeField]protected float projectileSpeed = 25.0f;
 
-    protected new AudioSource audio;
+    protected new AudioSource[] audio;
 
 
 
@@ -34,8 +34,8 @@ public abstract class EnemyScript : Agent, IHittable {
         agent = GetComponent<NavMeshAgent>();
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 
-        audio = GetComponent<AudioSource>();
-        audio.maxDistance = shootingRange * 2f;
+        audio = GetComponents<AudioSource>();
+        audio[0].maxDistance = shootingRange * 2f;
 	}
 
 	public void Hit (float damage, Agent attacker = null) {
@@ -69,7 +69,7 @@ public abstract class EnemyScript : Agent, IHittable {
 		rbS.angularVelocity = rbE.angularVelocity;
 
 		GameManager.addScore((int)maxHealth);
-
+        
 		Destroy(gameObject, 0.01f);
 		enabled = false;
 	}

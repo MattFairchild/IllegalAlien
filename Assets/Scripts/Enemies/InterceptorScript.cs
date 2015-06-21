@@ -4,7 +4,6 @@ using System.Collections;
 public class InterceptorScript : EnemyScript
 {
     
-
 	// Use this for initialization
     void Start() 
     {
@@ -49,6 +48,6 @@ public class InterceptorScript : EnemyScript
         bs2.damage = damagePerShot;
         bs2.speed = projectileSpeed;
         
-        audio.PlayOneShot(audio.clip);
+        audio[0].PlayOneShot(audio[0].clip);
     }
 }
