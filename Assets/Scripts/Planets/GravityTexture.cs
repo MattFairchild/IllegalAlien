@@ -12,7 +12,7 @@ public class GravityTexture : MonoBehaviour
     private float alpha;
     public Texture2D inputTexture;
     private int inputTextureX;
-    
+
 
     // Use this for initialization
     void Start()
@@ -23,12 +23,12 @@ public class GravityTexture : MonoBehaviour
         alpha = 0.20f;
 
         boxSize = 2 * mass * GameManager.getGravitationalConstant() / Mathf.Pow(1.5f, 2);
-        transform.localScale = new Vector3(boxSize, 0, boxSize);
+        transform.localScale = new Vector3(boxSize, boxSize, 0);
         GetComponentInParent<PlanetScript>().range = 0.5f * transform.lossyScale.x;
         mask = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, true);
 
         StartCoroutine(CreateTexture(mass));
-        
+
     }
 
     void Update()
@@ -54,7 +54,7 @@ public class GravityTexture : MonoBehaviour
                 speed = Mathf.Sqrt(mass * GameManager.getGravitationalConstant() / distance);
 
                 Color tex = new Color(0, 0, 0, 0);
-                
+
                 if (speed < 2f)
                 {
                     if (speed >= 1.5f)
@@ -79,11 +79,11 @@ public class GravityTexture : MonoBehaviour
                     tex = inputTexture.GetPixel(inputTextureX, 1);
                     tex.a = alpha;
                 }
-                
-                
+
+
                 mask.SetPixel(i, j, tex);
             }
-         
+
         }
         mask.Apply();
         gameObject.GetComponent<Renderer>().material.mainTexture = mask;

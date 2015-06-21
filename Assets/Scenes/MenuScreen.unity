@@ -659,14 +659,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bf56c2fa92ac544abf822e80aa0fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 0}
+  m_spaceStation: {fileID: 0}
+  m_gui: {fileID: 0}
   gravitationalConstant: 30
-  showRadius: 0
+  m_showRadius: 0
   alwayShowRadius: 0
   onlyNearest: 0
   screenUp: {x: 0, y: 0, z: 0}
   screenRight: {x: 0, y: 0, z: 0}
   screenNormal: {x: 0, y: 0, z: 0}
   autoShoot: 0
+  m_curResources: 0
+  m_maxResources: 100
+  m_resourceCostPerTowerLevel: 20
+  m_score: 0
+  controlsMixed: 0
+  m_boostTimer: 0
+  m_gameDuration: 300
+  m_startTime: 0
+  m_endTime: 0
 --- !u!4 &910933360
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,7 +1068,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4fdc3296537c4ce4f9959f10394cfe4c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f658a20fd6368204e9d071b95e8ba44b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
