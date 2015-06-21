@@ -49,6 +49,7 @@ public class TurretScript : Agent, IHittable {
 	[SerializeField]protected Text textDPS;
 	[SerializeField]protected Text textState;
 	[SerializeField]protected Text textLvl;
+	[SerializeField]protected Image imageRange;
     protected bool guiVisible = true;
 
     // Use this for initialization
@@ -75,6 +76,7 @@ public class TurretScript : Agent, IHittable {
 		textDPS.text = "est. DPS :~ " + ComputeEstimatedDPS().ToString("0.00");
 		textState.text = "State := <color=#22B2FF>" + "unlaunched" + "</color>";
 		textLvl.text = "<color=orange>" + towerLevel + "</color>\n<size=20><color=white>LVL</color></size>";
+		imageRange.rectTransform.localScale *= shootingRange/5;
         StartCoroutine(FadeTowerGUI());
 	}
 
