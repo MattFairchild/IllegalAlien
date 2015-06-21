@@ -69,7 +69,7 @@ public class DestroyerScript : EnemyScript
         float distance = 100f;
         for (int i = 0; i < enemiesInRange.Count; i++ )
         {
-            if (enemiesInRange == null)
+            if (enemiesInRange[i] == null)
             {
                 enemiesInRange.Remove(enemiesInRange[i]);
             }

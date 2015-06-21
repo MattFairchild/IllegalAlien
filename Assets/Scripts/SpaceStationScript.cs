@@ -6,12 +6,12 @@ public class SpaceStationScript : Agent, IHittable
 
 	// Use this for initialization
 	void Start () {
-	
+        InitializeAgent();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     public void Hit(float damage, Agent attacker = null)
@@ -19,7 +19,7 @@ public class SpaceStationScript : Agent, IHittable
         curHealth -= damage;
         if (curHealth <= 0)
         {
-            //Die();
+            Die();
             if (attacker)
             {
                 attacker.IncreaseKillCount();
@@ -29,5 +29,10 @@ public class SpaceStationScript : Agent, IHittable
     public override void IncreaseKillCount()
     {
         killCount++;
+    }
+
+    void Die()
+    {
+        Debug.Log("Game Over!!");
     }
 }
