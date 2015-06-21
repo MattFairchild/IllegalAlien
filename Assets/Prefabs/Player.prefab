@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &110952
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,10 +342,10 @@ Rigidbody:
   m_GameObject: {fileID: 110952}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_Drag: 1
+  m_AngularDrag: .200000003
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -497,6 +497,7 @@ MonoBehaviour:
   warningParticlePrefab: {fileID: 122670, guid: 09e98d045b7aac841b1046518a3bd8bd,
     type: 2}
   input: {fileID: 11441072}
+  rigidbody: {fileID: 5457934}
   turretSpeed: 5
 --- !u!114 &11409130
 MonoBehaviour:
@@ -514,7 +515,6 @@ MonoBehaviour:
   percentOfHealth: 0
   healthBarOverlay: {fileID: 11405510}
   input: {fileID: 11441072}
-  speed: 0
 --- !u!114 &11432344
 MonoBehaviour:
   m_ObjectHideFlags: 1

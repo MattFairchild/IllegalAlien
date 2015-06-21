@@ -4334,14 +4334,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 11438948, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
-      propertyPath: borderCubeRadius
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438948, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
-      propertyPath: borderThickness
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
   m_IsPrefabParent: 0
@@ -5979,6 +5971,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 11411036, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
+      propertyPath: maxHealth
+      value: 250
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
   m_IsPrefabParent: 0
@@ -7117,7 +7113,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5146055b787b75b42ac1771a6c13e330, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .202000007
+  m_Volume: .200000003
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -291,8 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddea650f2497384698f96d8a9a9da7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderCubeRadius: 65
-  borderThickness: 2
+  borderCubeRadius: 70
+  borderThickness: 25
 --- !u!114 &11440508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70d028922d5c042ba9601c3aedbcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTimeOfPlayerEnter: 0
 --- !u!114 &11442998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70d028922d5c042ba9601c3aedbcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTimeOfPlayerEnter: 0
 --- !u!114 &11472698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70d028922d5c042ba9601c3aedbcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTimeOfPlayerEnter: 0
 --- !u!114 &11478190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70d028922d5c042ba9601c3aedbcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTimeOfPlayerEnter: 0
 --- !u!114 &11482028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70d028922d5c042ba9601c3aedbcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTimeOfPlayerEnter: 0
 --- !u!114 &11482498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70d028922d5c042ba9601c3aedbcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTimeOfPlayerEnter: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

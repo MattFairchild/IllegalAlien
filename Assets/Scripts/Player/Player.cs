@@ -13,8 +13,8 @@ public class Player : Agent, IHittable {
 	public Image healthBarOverlay;
     public InputCapture input;
 
-	protected Vector3 lastPos = Vector3.zero;
-	public float speed;
+	//protected Vector3 lastPos = Vector3.zero;
+	//public float speed;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +28,7 @@ public class Player : Agent, IHittable {
 		//shardsBar.fillAmount = (float)GameManager.curResources / (float)maxResources;
 		//ddd move to GUI script!
 	}*/
-
+	/*
 	void Update () {
 		//speedBar.value = speed;
 		//speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
@@ -41,7 +41,7 @@ public class Player : Agent, IHittable {
         {
             speed = input.getSpeed();
         }
-	}
+	}*/
 
 	protected void Die () {
 		Debug.Log("Game Over!");
@@ -68,7 +68,9 @@ public class Player : Agent, IHittable {
 			Hit (0.2f * collision.relativeVelocity.magnitude);
 			break;
 		case "Planet":
-			Hit (0.5f * collision.relativeVelocity.magnitude);
+			//Hit (0.5f * collision.relativeVelocity.magnitude);
+			//Debug.Log("blub" + collision.relativeVelocity.magnitude);
+			Hit (0.5f * input.getSpeed() * (input.placingTurret() ? 2.5f : 5.0f));
 			break;
 		default:
 			break;

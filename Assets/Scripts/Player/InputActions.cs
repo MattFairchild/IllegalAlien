@@ -9,6 +9,7 @@ public class InputActions : MonoBehaviour
 	public GameObject turretPrefabLvl4;
 	public GameObject warningParticlePrefab;
 	public InputCapture input;
+	[SerializeField]protected new Rigidbody rigidbody;
 
     private float boostCooldown;
     
@@ -62,6 +63,23 @@ public class InputActions : MonoBehaviour
 	protected void ShowWarning () {
 		Vector3 spawnPos = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + warningParticlePrefab.transform.localScale.z / 2) + Vector3.up;
 		(Instantiate(warningParticlePrefab, spawnPos, Quaternion.identity) as GameObject).transform.SetParent(this.transform);
+	}
+
+	protected void MovePlayer () {
+		//adjust position according to speed etc.
+		//transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
+		//transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
+		//transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+
+		Vector3 movement = (input.getSpeedUp() * GameManager.getScreenUp() + input.getSpeedRight() * GameManager.getScreenRight());
+		movement *= currentMaxSpeed * Time.deltaTime;
+		Vector3 newPosition = rigidbody.position + movement;
+		newPosition.y = 0;
+		rigidbody.MovePosition(newPosition);
+
+		//ideas: 
+		//1. transform.Translate? even better: rigidbody.MovePosition(); (physics detection then!)
+		//2. input up and right --> direction; what's the maximum possibl speed/vector magnitude for that direction? --> divide current speed by max --> "directional normalizing"
 	}
 
     // Update is called once per frame
@@ -122,11 +140,7 @@ public class InputActions : MonoBehaviour
             rot = Quaternion.AngleAxis(input.getShootAngle(), GameManager.getScreenNormal());
         }
         
-
-        //adjust position according to speed etc.
-        transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
-        transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+		MovePlayer();
 
         transform.rotation = rot;
     }
@@ -202,10 +216,7 @@ public class InputActions : MonoBehaviour
         }
         else
         {
-            //adjust position according to speed etc.
-            transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
-            transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
-            transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+			MovePlayer();
         }
     }
 

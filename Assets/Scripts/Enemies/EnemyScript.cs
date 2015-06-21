@@ -35,7 +35,9 @@ public abstract class EnemyScript : Agent, IHittable {
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 
         audio = GetComponents<AudioSource>();
-        audio[0].maxDistance = shootingRange * 2f;
+		foreach (AudioSource source in audio) {
+			source.maxDistance = shootingRange * 2f;
+		}
 	}
 
 	public void Hit (float damage, Agent attacker = null) {

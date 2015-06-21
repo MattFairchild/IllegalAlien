@@ -23,6 +23,7 @@ public class GUI : MonoBehaviour {
 	protected SpaceStationScript spaceStation;
 	protected Image playerHealthOverlay;
 	protected Image baseHealthOverlay;
+	protected InputCapture input;
 
 	//ddd move to GUI script!
 
@@ -32,6 +33,7 @@ public class GUI : MonoBehaviour {
 		spaceStation = GameManager.spaceStation;
 		playerHealthOverlay = player.healthBarOverlay;
 		baseHealthOverlay = spaceStation.healthBarOverlay;
+		input = player.input;
 	}
 	
 	// Update is called once per frame
@@ -41,7 +43,7 @@ public class GUI : MonoBehaviour {
 		timer.text = "<size=50><i>Time</i></size>\n" + (int)timeLeft;
 		timerCircle.fillAmount = timeLeft / GameManager.gameDuration;
 		playerShards.fillAmount = 1.0f*GameManager.curResources/GameManager.maxResources;
-		playerSpeed.value = player.speed;
+		playerSpeed.value = input.getSpeed() * (input.placingTurret() ? 0.5f : 1);
 		playerHealth.fillAmount = playerHealthOverlay.fillAmount = player.percentOfHealth;
 		baseHealth.fillAmount = baseHealthOverlay.fillAmount = spaceStation.percentOfHealth;
 	}
