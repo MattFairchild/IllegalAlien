@@ -96,9 +96,9 @@ MonoBehaviour:
   faction: 1
   target: {fileID: 0}
   targetSeeking: 0
-  areaOfEffect: 0
+  areaOfEffect: 1
   aoeRadius: 5
-  aoeDamageModifier: 1
+  aoeDamageModifier: .5
   sender: {fileID: 0}
   explosionPrefab: {fileID: 112498, guid: 31d84847dfc81a04c8354a25f71f6d3c, type: 2}
 --- !u!136 &13601722
