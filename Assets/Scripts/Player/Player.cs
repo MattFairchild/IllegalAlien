@@ -44,7 +44,7 @@ public class Player : Agent, IHittable {
 	}
 
 	protected void Die () {
-		Debug.Log("Game over");
+		Debug.Log("Game Over!");
 	}
 
 	public void Hit (float damage, Agent attacker = null) {

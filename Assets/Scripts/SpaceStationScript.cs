@@ -13,11 +13,11 @@ public class SpaceStationScript : Agent, IHittable {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	protected void Die () {
-		Debug.Log("Game over");
+		Debug.Log("Game Over!");
 	}
 
     public void Hit (float damage, Agent attacker = null) {
