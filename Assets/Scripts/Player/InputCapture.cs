@@ -135,7 +135,7 @@ public class InputCapture : MonoBehaviour {
             if (Input.GetJoystickNames()[i].CompareTo("") != 0)
             {
                 count++;
-                Debug.Log("Controller Found " + i);
+                //Debug.Log("Controller Found " + i);
             }
         }
 

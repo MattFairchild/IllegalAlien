@@ -15,13 +15,27 @@ public abstract class EnemyScript : Agent, IHittable {
 
     protected NavMeshAgent agent;
 
+    [SerializeField]protected GameObject bulletPrefab;
+    [SerializeField]protected int numberOfShots = 1;
+    [SerializeField]protected float damagePerShot = 0.5f;
+    [SerializeField]protected float shootingFrequency = 1.0f;
+    [SerializeField]protected float shootingRange = 15.0f;
+    [SerializeField]protected float projectileSpeed = 25.0f;
+
+    protected new AudioSource audio;
+
+
+
 	protected void InitializeEnemy () {
 		InitializeAgent();
 		player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
-		spaceStation = GameManager.spaceStation;//GameObject.FindGameObjectWithTag("SpaceStation");
+		spaceStation = GameManager.spaceStation.gameObject;//GameObject.FindGameObjectWithTag("SpaceStation");
 		healthBar.fillAmount = percentOfHealth;
         agent = GetComponent<NavMeshAgent>();
 		rigidbody = gameObject.GetComponent<Rigidbody>();
+
+        audio = GetComponent<AudioSource>();
+        audio.maxDistance = shootingRange * 2f;
 	}
 
 	public void Hit (float damage, Agent attacker = null) {

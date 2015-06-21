@@ -84,6 +84,7 @@ GameObject:
   - 54: {fileID: 5491822}
   - 114: {fileID: 11431682}
   - 195: {fileID: 19591954}
+  - 82: {fileID: 8207380}
   m_Layer: 0
   m_Name: Destroyer
   m_TagString: Enemy
@@ -206,6 +207,75 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 2f485913e4432e246ac5c013f8c2f9d1, type: 3}
+--- !u!82 &8207380
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197038}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 484af2d5b8ffe5f4d91034ab2b5fe0cb, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .25
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11407530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,10 +299,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  lowHealthPercentage: .200000003
   percentOfHealth: 0
   resources: 10
   scrapPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
   healthBar: {fileID: 11468148}
+  bulletPrefab: {fileID: 101722, guid: cb8a4d9b8764ed84ea78a22a6644402e, type: 2}
+  numberOfShots: 1
+  damagePerShot: .5
+  shootingFrequency: 1
+  shootingRange: 10
+  projectileSpeed: 25
 --- !u!114 &11468148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,11 +397,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 197038}
   m_Enabled: 1
   m_Radius: 1
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
