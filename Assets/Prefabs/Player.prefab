@@ -299,7 +299,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5b93bec9847d5304498891ff1fb6c915, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -347,7 +347,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &6524442
 BoxCollider:
@@ -511,10 +511,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  lowHealthPercentage: .200000003
+  lowHealthPercentage: .300000012
   percentOfHealth: 0
   healthBarOverlay: {fileID: 11405510}
   input: {fileID: 11441072}
+  speed: 0
+  lowHealthWarningPrefab: {fileID: 122670, guid: 09e98d045b7aac841b1046518a3bd8bd,
+    type: 2}
 --- !u!114 &11432344
 MonoBehaviour:
   m_ObjectHideFlags: 1

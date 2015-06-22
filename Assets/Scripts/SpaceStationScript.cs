@@ -18,6 +18,7 @@ public class SpaceStationScript : Agent, IHittable {
 
 	protected void Die () {
 		Debug.Log("Game Over!");
+		GameManager.GameOver();
 	}
 
     public void Hit (float damage, Agent attacker = null) {

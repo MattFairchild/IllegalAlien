@@ -14,7 +14,9 @@ public class Player : Agent, IHittable {
     public InputCapture input;
 
 	//protected Vector3 lastPos = Vector3.zero;
-	//public float speed;
+	public float speed;
+
+	[SerializeField]protected GameObject lowHealthWarningPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -22,29 +24,25 @@ public class Player : Agent, IHittable {
 	}
 	
 	// Update is called once per frame
-	/*void Update () {
+	void Update () {
 		//healthBarOverlay.fillAmount = percentOfHealth;
 		//healthBar.fillAmount = percentOfHealth;
 		//shardsBar.fillAmount = (float)GameManager.curResources / (float)maxResources;
-		//ddd move to GUI script!
-	}*/
-	/*
-	void Update () {
+		//moved to GUI script!
 		//speedBar.value = speed;
 		//speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
 		//lastPos = transform.position;
-        if (input.placingTurret())
-        {
+        if (input.placingTurret()){
             speed = 0.5f * input.getSpeed();
         }
-        else
-        {
-            speed = input.getSpeed();
+        else{
+            speed = 1.0f * input.getSpeed();
         }
-	}*/
+	}
 
 	protected void Die () {
 		Debug.Log("Game Over!");
+		GameManager.GameOver();
 	}
 
 	public void Hit (float damage, Agent attacker = null) {
@@ -55,6 +53,9 @@ public class Player : Agent, IHittable {
 			if (attacker){
 				attacker.IncreaseKillCount();
 			}
+		}
+		else if(percentOfHealth < lowHealthPercentage){
+			(Instantiate(lowHealthWarningPrefab, transform.position + 0.5f*Vector3.up, Quaternion.identity) as GameObject).transform.SetParent(transform);
 		}
 	}
 

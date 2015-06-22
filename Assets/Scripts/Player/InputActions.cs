@@ -66,20 +66,35 @@ public class InputActions : MonoBehaviour
 	}
 
 	protected void MovePlayer () {
-		//adjust position according to speed etc.
-		//transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
-		//transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
-		//transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+		/*
+		//version 1: adjust position according to speed etc.
+		transform.position = transform.position + input.getSpeedRight() * currentMaxSpeed * GameManager.getScreenRight() * Time.deltaTime;
+		transform.position = transform.position + input.getSpeedUp() * currentMaxSpeed * GameManager.getScreenUp() * Time.deltaTime;
+		transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+		*/
 
+		/*
+		//version 2: use rigidbody.MovePosition()
 		Vector3 movement = (input.getSpeedUp() * GameManager.getScreenUp() + input.getSpeedRight() * GameManager.getScreenRight());
 		movement *= currentMaxSpeed * Time.deltaTime;
 		Vector3 newPosition = rigidbody.position + movement;
 		newPosition.y = 0;
 		rigidbody.MovePosition(newPosition);
+		*/
 
-		//ideas: 
-		//1. transform.Translate? even better: rigidbody.MovePosition(); (physics detection then!)
-		//2. input up and right --> direction; what's the maximum possibl speed/vector magnitude for that direction? --> divide current speed by max --> "directional normalizing"
+		//version 3: "normalize" speed independent of movement direction
+		//idea: input up and right --> direction; what's the maximum possibl speed/vector magnitude for that direction? --> divide current speed by max --> "directional normalizing"
+		//Vector3 movement = new Vector3(input.getSpeedRight(), 0.0f, input.getSpeedUp());
+		Vector3 movement = (input.getSpeedUp() * GameManager.getScreenUp() + input.getSpeedRight() * GameManager.getScreenRight());
+		if(movement != Vector3.zero){
+			Vector3 dir = movement.normalized;
+			int idx = Mathf.Abs(movement[0]) > Mathf.Abs(movement[2]) ? 0 : 2;
+			Vector3 maxMovementInDir = movement * (1.0f / (Mathf.Abs(movement[idx])));
+			float normalizedSpeed = movement.magnitude / maxMovementInDir.magnitude;
+			Vector3 newPos = rigidbody.position + dir * normalizedSpeed * currentMaxSpeed * Time.deltaTime;
+			newPos.y = 0;
+			rigidbody.MovePosition(newPos);
+		}
 	}
 
     // Update is called once per frame
@@ -142,7 +157,8 @@ public class InputActions : MonoBehaviour
         
 		MovePlayer();
 
-        transform.rotation = rot;
+        //transform.rotation = rot;
+		rigidbody.MoveRotation(rot);
     }
 
 
@@ -205,7 +221,8 @@ public class InputActions : MonoBehaviour
         }
 
 
-        transform.rotation = rot;
+        //transform.rotation = rot;
+		rigidbody.MoveRotation(rot);
 
 
         if (bumperPressed && !bumperReleased)

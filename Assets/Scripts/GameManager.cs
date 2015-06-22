@@ -204,4 +204,8 @@ public class GameManager : MonoBehaviour {
 	{
 		return instance.controlsMixed;
 	}
+
+	public static void GameOver () {
+		Application.LoadLevel(0);
+	}
 }
