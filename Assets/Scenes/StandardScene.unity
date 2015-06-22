@@ -862,6 +862,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 19868060, guid: 747855f488f2546429ba46e3cee533de, type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 19845788, guid: 747855f488f2546429ba46e3cee533de, type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864390, guid: 747855f488f2546429ba46e3cee533de, type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 747855f488f2546429ba46e3cee533de, type: 2}
   m_IsPrefabParent: 0
@@ -897,7 +909,7 @@ MonoBehaviour:
   m_player: {fileID: 1381267150}
   m_spaceStation: {fileID: 2050490140}
   m_gui: {fileID: 997557133}
-  gravitationalConstant: 20
+  gravitationalConstant: 30
   m_showRadius: 0
   alwayShowRadius: 0
   onlyNearest: 0

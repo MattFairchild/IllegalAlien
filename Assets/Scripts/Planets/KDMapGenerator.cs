@@ -69,8 +69,8 @@ public class KDMapGenerator : MonoBehaviour {
 		
 		foreach (Rect r in rects)
 		{
-			float radius = Mathf.Min(Mathf.Abs(r.width), Mathf.Abs(r.height))/2.0f;
-			float mass = (Mathf.Pow(1.5f, 2.0f) * radius) / GameManager.getGravitationalConstant();
+            float radius = Mathf.Min(Mathf.Abs(r.width), Mathf.Abs(r.height)) / 2.0f;
+            float mass = 1.5f * (Mathf.Pow(1.5f, 2.0f) * radius) / GameManager.getGravitationalConstant();
 			float newSize = UnityEngine.Random.Range(mass*0.95f, mass*1.05f);
 			
 			

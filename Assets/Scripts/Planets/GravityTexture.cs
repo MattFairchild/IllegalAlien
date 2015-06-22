@@ -22,7 +22,7 @@ public class GravityTexture : MonoBehaviour
 
         alpha = 0.20f;
 
-        boxSize = 2 * mass * GameManager.getGravitationalConstant() / Mathf.Pow(1.5f, 2);
+        boxSize = mass * GameManager.getGravitationalConstant() / Mathf.Pow(1.5f, 2);
         transform.localScale = new Vector3(boxSize, boxSize, 0);
         GetComponentInParent<PlanetScript>().range = 0.5f * transform.lossyScale.x;
         mask = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, true);
@@ -50,7 +50,7 @@ public class GravityTexture : MonoBehaviour
             for (int i = 0; i < textureSize; i++)
             {
 
-                distance = 2f * boxSize * Mathf.Sqrt(Mathf.Pow(((float)i - (float)textureSize / 2f) / (float)textureSize / 2f, 2f) + Mathf.Pow(((float)j - (float)textureSize / 2f) / (float)textureSize / 2f, 2f));
+                distance = 4f * boxSize * Mathf.Sqrt(Mathf.Pow(((float)i - (float)textureSize / 2f) / (float)textureSize / 2f, 2f) + Mathf.Pow(((float)j - (float)textureSize / 2f) / (float)textureSize / 2f, 2f));
                 speed = Mathf.Sqrt(mass * GameManager.getGravitationalConstant() / distance);
 
                 Color tex = new Color(0, 0, 0, 0);
