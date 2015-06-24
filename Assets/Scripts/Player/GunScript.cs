@@ -15,7 +15,8 @@ public class GunScript : MonoBehaviour {
 	void Start()
 	{
 		audio = GetComponent<AudioSource> ();
-		parent = GameObject.FindGameObjectWithTag ("Player").transform;
+		//parent = GameObject.FindGameObjectWithTag ("Player").transform;
+		parent = transform.parent;
 	}
 
 

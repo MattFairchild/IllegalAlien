@@ -5,6 +5,9 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     private static GameManager instance;
+	public static float lastTime = 0;
+	public static int lastScore = 0;
+	public static bool lastGameWon = false;
 
 	public Player m_player;
 	public SpaceStationScript m_spaceStation;
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour {
 		m_score = 0;
 		m_startTime = Time.time;
 		m_endTime = m_startTime + m_gameDuration;
+		StartCoroutine(EndGame());
 	}
 	
 
@@ -205,7 +209,30 @@ public class GameManager : MonoBehaviour {
 		return instance.controlsMixed;
 	}
 
-	public static void GameOver () {
-		Application.LoadLevel(0);
+	public static void GameOver (bool won = false) {
+		lastTime = Time.time - startTime;
+		lastScore = score;
+		lastGameWon = won;
+
+		instance.StartCoroutine(LoadLevelWithDelay(0, 2.5f));
+	}
+
+	protected static IEnumerator LoadLevelWithDelay (int level, float delay) {
+		yield return new WaitForSeconds(delay);
+		Application.LoadLevel(level);
+	}
+
+	protected IEnumerator EndGame () {
+		yield return new WaitForSeconds(m_gameDuration);
+		GameOver(true);
+	}
+
+	public void ExitGame () {
+		Debug.Log("Exiting game");
+		Application.Quit();
+	}
+
+	public static void QuitGame () {
+		instance.ExitGame();
 	}
 }

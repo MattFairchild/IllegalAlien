@@ -114,6 +114,7 @@ GameObject:
   - 199: {fileID: 19986742}
   - 114: {fileID: 11497340}
   - 114: {fileID: 11408244}
+  - 114: {fileID: 11494856}
   m_Layer: 0
   m_Name: explosion_player
   m_TagString: Untagged
@@ -224,6 +225,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TimeOut: 3
   m_DetachChildren: 0
+--- !u!114 &11494856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac1691131a8c844dafe8b6ace6a172a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 15
 --- !u!114 &11497340
 MonoBehaviour:
   m_ObjectHideFlags: 1

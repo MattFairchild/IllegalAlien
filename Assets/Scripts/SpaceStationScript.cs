@@ -22,6 +22,7 @@ public class SpaceStationScript : Agent, IHittable {
 
 	protected void Die () {
 		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
+		gameObject.GetComponent<AudioSource>().PlayOneShot(deathClip, 2.0f);
 
 		Debug.Log("Game Over!");
 		GameManager.GameOver();

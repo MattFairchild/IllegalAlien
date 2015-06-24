@@ -42,6 +42,7 @@ public class Player : Agent, IHittable {
 
 	protected void Die () {
 		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
+		gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(deathClip, 2.0f);
 
 		Debug.Log("Game Over!");
 		GameManager.GameOver();
@@ -59,7 +60,7 @@ public class Player : Agent, IHittable {
 		else if(percentOfHealth < lowHealthPercentage){
 			GameObject warning = (Instantiate(lowHealthWarningPrefab, transform.position + 0.5f*Vector3.up, Quaternion.identity) as GameObject);
 			warning.transform.SetParent(transform);
-			warning.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = 2;
+			warning.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = 1.5f;
 		}
 	}
 
