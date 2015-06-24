@@ -24,8 +24,6 @@ public abstract class EnemyScript : Agent, IHittable {
 
     protected new AudioSource[] audio;
 
-
-
 	protected void InitializeEnemy () {
 		InitializeAgent();
 		player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
@@ -79,15 +77,36 @@ public abstract class EnemyScript : Agent, IHittable {
 
 		GameManager.addScore((int)maxHealth);
         
-		Destroy(gameObject, 0.01f);
-		enabled = false;
+		GameObject explosion = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity) as GameObject;
+		explosion.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
+		audio[0].PlayOneShot(deathClip, 10);
+
+		GetComponent<Collider>().enabled = false;
+		GetComponent<Renderer>().enabled = false;
+		agent.enabled = false;
+		this.enabled = false;
+		foreach(Transform child in transform){
+			child.gameObject.SetActive(false);
+		}
+		Destroy(gameObject, 2.5f);
+		//Destroy(gameObject, 0.01f);
 	}
+
+	/*protected IEnumerator RotateOnDeath () {
+		float startTime = Time.time;
+		while (Time.time < startTime + 3) {
+			transform.Rotate(Time.fixedDeltaTime * 90.0f / 3, 0, 0, Space.Self);
+			yield return new WaitForFixedUpdate();
+		}
+	}*/
 
 	public override void IncreaseKillCount () {
 		killCount++;
 	}
 
     void OnCollisionEnter (Collision collision) {
+		InstantiateCollisionEffect (collision.contacts[0].point);
+
         switch (collision.gameObject.tag){
 		//case "Bullet":
 			//now handled by bullet!

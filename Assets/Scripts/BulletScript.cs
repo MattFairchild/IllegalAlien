@@ -51,6 +51,7 @@ public class BulletScript : MonoBehaviour {
     }
 
     protected void OnCollisionEnter(Collision collision) {
+		bool explode = true;
 		switch(faction){
 		case GameManager.Factions.Player:
 			//enemy faction member hit
@@ -60,7 +61,11 @@ public class BulletScript : MonoBehaviour {
 					PerformAreaOfEffect(collision.gameObject);
 				}
 				//Destroy(gameObject);
-			}/*
+			}
+			else if(GameManager.FactionTagsPlayer.Contains(collision.gameObject.tag)){
+				explode = false;
+			}
+			/*
 			else if (collision.gameObject.tag != "Player" && collision.collider.tag != "Gun"){
 	            Destroy(gameObject);
 	        }*/
@@ -70,6 +75,9 @@ public class BulletScript : MonoBehaviour {
 			if(GameManager.FactionTagsPlayer.Contains(collision.gameObject.tag)){
 				collision.gameObject.GetComponent<IHittable>().Hit(damage, sender);
 			}
+			else if(GameManager.FactionTagsEnemy.Contains(collision.gameObject.tag)){
+				explode = false;
+			}
 			//else if(collision.gameObject.tag != "Enemy"){
 			Destroy(gameObject);
 			break;
@@ -77,7 +85,7 @@ public class BulletScript : MonoBehaviour {
 			Destroy(gameObject);
 			break;
 		}
-		if(explosionPrefab){
+		if(explosionPrefab && explode){
 			Instantiate(explosionPrefab, collision.contacts[0].point, Quaternion.identity);
 		}
     }

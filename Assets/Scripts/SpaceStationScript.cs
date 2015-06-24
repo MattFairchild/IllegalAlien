@@ -16,7 +16,13 @@ public class SpaceStationScript : Agent, IHittable {
 
 	}
 
+	void OnCollisionEnter (Collision collision) {
+		InstantiateCollisionEffect (collision.contacts[0].point);
+	}
+
 	protected void Die () {
+		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
+
 		Debug.Log("Game Over!");
 		GameManager.GameOver();
 	}

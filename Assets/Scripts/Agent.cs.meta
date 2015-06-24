@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 9bd898ff865d6de4ea587ae0716938c4
-timeCreated: 1433956119
+timeCreated: 1435183570
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - deathExplosionPrefab: {instanceID: 0}
+  - collisionEffectPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -161,6 +161,8 @@ public class TurretScript : Agent, IHittable {
 
     // Collision with other objects
     void OnCollisionEnter (Collision collision) {
+		InstantiateCollisionEffect (collision.contacts[0].point);
+
 		switch(collision.gameObject.tag){
 		case "Planet":
 			Die();
@@ -223,7 +225,7 @@ public class TurretScript : Agent, IHittable {
 					audio.PlayOneShot(audio.clip);
 					for(int i = 0; (i < numberOfShots) && enemy; i++){
 						FireProjectile(enemy);
-						Debug.Log(i+1);
+						//Debug.Log(i+1);
                         yield return new WaitForSeconds(0.1f);
 					}
 				}
@@ -338,7 +340,8 @@ public class TurretScript : Agent, IHittable {
 	}
 
 	protected void Die () {
-		//Destroy(this.gameObject);
+		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
+
 		Destroy(turretObject);
 		rb.isKinematic = true;
 		trail.autodestruct = true;

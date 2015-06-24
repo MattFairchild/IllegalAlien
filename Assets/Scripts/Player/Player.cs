@@ -41,6 +41,8 @@ public class Player : Agent, IHittable {
 	}
 
 	protected void Die () {
+		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
+
 		Debug.Log("Game Over!");
 		GameManager.GameOver();
 	}
@@ -55,7 +57,9 @@ public class Player : Agent, IHittable {
 			}
 		}
 		else if(percentOfHealth < lowHealthPercentage){
-			(Instantiate(lowHealthWarningPrefab, transform.position + 0.5f*Vector3.up, Quaternion.identity) as GameObject).transform.SetParent(transform);
+			GameObject warning = (Instantiate(lowHealthWarningPrefab, transform.position + 0.5f*Vector3.up, Quaternion.identity) as GameObject);
+			warning.transform.SetParent(transform);
+			warning.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = 2;
 		}
 	}
 
@@ -64,6 +68,7 @@ public class Player : Agent, IHittable {
 	}
 
 	void OnCollisionEnter (Collision collision) {
+		InstantiateCollisionEffect (collision.contacts[0].point);
 		switch(collision.gameObject.tag){
 		case "Enemy":
 			Hit (0.2f * collision.relativeVelocity.magnitude);

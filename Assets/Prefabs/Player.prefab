@@ -512,6 +512,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   lowHealthPercentage: .300000012
+  collisionEffectPrefab: {fileID: 145410, guid: fc7f04fa0b9420c42b0a8444b0310827,
+    type: 2}
+  deathExplosionPrefab: {fileID: 191956, guid: d167338bdb1928b40bca2a56740b9c06, type: 2}
+  deathClip: {fileID: 8300000, guid: a019ae3af8e864616b85773c509f5285, type: 3}
   percentOfHealth: 0
   healthBarOverlay: {fileID: 11405510}
   input: {fileID: 11441072}
@@ -604,8 +608,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .899999976
-  m_Center: {x: 0, y: 0, z: .25}
+  m_Radius: .824999988
+  m_Center: {x: 0, y: 0, z: .174999997}
 --- !u!198 &19815150
 ParticleSystem:
   m_ObjectHideFlags: 1
