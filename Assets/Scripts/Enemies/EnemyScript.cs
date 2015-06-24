@@ -5,8 +5,8 @@ using System.Collections;
 public abstract class EnemyScript : Agent, IHittable {
 
 	[SerializeField]protected int resources;
-	[SerializeField]protected GameObject scrapPrefab;
-    protected new Rigidbody rigidbody;
+	[SerializeField]protected GameObject shardPrefab;
+    protected new Rigidbody rigid;
 	[SerializeField]protected Image healthBar;
 
 	protected GameObject spaceStation;
@@ -31,8 +31,9 @@ public abstract class EnemyScript : Agent, IHittable {
 		player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
 		spaceStation = GameManager.spaceStation.gameObject;//GameObject.FindGameObjectWithTag("SpaceStation");
 		healthBar.fillAmount = percentOfHealth;
+
         agent = GetComponent<NavMeshAgent>();
-		rigidbody = gameObject.GetComponent<Rigidbody>();
+		rigid = gameObject.GetComponent<Rigidbody>();
 
         audio = GetComponents<AudioSource>();
 		foreach (AudioSource source in audio) {
@@ -61,14 +62,20 @@ public abstract class EnemyScript : Agent, IHittable {
 	}
 
 	protected void Die () {
-		GameObject scrap = (GameObject)Instantiate(scrapPrefab, transform.position, Quaternion.identity);
-		ResourcesScript rs = scrap.GetComponent<ResourcesScript>();
-		rs.resources = resources;
+		int numberOfShards = Random.Range(2, 6); //returns values of 2-5!
+		int remainingResourceCount = resources;
 
-		Rigidbody rbE = gameObject.GetComponent<Rigidbody>();
-		Rigidbody rbS = rs.GetComponent<Rigidbody>();
-		rbS.velocity = rbE.velocity;
-		rbS.angularVelocity = rbE.angularVelocity;
+		for(int i = 0; i < numberOfShards && remainingResourceCount > 0; i++) {
+			int resourceCountOfShard = Random.Range(Mathf.Min(i, remainingResourceCount), remainingResourceCount);
+			GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position, Random.rotationUniform);
+			ResourcesScript rs = shard.GetComponent<ResourcesScript>();
+			rs.resources = resourceCountOfShard;
+
+			Rigidbody rbS = shard.GetComponent<Rigidbody>();
+
+			rbS.velocity = agent.velocity + Random.insideUnitSphere;
+			rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
+		}
 
 		GameManager.addScore((int)maxHealth);
         

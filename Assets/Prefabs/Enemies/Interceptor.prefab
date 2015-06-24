@@ -492,7 +492,7 @@ MonoBehaviour:
   lowHealthPercentage: .200000003
   percentOfHealth: 0
   resources: 5
-  scrapPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
+  shardPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}
   healthBar: {fileID: 11432232}
   bulletPrefab: {fileID: 101722, guid: cb8a4d9b8764ed84ea78a22a6644402e, type: 2}
   numberOfShots: 1
@@ -653,7 +653,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -.25}
   m_SizeDelta: {x: 500, y: 350}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
