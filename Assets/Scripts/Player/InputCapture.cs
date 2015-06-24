@@ -16,6 +16,7 @@ public class InputCapture : MonoBehaviour {
     private int numOfPads;
     private new Camera camera;
     private Vector3 screenUp, screenRight;
+	private Vector3 speedNormalized;
 
     //variables for mouse rotation
     private Plane plane;
@@ -122,6 +123,27 @@ public class InputCapture : MonoBehaviour {
             }
         }
 
+		Vector3 rawInput = (speedU * GameManager.getScreenUp() + speedR * GameManager.getScreenRight());
+		if(rawInput != Vector3.zero){
+			float normalizationFactor = Mathf.Max(Mathf.Abs(rawInput.x), Mathf.Abs(rawInput.z));
+			Vector3 normalizedInput = rawInput.normalized * normalizationFactor;
+			speedNormalized = normalizedInput;
+
+			//float rawInputMaxComponent = Mathf.Max(Mathf.Abs(rawInput.x), Mathf.Abs(rawInput.z));
+			//Vector3 maxInputInDir = rawInput * (1.0f / rawInputMaxComponent);
+			//float normalizationFactor = rawInput.magnitude / maxInputInDir.magnitude;
+			//float normalizationFactor = rawInput.magnitude / (rawInput.magnitude * (1.0f / rawInputMaxComponent));
+			//float normalizationFactor = rawInputMaxComponent;
+			//Vector3 dirRawInput = rawInput.normalized;
+			//int rawInputMaxIdx = Mathf.Abs(rawInput[0]) > Mathf.Abs(rawInput[2]) ? 0 : 2;
+			//Vector3 maxMovementInDir = rawInput * (1.0f / (Mathf.Abs(rawInput[rawInputMaxIdx])));
+			//float normalizedSpeed = rawInput.magnitude / maxMovementInDir.magnitude;
+			//Vector3 normalizedInput = dirRawInput * normalizedSpeed;
+		}
+		else{
+			speedNormalized = Vector3.zero;
+		}
+
 	}
 
 
@@ -181,6 +203,14 @@ public class InputCapture : MonoBehaviour {
     {
         return speedU;
     }
+
+	public float getSpeedNormalizedLength(){
+		return speedNormalized.magnitude;
+	}
+
+	public Vector3 getSpeedNormalized(){
+		return speedNormalized;
+	}
 
 	public bool leftTrigger()
 	{

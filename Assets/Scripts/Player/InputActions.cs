@@ -54,7 +54,8 @@ public class InputActions : MonoBehaviour
 		if (tempTurret){
 			TurretScript trt = tempTurret.GetComponent<TurretScript>();
 			if(trt){
-				trt.SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
+				//trt.SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
+				trt.SetVelocity(this.transform.forward * input.getSpeedNormalizedLength() * maxSpeed);
 			}
 			tempTurret = null;
 		}
@@ -85,16 +86,22 @@ public class InputActions : MonoBehaviour
 		//version 3: "normalize" speed independent of movement direction
 		//idea: input up and right --> direction; what's the maximum possibl speed/vector magnitude for that direction? --> divide current speed by max --> "directional normalizing"
 		//Vector3 movement = new Vector3(input.getSpeedRight(), 0.0f, input.getSpeedUp());
-		Vector3 movement = (input.getSpeedUp() * GameManager.getScreenUp() + input.getSpeedRight() * GameManager.getScreenRight());
+		/*Vector3 movement = (input.getSpeedUp() * GameManager.getScreenUp() + input.getSpeedRight() * GameManager.getScreenRight());
 		if(movement != Vector3.zero){
 			Vector3 dir = movement.normalized;
 			int idx = Mathf.Abs(movement[0]) > Mathf.Abs(movement[2]) ? 0 : 2;
 			Vector3 maxMovementInDir = movement * (1.0f / (Mathf.Abs(movement[idx])));
 			float normalizedSpeed = movement.magnitude / maxMovementInDir.magnitude;
-			Vector3 newPos = rigidbody.position + dir * normalizedSpeed * currentMaxSpeed * Time.deltaTime;
+			Vector3 normalizedInput = dir * normalizedSpeed;
+			Vector3 newPos = rigidbody.position + normalizedInput * currentMaxSpeed * Time.deltaTime;
 			newPos.y = 0;
 			rigidbody.MovePosition(newPos);
-		}
+		}*/
+
+		//version 4: moved to input capture and greatly simplified
+		Vector3 newPos = rigidbody.position + input.getSpeedNormalized() * currentMaxSpeed * Time.deltaTime;
+		newPos.y = 0;
+		rigidbody.MovePosition(newPos);
 	}
 
     // Update is called once per frame

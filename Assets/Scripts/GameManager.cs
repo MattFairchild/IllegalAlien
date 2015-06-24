@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    Transform cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+		Transform cam = Camera.main.transform;//GameObject.FindGameObjectWithTag("MainCamera").transform;
 
         screenUp = cam.up;
         screenRight = cam.right;

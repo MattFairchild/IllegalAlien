@@ -6,7 +6,7 @@ public abstract class EnemyScript : Agent, IHittable {
 
 	[SerializeField]protected int resources;
 	[SerializeField]protected GameObject shardPrefab;
-    protected new Rigidbody rigid;
+    protected Rigidbody rigid;
 	[SerializeField]protected Image healthBar;
 
 	protected GameObject spaceStation;

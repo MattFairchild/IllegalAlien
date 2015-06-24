@@ -33,10 +33,10 @@ public class Player : Agent, IHittable {
 		//speed = 0.1f * (transform.position - lastPos).magnitude / Time.fixedDeltaTime;
 		//lastPos = transform.position;
         if (input.placingTurret()){
-            speed = 0.5f * input.getSpeed();
+            speed = 0.5f * input.getSpeedNormalizedLength();
         }
         else{
-            speed = 1.0f * input.getSpeed();
+            speed = 1.0f * input.getSpeedNormalizedLength();
         }
 	}
 
@@ -71,7 +71,7 @@ public class Player : Agent, IHittable {
 		case "Planet":
 			//Hit (0.5f * collision.relativeVelocity.magnitude);
 			//Debug.Log("blub" + collision.relativeVelocity.magnitude);
-			Hit (0.5f * input.getSpeed() * (input.placingTurret() ? 2.5f : 5.0f));
+			Hit (0.5f * input.getSpeedNormalizedLength() * (input.placingTurret() ? 2.5f : 5.0f));
 			break;
 		default:
 			break;
