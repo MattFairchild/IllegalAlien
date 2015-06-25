@@ -66,6 +66,7 @@ public class InputCapture : MonoBehaviour {
 
             if (Input.GetAxis("TurretGamepad") > 0.1f)
             {
+                Debug.Log("bub");
                 turret = true;
             }
             else
@@ -212,9 +213,9 @@ public class InputCapture : MonoBehaviour {
 		return speedNormalized;
 	}
 
-	public bool leftTrigger()
+	public bool leftBumper()
 	{
-		if (Input.GetAxis ("Controller Trigger L") > 0.1f)
+		if (Input.GetAxis ("Bumper Left") > 0.1f)
 			return true;
 		else
 			return false;

@@ -18,7 +18,9 @@ public class InputActions : MonoBehaviour
 	private Quaternion rot;
     private GameObject tempTurret;
 
-    private bool bumperPressed = false, bumperReleased = false;
+    private bool triggerPressed = false, triggerReleased = false;
+    private bool boost = false;
+
 
     void Update()
     {
@@ -104,6 +106,7 @@ public class InputActions : MonoBehaviour
 		rigidbody.MovePosition(newPos);
 	}
 
+
     // Update is called once per frame
     void normalMovement()
     {
@@ -112,15 +115,15 @@ public class InputActions : MonoBehaviour
         {
             currentMaxSpeed = maxSpeed;
 
-            if (!bumperPressed)
+            if (!triggerPressed)
             {
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
                     GameManager.showRadius = true;
                 }
-                bumperPressed = true;
-                bumperReleased = false;
+                triggerPressed = true;
+                triggerReleased = false;
 
 				TryToSpawnTurret();
             }
@@ -128,9 +131,44 @@ public class InputActions : MonoBehaviour
         //when releasing place turret button, let turret go
         else
         {
-            currentMaxSpeed = maxSpeed * 2.0f;
+            //is the player currently boosting, and is it still possible if he is?
+            if (input.leftBumper() && GameManager.boostTimer > 0.0f)
+            {
+                if (GameManager.boostTimer >= 1.0f && !boost)
+                {
+                    boost = true;
+                }
+            }
+            else if (!input.leftBumper() && boost)
+            {
+                boost = false;
+            }
 
-            if (bumperPressed && !bumperReleased)
+
+            //according to if the player is boosting or not set the speed
+            if (boost)
+            {
+                currentMaxSpeed = maxSpeed * 6.0f;
+                GameManager.boostTimer -= Time.deltaTime;
+                
+                if (GameManager.boostTimer <= 0.0f)
+                {
+                    boost = false;
+                    GameManager.boostTimer = 0.0f;
+                }
+            }
+            else
+            {
+                currentMaxSpeed = maxSpeed * 2.0f;
+
+                if (GameManager.boostTimer < 1.0f)
+                {
+                    GameManager.boostTimer += Time.deltaTime * 0.2f;
+                }
+            }
+            
+
+            if (triggerPressed && !triggerReleased)
             {
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
@@ -138,8 +176,8 @@ public class InputActions : MonoBehaviour
                     GameManager.showRadius = false;
                 }
 
-                bumperPressed = false;
-                bumperReleased = true;
+                triggerPressed = false;
+                triggerReleased = true;
 
 				ReleaseTurret();
             }
@@ -147,7 +185,7 @@ public class InputActions : MonoBehaviour
 
 
         //if the player is currently dragging a turret behind him, keep the position updated
-        if (bumperPressed && !bumperReleased && tempTurret)
+        if (triggerPressed && !triggerReleased && tempTurret)
         {
             tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefabLvl1.transform.localScale.z / 2);
         }
@@ -177,15 +215,15 @@ public class InputActions : MonoBehaviour
         {
             currentMaxSpeed = maxSpeed;
 
-            if (!bumperPressed)
+            if (!triggerPressed)
             {
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
                     GameManager.showRadius = true;
                 }
-                bumperPressed = true;
-                bumperReleased = false;
+                triggerPressed = true;
+                triggerReleased = false;
 
 				TryToSpawnTurret();
             }
@@ -195,7 +233,7 @@ public class InputActions : MonoBehaviour
         {
             currentMaxSpeed = maxSpeed * 2.0f;
 
-            if (bumperPressed && !bumperReleased)
+            if (triggerPressed && !triggerReleased)
             {
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
@@ -203,8 +241,8 @@ public class InputActions : MonoBehaviour
                     GameManager.showRadius = false;
                 }
 
-                bumperPressed = false;
-                bumperReleased = true;
+                triggerPressed = false;
+                triggerReleased = true;
 
 				ReleaseTurret();
             }
@@ -212,7 +250,7 @@ public class InputActions : MonoBehaviour
 
 
         //if the player is currently dragging a turret behind him, keep the position updated
-        if (bumperPressed && !bumperReleased && tempTurret)
+        if (triggerPressed && !triggerReleased && tempTurret)
         {
             tempTurret.transform.position = this.transform.position - this.transform.forward * (transform.localScale.z / 2 + turretPrefabLvl1.transform.localScale.z / 2);
         }
@@ -232,7 +270,7 @@ public class InputActions : MonoBehaviour
 		rigidbody.MoveRotation(rot);
 
 
-        if (bumperPressed && !bumperReleased)
+        if (triggerPressed && !triggerReleased)
         {
             //adjust position according to speed etc.
             transform.position = transform.position + (transform.forward * Mathf.Abs(input.getSpeedUp()) * currentMaxSpeed * Time.deltaTime);

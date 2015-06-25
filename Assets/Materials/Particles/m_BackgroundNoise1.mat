@@ -18,7 +18,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 71646ebaae78d43aeb8b53cacdb69671, type: 3}
+          m_Texture: {fileID: 2800000, guid: 261d3fdaf92d6284ba2b38e5b3a3f16f, type: 3}
           m_Scale: {x: 3, y: 1.5}
           m_Offset: {x: 0, y: 0}
       data:
@@ -166,34 +166,6 @@ Material:
         second: 0
       data:
         first:
-          name: _Stencil
-        second: 0
-      data:
-        first:
-          name: _StencilComp
-        second: 8
-      data:
-        first:
-          name: _StencilOp
-        second: 0
-      data:
-        first:
-          name: _StencilReadMask
-        second: 255
-      data:
-        first:
-          name: _StencilWriteMask
-        second: 255
-      data:
-        first:
-          name: _ColorMask
-        second: 15
-      data:
-        first:
-          name: _InvFade
-        second: 1
-      data:
-        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -234,6 +206,34 @@ Material:
         second: .108000003
       data:
         first:
+          name: _Stencil
+        second: 0
+      data:
+        first:
+          name: _StencilComp
+        second: 8
+      data:
+        first:
+          name: _StencilOp
+        second: 0
+      data:
+        first:
+          name: _StencilReadMask
+        second: 255
+      data:
+        first:
+          name: _StencilWriteMask
+        second: 255
+      data:
+        first:
+          name: _ColorMask
+        second: 15
+      data:
+        first:
+          name: _InvFade
+        second: 1
+      data:
+        first:
           name: _Strength
         second: .200000003
     m_Colors:
@@ -251,6 +251,10 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
+          name: _EmissionColorUI
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
           name: _Emission
         second: {r: 0, g: 0, b: 0, a: 0}
       data:
@@ -261,7 +265,3 @@ Material:
         first:
           name: _EmisColor
         second: {r: .200000003, g: .200000003, b: .200000003, a: 0}
-      data:
-        first:
-          name: _EmissionColorUI
-        second: {r: 1, g: 1, b: 1, a: 1}

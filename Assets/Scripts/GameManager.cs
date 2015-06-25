@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour {
 		m_score = 0;
 		m_startTime = Time.time;
 		m_endTime = m_startTime + m_gameDuration;
+        m_boostTimer = 1.0f;
 		StartCoroutine(EndGame());
 	}
 	

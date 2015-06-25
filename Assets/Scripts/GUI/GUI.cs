@@ -39,6 +39,7 @@ public class GUI : MonoBehaviour {
 		float timeLeft = GameManager.endTime - Time.time;
 		timer.text = "<size=50><i>Time</i></size>\n" + (int)timeLeft;
 		timerCircle.fillAmount = timeLeft / GameManager.gameDuration;
+        playerShield.fillAmount = GameManager.boostTimer;
 		playerShards.fillAmount = 1.0f*GameManager.curResources/GameManager.maxResources;
 		playerSpeed.value = player.speed; //input.getSpeed() * (input.placingTurret() ? 0.5f : 1);
 		playerHealth.fillAmount = playerHealthOverlay.fillAmount = player.percentOfHealth;
