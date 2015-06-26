@@ -79,7 +79,7 @@ public abstract class EnemyScript : Agent, IHittable {
         
 		GameObject explosion = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity) as GameObject;
 		explosion.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
-		audio[0].PlayOneShot(deathClip, 10);
+		audio[0].PlayOneShot(deathClip, 5f);
 
 		GetComponent<Collider>().enabled = false;
 		GetComponent<Renderer>().enabled = false;

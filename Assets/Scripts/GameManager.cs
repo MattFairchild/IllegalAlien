@@ -211,6 +211,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public static void GameOver (bool won = false) {
+        if (score > PlayerPrefs.GetInt("highscore", 0))
+        {
+            PlayerPrefs.SetInt("highscore", score);
+        }
 		lastTime = Time.time - startTime;
 		lastScore = score;
 		lastGameWon = won;
