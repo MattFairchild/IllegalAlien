@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	public static float lastTime = 0;
 	public static int lastScore = 0;
 	public static bool lastGameWon = false;
+	public bool gameover = false;
 
 	public Player m_player;
 	public SpaceStationScript m_spaceStation;
@@ -211,6 +212,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public static void GameOver (bool won = false) {
+		if(!instance || instance.gameover){
+			return;
+		}
+		instance.gameover = true;
 		lastTime = Time.time - startTime;
 		lastScore = score;
 		lastGameWon = won;
@@ -230,6 +235,9 @@ public class GameManager : MonoBehaviour {
 
 	public void ExitGame () {
 		Debug.Log("Exiting game");
+		#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+		#endif
 		Application.Quit();
 	}
 

@@ -490,7 +490,7 @@ MonoBehaviour:
   collisionEffectPrefab: {fileID: 145410, guid: fc7f04fa0b9420c42b0a8444b0310827,
     type: 2}
   deathExplosionPrefab: {fileID: 181106, guid: 9f5958c4dfbcc9649a92c089dee7a455, type: 2}
-  deathClip: {fileID: 8300000, guid: a019ae3af8e864616b85773c509f5285, type: 3}
+  deathSoundPrefab: {fileID: 104842, guid: 697efab2723e18540a19bd98bcd7fe2a, type: 2}
   percentOfHealth: 0
   resources: 10
   shardPrefab: {fileID: 178388, guid: 9c59b3dd8faa3ab429f627ad9b21d804, type: 2}

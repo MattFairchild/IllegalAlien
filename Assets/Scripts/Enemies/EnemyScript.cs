@@ -60,27 +60,18 @@ public abstract class EnemyScript : Agent, IHittable {
 	}
 
 	protected void Die () {
-		int numberOfShards = Random.Range(2, 6); //returns values of 2-5!
-		int remainingResourceCount = resources;
 
-		for(int i = 0; i < numberOfShards && remainingResourceCount > 0; i++) {
-			int resourceCountOfShard = Random.Range(Mathf.Min(i, remainingResourceCount), remainingResourceCount);
-			GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position, Random.rotationUniform);
-			ResourcesScript rs = shard.GetComponent<ResourcesScript>();
-			rs.resources = resourceCountOfShard;
-
-			Rigidbody rbS = shard.GetComponent<Rigidbody>();
-
-			rbS.velocity = agent.velocity + Random.insideUnitSphere;
-			rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
-		}
+		SpawnResources();
 
 		GameManager.addScore((int)maxHealth);
         
 		GameObject explosion = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity) as GameObject;
 		explosion.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
-		audio[0].PlayOneShot(deathClip, 10);
+		Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
+		Destroy(gameObject, 0.01f);
+		//audio[0].PlayOneShot(deathClip, 10);
 
+		/*
 		GetComponent<Collider>().enabled = false;
 		GetComponent<Renderer>().enabled = false;
 		agent.enabled = false;
@@ -89,7 +80,7 @@ public abstract class EnemyScript : Agent, IHittable {
 			child.gameObject.SetActive(false);
 		}
 		Destroy(gameObject, 2.5f);
-		//Destroy(gameObject, 0.01f);
+		*/
 	}
 
 	/*protected IEnumerator RotateOnDeath () {
@@ -99,6 +90,27 @@ public abstract class EnemyScript : Agent, IHittable {
 			yield return new WaitForFixedUpdate();
 		}
 	}*/
+
+	protected void SpawnResources () {
+		int numberOfShards = Random.Range(2, 6); //returns values of 2-5!
+		int remainingResourceCount = resources;
+		int tmpSum = 0;
+
+		for(int i = 0; i < numberOfShards && remainingResourceCount > 0; i++) {
+			int resourceCountOfShard = (i < numberOfShards-1) ? Random.Range(Mathf.Min(i, remainingResourceCount), remainingResourceCount) : remainingResourceCount;
+			remainingResourceCount -= resourceCountOfShard;
+			GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position, Random.rotationUniform);
+			ResourcesScript rs = shard.GetComponent<ResourcesScript>();
+			rs.resources = resourceCountOfShard;
+			tmpSum += rs.resources;
+			
+			Rigidbody rbS = shard.GetComponent<Rigidbody>();
+			
+			rbS.velocity = agent.velocity + Random.insideUnitSphere;
+			rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
+		}
+		Debug.Log(this.GetType().ToString() + ": " + tmpSum);
+	}
 
 	public override void IncreaseKillCount () {
 		killCount++;

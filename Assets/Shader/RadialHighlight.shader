@@ -1,6 +1,6 @@
 ﻿Shader "Custom/RadialHighlight" {
     Properties {
-        _Offset("Highlight Offset", float)= 4
+        _Offset("Highlight Offset", float) = 4
 		_Scale("Planet Scale", float) = 1
 	}
 
@@ -50,7 +50,7 @@
 				
                 float2 centeredUVs = i.texcoord * 2.0 - 1.0;
                 float distance = sqrt(centeredUVs.x * centeredUVs.x + centeredUVs.y * centeredUVs.y);
-                float ringOffset = clamp(_Offset, 0.1, maxPlayerSpeed);
+                float ringOffset = clamp(_Offset, 0.1, 0.8*maxPlayerSpeed);
 				
                 ringOffset = maxPlayerSpeed - ringOffset;
 				
