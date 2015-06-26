@@ -735,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bf56c2fa92ac544abf822e80aa0fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameover: 0
   m_player: {fileID: 0}
   m_spaceStation: {fileID: 0}
   m_gui: {fileID: 0}
@@ -1068,7 +1069,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 60}
+  m_SizeDelta: {x: 320, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1363516635
 MonoBehaviour:
@@ -1097,7 +1098,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Oh dear, you were defeated...
 
-    Your score: N/A. Time: N/A'
+    Your score: N/A. Time: N/A
+
+    Highscore: N/A'
 --- !u!222 &1363516636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1164,8 +1167,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 240}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchoredPosition: {x: 0, y: 270}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1595209507
 GameObject:
@@ -1277,7 +1280,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f658a20fd6368204e9d071b95e8ba44b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .200000003
   m_Pitch: 1
   Loop: 1
   Mute: 0

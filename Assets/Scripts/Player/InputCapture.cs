@@ -5,6 +5,7 @@ public class InputCapture : MonoBehaviour {
 
     private float speed;
     private float flightAngle;
+    private float lastFlightAngle;
     private float shootAngle;
 
     private float speedR;
@@ -47,11 +48,22 @@ public class InputCapture : MonoBehaviour {
 
 
             //rotate towards how the right analog stick is facing
+            
             float y = Input.GetAxis("HorizontalRight");
             float x = Input.GetAxis("VerticalRight");
-
-            flightAngle = (Mathf.Atan2(speedU,speedR) * Mathf.Rad2Deg) - 90.0f;
+ 
             shootAngle = (Mathf.Atan2(y, x) * Mathf.Rad2Deg) + 90.0f;
+
+            if (Input.GetAxis("HorizontalLeft") != 0 || Input.GetAxis("VerticalLeft") != 0)
+            {
+                flightAngle = (Mathf.Atan2(speedU, speedR) * Mathf.Rad2Deg) - 90.0f;
+                lastFlightAngle = flightAngle;
+            }
+            else
+            {
+                flightAngle = lastFlightAngle;
+            }
+
 
 
             if (Input.GetAxis("ShootGamepad") > 0.1f)
