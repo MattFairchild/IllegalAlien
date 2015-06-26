@@ -566,7 +566,7 @@ MonoBehaviour:
   collisionEffectPrefab: {fileID: 145410, guid: fc7f04fa0b9420c42b0a8444b0310827,
     type: 2}
   deathExplosionPrefab: {fileID: 195572, guid: 27535dd6d493e2b4b93a65b8715f58b0, type: 2}
-  deathClip: {fileID: 8300000, guid: a019ae3af8e864616b85773c509f5285, type: 3}
+  deathSoundPrefab: {fileID: 104842, guid: 697efab2723e18540a19bd98bcd7fe2a, type: 2}
   percentOfHealth: 0
   healthBarOverlay: {fileID: 11404644}
 --- !u!114 &11424188

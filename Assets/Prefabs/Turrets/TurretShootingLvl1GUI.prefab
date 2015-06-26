@@ -908,7 +908,7 @@ MonoBehaviour:
   collisionEffectPrefab: {fileID: 145410, guid: fc7f04fa0b9420c42b0a8444b0310827,
     type: 2}
   deathExplosionPrefab: {fileID: 107010, guid: 17e04e1ec59612948a9967dde52cc69d, type: 2}
-  deathClip: {fileID: 8300000, guid: 3dc7455402dfa462b89a4bbd513955e9, type: 3}
+  deathSoundPrefab: {fileID: 127210, guid: 298266c365a2b9743a4c26fb5baf66d7, type: 2}
   percentOfHealth: 0
   affectedByGravity: 1
   launched: 1
