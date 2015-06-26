@@ -1,7 +1,7 @@
 ﻿Shader "Custom/RadialHighlight" {
     Properties {
         _Offset("Highlight Offset", float)= 4
-		_Scale("Planet Scale", float) = 1
+		//_Scale("Planet Scale", float) = 1
 	}
 
 	SubShader {
@@ -38,16 +38,14 @@
             }
 			
 			float _Offset;
-            float _Scale;
+            //float _Scale;
 			
             fixed4 frag (v2f i) : SV_Target
 			{
-                float maxPlayerSpeed = 5;
-                float intensityMultiplier = 500;
-                float width = 2;
-				
-                width /= _Scale;
-				
+                float maxPlayerSpeed = 7.75;
+                float intensityMultiplier = 150;
+                float width = 0.1;
+								
                 float2 centeredUVs = i.texcoord * 2.0 - 1.0;
                 float distance = sqrt(centeredUVs.x * centeredUVs.x + centeredUVs.y * centeredUVs.y);
                 float ringOffset = clamp(_Offset, 0.1, maxPlayerSpeed);
@@ -58,7 +56,7 @@
                 float innerRegion = (ringOffset - width) / maxPlayerSpeed;
                 float highlight = (outerRegion - distance) * (distance - innerRegion);
 				
-                return highlight * _Scale *  intensityMultiplier;
+                return highlight * (1 / width) * intensityMultiplier;
             }
 
 

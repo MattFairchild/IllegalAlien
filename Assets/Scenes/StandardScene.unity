@@ -789,7 +789,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496542, guid: 747855f488f2546429ba46e3cee533de, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19868060, guid: 747855f488f2546429ba46e3cee533de, type: 2}
       propertyPath: InitialModule.maxNumParticles
@@ -1446,7 +1446,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475952, guid: 41b8354224b47194089789d5c98c67f0, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2303598, guid: 41b8354224b47194089789d5c98c67f0, type: 2}
       propertyPath: m_Enabled
@@ -2572,7 +2572,7 @@ Transform:
   - {fileID: 2058516232}
   - {fileID: 50105569}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!1 &772786620
 GameObject:
   m_ObjectHideFlags: 0
@@ -4214,7 +4214,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 459130, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
@@ -4304,7 +4304,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22404140, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438664, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMin.x
@@ -4316,7 +4316,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438664, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11432558, guid: 913b8a9cf03d715448a1cf13ec048e80, type: 2}
       propertyPath: m_FontData.m_Font
@@ -5009,6 +5009,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1453950224
 Transform:
   m_ObjectHideFlags: 0
@@ -5021,7 +5022,7 @@ Transform:
   m_Children:
   - {fileID: 1028692738}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1546719781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5747,7 +5748,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 440250, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 11411036, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
       propertyPath: maxHealth
@@ -6010,6 +6011,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1827688118
 MonoBehaviour:
@@ -6082,7 +6084,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 403624, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11409130, guid: 0a2d22d80ecb1c046938095fec696afd, type: 2}
       propertyPath: maxHealth
@@ -7022,6 +7024,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &2042443703
 Transform:
   m_ObjectHideFlags: 0

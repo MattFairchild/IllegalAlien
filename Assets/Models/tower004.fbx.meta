@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 891645b3cf63b3f48823464bfd6e0dc8
-timeCreated: 1432672471
+guid: b33a151bcb3b5f74e8445221aea10b51
+timeCreated: 1435353034
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: tower
+    4300000: tower004
   materials:
     importMaterials: 0
     materialName: 0
@@ -19,6 +19,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
