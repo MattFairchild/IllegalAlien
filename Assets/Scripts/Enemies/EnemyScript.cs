@@ -109,7 +109,7 @@ public abstract class EnemyScript : Agent, IHittable {
 			rbS.velocity = agent.velocity + Random.insideUnitSphere;
 			rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
 		}
-		Debug.Log(this.GetType().ToString() + ": " + tmpSum);
+		//Debug.Log(this.GetType().ToString() + ": " + tmpSum);
 	}
 
 	public override void IncreaseKillCount () {

@@ -5,6 +5,9 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     private static GameManager instance;
+
+	public static float soundMasterVolume = 1;
+
 	public static float lastTime = 0;
 	public static int lastScore = 0;
 	public static bool lastGameWon = false;
@@ -248,5 +251,11 @@ public class GameManager : MonoBehaviour {
 
 	public static void QuitGame () {
 		instance.ExitGame();
+	}
+
+	public void SetSoundMasterVolume (float newVolume) {
+		soundMasterVolume = newVolume;//Mathf.Log10(Mathf.Clamp01(newVolume)*20);
+		AudioListener.volume = soundMasterVolume;
+		//Debug.Log(soundMasterVolume);
 	}
 }
