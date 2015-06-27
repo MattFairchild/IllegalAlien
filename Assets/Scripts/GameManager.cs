@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     private static GameManager instance;
 
 	public static float soundMasterVolume = 1;
+	public static float gameMasterDuration = 300;
 
 	public static float lastTime = 0;
 	public static int lastScore = 0;
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Transform cam = Camera.main.transform;//GameObject.FindGameObjectWithTag("MainCamera").transform;
+		SetSoundMasterVolume(soundMasterVolume);
 
         screenUp = cam.up;
         screenRight = cam.right;
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour {
         m_curResources = 0;
 		m_score = 0;
 		m_startTime = Time.time;
+		m_gameDuration = gameMasterDuration;
 		m_endTime = m_startTime + m_gameDuration;
         m_boostTimer = 1.0f;
 		StartCoroutine(EndGame());
@@ -257,5 +260,9 @@ public class GameManager : MonoBehaviour {
 		soundMasterVolume = newVolume;//Mathf.Log10(Mathf.Clamp01(newVolume)*20);
 		AudioListener.volume = soundMasterVolume;
 		//Debug.Log(soundMasterVolume);
+	}
+
+	public void SetGameMasterDuration (float newDuration) {
+		gameMasterDuration = newDuration;
 	}
 }
