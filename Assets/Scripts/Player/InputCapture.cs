@@ -37,6 +37,10 @@ public class InputCapture : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if(Input.GetKeyDown(KeyCode.JoystickButton1) || Input.GetKeyDown(KeyCode.Escape)){
+			GameManager.UnPauseGame();
+		}
+
         //update the angle to rotate
         //Gamepad
         if ((numOfPads = numberOfGamepads()) != 0)

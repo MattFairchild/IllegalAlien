@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour {
 	public static float lastTime = 0;
 	public static int lastScore = 0;
 	public static bool lastGameWon = false;
-	public bool gameover = false;
+
+
+	public bool m_gameOver = false;
+	public bool m_gamePaused = false;
 
 	public Player m_player;
 	public SpaceStationScript m_spaceStation;
@@ -196,7 +199,11 @@ public class GameManager : MonoBehaviour {
 	public static float gameDuration {
 		get { return instance.m_gameDuration; }
 	}
-	
+
+	public static bool gamePaused {
+		get { return instance.m_gamePaused; }
+	}
+
 	/*public static int TowerResourceCost (int towerLevel) {
 		switch(towerLevel){
 		case 1:
@@ -218,10 +225,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public static void GameOver (bool won = false) {
-		if(instance.gameover){
+		if(instance.m_gameOver){
 			return;
 		}
-		instance.gameover = true;
+		instance.m_gameOver = true;
 
         if (score > PlayerPrefs.GetInt("highscore", 0)){
             PlayerPrefs.SetInt("highscore", score);
@@ -232,6 +239,11 @@ public class GameManager : MonoBehaviour {
 		lastGameWon = won;
 
 		instance.StartCoroutine(LoadLevelWithDelay(0, 2.5f));
+	}
+
+	public static void UnPauseGame () {
+		instance.m_gamePaused = !instance.m_gamePaused;
+		Time.timeScale = instance.m_gamePaused ? 0 : 1;
 	}
 
 	protected static IEnumerator LoadLevelWithDelay (int level, float delay) {

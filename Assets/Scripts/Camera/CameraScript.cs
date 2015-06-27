@@ -9,6 +9,17 @@ public class CameraScript : MonoBehaviour {
 	
 	private Transform player;
 	private Camera cam;
+
+	void OnDrawGizmos () {
+		Color regColor = Gizmos.color;
+		Gizmos.color = Color.blue;
+
+		//Gizmos.DrawLine();
+		Gizmos.DrawWireCube(Vector3.zero + Vector3.up * yDistance, 2 * new Vector3(xBounds, 0, zBounds));
+
+		Gizmos.color = regColor;
+	}
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player").transform;

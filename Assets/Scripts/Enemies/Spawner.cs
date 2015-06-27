@@ -12,6 +12,15 @@ public class Spawner : MonoBehaviour {
 
 	protected List<EnemyScript> enemies = new List<EnemyScript>();
 
+	void OnDrawGizmos () {
+		Color regColor = Gizmos.color;
+		Gizmos.color = Color.red;
+
+		Gizmos.DrawWireCube(Vector3.zero, 2 * new Vector3(spawnBorderX, 1, spawnBorderZ));
+		
+		Gizmos.color = regColor;
+	}
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(SpawnShips());
