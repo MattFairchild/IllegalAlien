@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+//using System;
 
 public class KDMapGenerator : MonoBehaviour {
 	
@@ -16,11 +16,28 @@ public class KDMapGenerator : MonoBehaviour {
 	
 	public bool showBoxCorners;
 	public float distanceToOrigin = 15.0f;
-	
-	
+	public float offsetRange = 0;
+	public bool drawGizmos = false;
+
+	void OnDrawGizmos () {
+		if(drawGizmos){
+			Color regColor = Gizmos.color;
+			Gizmos.color = Color.green;
+
+			foreach(Rect rect in rects){
+				//Vector3 pos = new Vector3(rect.position.x, 0, rect.position.y);
+				Vector3 center = new Vector3(rect.center.x, 0, rect.center.y);
+				Vector3 size = new Vector3(rect.size.x, 0, rect.size.y);
+				Gizmos.DrawWireCube(center, size);
+			}
+			
+			Gizmos.color = regColor;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
-		CameraScript cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>();
+		CameraScript cam = Camera.main.GetComponent<CameraScript>(); //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>();
 		area.xMin = -cam.xBounds*1.5f;
 		area.yMin = cam.zBounds * 1.5f;
 		area.xMax = cam.xBounds * 1.5f;
@@ -75,6 +92,8 @@ public class KDMapGenerator : MonoBehaviour {
 			
 			
 			pos = getPlanetPosition(r, radius);
+			Vector2 offset = Random.insideUnitCircle;
+			pos += offsetRange * new Vector3(offset.x, 0, offset.y);
 			tempObject = (GameObject)Instantiate(tempPrefab, pos, Quaternion.identity);
 			tempObject.GetComponent<PlanetScript>().scaleTo(newSize);
 		}
@@ -190,7 +209,7 @@ public class KDMapGenerator : MonoBehaviour {
 		Vector3 pos = new Vector3(rec.center.x, 0.0f, rec.center.y); ;
 		int counter = 0;
 		
-		while (Vector3.Magnitude(pos - new Vector3(0.0f, 0.0f, 0.0f)) < distanceToOrigin && counter < 6)
+		while (Vector3.Distance(pos, Vector3.zero) < distanceToOrigin && counter < 6)
 		{
 			if (rec.width > rec.height)
 			{

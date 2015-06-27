@@ -231,7 +231,7 @@ public class InputCapture : MonoBehaviour {
 
 	public bool leftBumper()
 	{
-		if (Input.GetAxis ("Bumper Left") > 0.1f)
+		if (Input.GetAxis("Bumper Left") > 0.1f || Input.GetKey(KeyCode.LeftShift))
 			return true;
 		else
 			return false;
