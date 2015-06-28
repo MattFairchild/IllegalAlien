@@ -326,6 +326,10 @@ public class TurretScript : Agent, IHittable {
 	}
 
 	public void Hit (float damage, Agent attacker = null) {
+		if(!alive){
+			return;
+		}
+
 		curHealth -= damage;
         percentOfHealth = curHealth / maxHealth;
 		textHealth.text = "Health := <color=#22B2FF>" + curHealth.ToString("0.00") + "</color>";
@@ -340,6 +344,8 @@ public class TurretScript : Agent, IHittable {
 	}
 
 	protected void Die () {
+		alive = false;
+
 		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
 
 		Destroy(turretObject);
