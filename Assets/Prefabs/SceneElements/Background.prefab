@@ -239,7 +239,7 @@ MonoBehaviour:
   mat2: {fileID: 2100000, guid: b858c27d6258dd24f873a6de7936089e, type: 2}
   rend: {fileID: 2305460}
   particles: {fileID: 111544}
-  emissionFactor: 0
+  emissionFactor: 1
 --- !u!114 &11491182
 MonoBehaviour:
   m_ObjectHideFlags: 1

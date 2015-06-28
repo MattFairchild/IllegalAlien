@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &164324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 491314}
+  - 114: {fileID: 11444128}
+  - 114: {fileID: 11435724}
+  - 114: {fileID: 11488292}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &491314
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11435724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b499420eb5a8a94ebbd92890468a3e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallShip: {fileID: 114966, guid: 0f43af1da613e514db75f6ef5428dffa, type: 2}
+  bigShip: {fileID: 197038, guid: ce5c7e1fbd1f4f347a4bb789905a881c, type: 2}
+  spawnInterval: 5
+  spawnBorderX: 50
+  spawnBorderZ: 50
+--- !u!114 &11444128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bf56c2fa92ac544abf822e80aa0fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameOver: 0
+  m_gamePaused: 0
+  m_player: {fileID: 0}
+  m_spaceStation: {fileID: 0}
+  m_gui: {fileID: 0}
+  gravitationalConstant: 30
+  m_showRadius: 0
+  alwayShowRadius: 0
+  onlyNearest: 0
+  screenUp: {x: 0, y: 0, z: 0}
+  screenRight: {x: 0, y: 0, z: 0}
+  screenNormal: {x: 0, y: 0, z: 0}
+  autoShoot: 0
+  m_curResources: 0
+  m_maxResources: 100
+  m_resourceCostPerTowerLevel: 20
+  m_score: 0
+  m_enemyCountOnMap: 0
+  controlsMixed: 0
+  m_boostTimer: 0
+  m_gameDuration: 300
+  m_startTime: 0
+  m_endTime: 0
+--- !u!114 &11488292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88657698d7e9c9a44a5582447ab7f557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testPrefab: {fileID: 0}
+  tempPrefab: {fileID: 163214, guid: c66b07eb556f9984e86316baccaa81b7, type: 2}
+  showBoxCorners: 0
+  distanceToOrigin: 15
+  offsetRange: 10
+  drawGizmos: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 164324}
+  m_IsPrefabParent: 1
