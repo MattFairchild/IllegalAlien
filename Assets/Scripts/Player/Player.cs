@@ -41,6 +41,8 @@ public class Player : Agent, IHittable {
 	}
 
 	protected void Die () {
+		alive = false;
+
 		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
 		Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
 		//gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(deathClip, 2.0f);
@@ -50,6 +52,10 @@ public class Player : Agent, IHittable {
 	}
 
 	public void Hit (float damage, Agent attacker = null) {
+		if(!alive){
+			return;
+		}
+
 		curHealth -= damage;
 		percentOfHealth = curHealth/maxHealth;
 		if(curHealth <= 0){

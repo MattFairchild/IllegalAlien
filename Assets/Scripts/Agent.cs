@@ -8,6 +8,8 @@ public interface IHittable {
 public abstract class Agent : MonoBehaviour {
 	[SerializeField]protected float maxHealth;
 	protected float curHealth;
+	protected bool alive = true;
+
     [SerializeField]protected float lowHealthPercentage = 0.2f;
 	[SerializeField]protected GameObject collisionEffectPrefab;
 	[SerializeField]protected GameObject deathExplosionPrefab;
