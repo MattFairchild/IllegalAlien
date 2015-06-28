@@ -1,15 +1,32 @@
 fileFormatVersion: 2
-guid: b33a151bcb3b5f74e8445221aea10b51
-timeCreated: 1435353034
+guid: c75fb9a7160e1f445a5357b1d4dd99e8
+timeCreated: 1435520237
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: tower001
+    100004: tower002
+    100006: tower003
+    100008: tower004
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: tower004
+    400002: tower001
+    400004: tower002
+    400006: tower003
+    400008: tower004
+    2300000: tower001
+    2300002: tower002
+    2300004: tower003
+    2300006: tower004
+    3300000: tower001
+    3300002: tower002
+    3300004: tower003
+    3300006: tower004
+    4300000: tower001
+    4300002: tower002
+    4300004: tower003
+    4300006: tower004
   materials:
     importMaterials: 0
     materialName: 0

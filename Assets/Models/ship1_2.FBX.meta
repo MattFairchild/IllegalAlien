@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 87ca0d8ff9e258a4ea476c82514e69a0
-timeCreated: 1435353034
+guid: 15ffd193f21ba4b4da783402ef97f7b9
+timeCreated: 1435494641
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: tower003
+    4300000: playerShip
   materials:
     importMaterials: 0
     materialName: 0
