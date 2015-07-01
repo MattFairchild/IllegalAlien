@@ -6,11 +6,36 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cylinder007
+    100004: Cylinder008
+    100006: Cylinder009
+    100008: destroyer
+    100010: Cylinder010
     400000: //RootNode
+    400002: Cylinder007
+    400004: Cylinder008
+    400006: Cylinder009
+    400008: destroyer
+    400010: Cylinder010
     2300000: //RootNode
+    2300002: Cylinder007
+    2300004: Cylinder008
+    2300006: Cylinder009
+    2300008: destroyer
+    2300010: Cylinder010
     3300000: //RootNode
+    3300002: Cylinder007
+    3300004: Cylinder008
+    3300006: Cylinder009
+    3300008: destroyer
+    3300010: Cylinder010
     4300000: Box004
     4300002: bruteShip
+    4300004: Cylinder007
+    4300006: Cylinder008
+    4300008: Cylinder009
+    4300010: destroyer
+    4300012: Cylinder010
   materials:
     importMaterials: 0
     materialName: 0
@@ -20,6 +45,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5

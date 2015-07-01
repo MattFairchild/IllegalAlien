@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &110952
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11409130}
   - 81: {fileID: 8135302}
   - 208: {fileID: 20893522}
+  - 114: {fileID: 11436514}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -538,6 +539,26 @@ MonoBehaviour:
   bulletPrefab: {fileID: 101722, guid: bc5d3e80da072ae4fad03b5349e3b73f, type: 2}
   parent: {fileID: 0}
   bulletCooldown: 0
+--- !u!114 &11436514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a290f5a607ac1184c99031e02830c572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animate: 1
+  startColor: {r: 0, g: .580391884, b: 1, a: 1}
+  endColor: {r: 0, g: 1, b: 1, a: 1}
+  endColorOverdrive: 3
+  Frequence: 2
+  MaterialParameterName: _EmissionColor
+  Materials:
+  - {fileID: 2100000, guid: 554c97bb20e16e943bb1d832189d43cc, type: 2}
+  - {fileID: 2100000, guid: d2e345ab7dfa13e43ae59fa133260976, type: 2}
 --- !u!114 &11441072
 MonoBehaviour:
   m_ObjectHideFlags: 1

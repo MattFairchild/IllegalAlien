@@ -8,7 +8,6 @@ public class MaterialColorController : MonoBehaviour
     public Color startColor;
     public Color endColor;
 
-    public float endColorOverdrive = 1;
     public float Frequence = 1;
 
     public string MaterialParameterName;
@@ -30,7 +29,7 @@ public class MaterialColorController : MonoBehaviour
 
             for (int i = 0; i < Materials.Length; i++)
             {
-                Materials[i].SetColor(MaterialParameterName, Color.Lerp(startColor, endColor * endColorOverdrive, sinTime));
+                Materials[i].SetColor(MaterialParameterName, Color.Lerp(startColor, endColor, sinTime));
             }
         }
     }
