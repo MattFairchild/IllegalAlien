@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraScript : MonoBehaviour
 {
 
-    public float xBounds = 30.0f;
+    public float xBounds = 50.0f;
     public float zBounds = 20.0f;
     public float yDistance = 20.0f;
 

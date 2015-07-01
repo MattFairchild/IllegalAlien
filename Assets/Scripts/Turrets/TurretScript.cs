@@ -188,7 +188,10 @@ public class TurretScript : Agent, IHittable {
 			}
 			break;
 		case "Player":
-            guiVisible = true;
+            if(GameManager.player.input.placingTurret())
+            {
+                guiVisible = true;
+            }
 			break;
 		}
 	}

@@ -46,7 +46,7 @@ public class KDMapGenerator : MonoBehaviour {
 		
 		indexLargest = 0;
 		
-		int numPLanets = UnityEngine.Random.Range(4, 7);
+		int numPLanets = UnityEngine.Random.Range(6, 9);
 		for (int i = 0; i < numPLanets; i++)
 		{
 			createPlanet();
@@ -88,7 +88,7 @@ public class KDMapGenerator : MonoBehaviour {
 		{
             float radius = Mathf.Min(Mathf.Abs(r.width), Mathf.Abs(r.height)) / 2.0f;
             float mass = 1.5f * (Mathf.Pow(1.5f, 2.0f) * radius) / GameManager.getGravitationalConstant();
-			float newSize = UnityEngine.Random.Range(mass*0.95f, mass*1.05f);
+			float newSize = UnityEngine.Random.Range(mass, mass*1.2f);
 			
 			
 			pos = getPlanetPosition(r, radius);

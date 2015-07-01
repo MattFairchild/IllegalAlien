@@ -91,5 +91,16 @@ public class GameGUI : MonoBehaviour
             pauseOverlay.CrossFadeAlpha(targetAlpha, 1.0f, true);
             pauseImage.gameObject.SetActive(paused);
         }
+
+
+        bool placingTurret = player.input.placingTurret();
+        if (placingTurret)
+        {
+            playerSpeed.gameObject.SetActive(true);
+        }
+        else
+        {
+            playerSpeed.gameObject.SetActive(false);
+        }
     }
 }
