@@ -10,7 +10,7 @@ public abstract class Agent : MonoBehaviour {
 	protected float curHealth;
 	protected bool alive = true;
 
-    [SerializeField]protected float lowHealthPercentage = 0.2f;
+    public float lowHealthPercentage = 0.2f;
 	[SerializeField]protected GameObject collisionEffectPrefab;
 	[SerializeField]protected GameObject deathExplosionPrefab;
 	[SerializeField]protected GameObject deathSoundPrefab;
