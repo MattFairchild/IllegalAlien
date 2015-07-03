@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour {
         screenNormal = cam.forward;
 
         //set starting values
-        m_curResources = 40;
+        m_curResources = 0;
 		m_score = 0;
 		m_startTime = Time.time;
 		m_gameDuration = gameMasterDuration;
@@ -85,11 +85,6 @@ public class GameManager : MonoBehaviour {
         m_boostTimer = 1.0f;
 		StartCoroutine(EndGame());
 	}
-
-    void Update()
-    {
-        m_curResources = 40;
-    }
 
     public static float getGravitationalConstant()
     {
