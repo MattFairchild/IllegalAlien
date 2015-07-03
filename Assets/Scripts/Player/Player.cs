@@ -90,4 +90,14 @@ public class Player : Agent, IHittable {
 			break;
 		}
 	}
+
+    public Vector3 getCurrentVelocity()
+    {
+        return (transform.forward * input.getSpeedNormalizedLength() * GetComponent<InputActions>().maxSpeed);
+    }
+
+    public float maxSpeed
+    {
+        get { return GetComponent<InputActions>().maxSpeed; }
+    }
 }

@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5401722}
-  speed: 10
+  speed: 8
   lifetime: 10
   damage: 10
   faction: 1

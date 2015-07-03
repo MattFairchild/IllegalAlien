@@ -99,6 +99,7 @@ MonoBehaviour:
   areaOfEffect: 1
   aoeRadius: 3
   aoeDamageModifier: 1
+  sender: {fileID: 0}
   explosionPrefab: {fileID: 124620, guid: fbd4d8e8edf84cb46821a5c91b8f2346, type: 2}
 --- !u!136 &13601722
 CapsuleCollider:

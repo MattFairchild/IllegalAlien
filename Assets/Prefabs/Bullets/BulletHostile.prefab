@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5401722}
-  speed: 25
+  speed: 22
   lifetime: 4
   damage: 1
   faction: 1
@@ -98,7 +98,8 @@ MonoBehaviour:
   targetSeeking: 0
   areaOfEffect: 0
   aoeRadius: 0
-  aoeDamage: 0
+  aoeDamageModifier: 0
+  sender: {fileID: 0}
   explosionPrefab: {fileID: 112498, guid: 31d84847dfc81a04c8354a25f71f6d3c, type: 2}
 --- !u!136 &13601722
 CapsuleCollider:

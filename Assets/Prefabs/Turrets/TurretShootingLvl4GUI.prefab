@@ -1008,6 +1008,7 @@ MonoBehaviour:
   percentOfHealth: 0
   affectedByGravity: 1
   launched: 0
+  lR: {fileID: 0}
   planets: []
   rb: {fileID: 5487290}
   turretObject: {fileID: 138148}

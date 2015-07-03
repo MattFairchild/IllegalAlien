@@ -11,7 +11,9 @@ public class TurretScript : Agent, IHittable {
 	protected float orbitalSpeed;
 	[SerializeField]protected bool affectedByGravity = false;
 	[SerializeField]protected bool launched = false;
+    public LineRenderer lR;
     public GameObject[] planets;
+
 
 	/*References stuff*/
 	[SerializeField]protected Rigidbody rb;
@@ -50,13 +52,24 @@ public class TurretScript : Agent, IHittable {
 	[SerializeField]protected Text textState;
 	[SerializeField]protected Text textLvl;
 	[SerializeField]protected Image imageRange;
-    protected bool guiVisible = true;
+    protected bool guiVisible = false;
+    protected bool playerInRange = false;
 
     // Use this for initialization
     void Start(){
 		InitializeAgent();
 		InitializeTower();
 		InitializeTowerGUI();
+
+        Color color1 = new Color(0.0f, 230.0f, 200.0f, 100.0f);
+        Color color2 = new Color(0.0f, 230.0f, 100.0f, 100.0f);
+
+        lR = gameObject.AddComponent<LineRenderer>();
+        lR.material = new Material(Shader.Find("Particles/Additive"));
+        lR.SetColors(color1, color2);
+
+        lR.SetVertexCount(200);
+        lR.SetWidth(0.1f, 0.08f);
     }
 
 	protected void InitializeTower () {
@@ -82,8 +95,32 @@ public class TurretScript : Agent, IHittable {
 
     void FixedUpdate()
     {
-        if (launched && affectedByGravity){
+        if (playerInRange)
+        { 
+            if (!GameManager.player.input.placingTurret())
+            {
+                guiVisible = false;
+            }
+            else if (GameManager.player.input.placingTurret())
+            {
+                guiVisible = true;
+            }        
+        }
+
+
+        if (launched && affectedByGravity)
+        {
             Gravity();
+        }
+
+
+        if (!launched)
+        {
+            showProjection();
+        }
+        else
+        {
+            lR.enabled = false;
         }
     }
 
@@ -105,52 +142,21 @@ public class TurretScript : Agent, IHittable {
 
     private void Gravity()
     {
-        //temp object for the case that we only consider the nearest planet.
-        //start it off as the first object if there are any panets at all
-        GameObject nearestPlanet = this.gameObject;
-        float tempDistance = 0.0f;
-        if (planets.Length > 0)
-        {
-            nearestPlanet = planets[0];
-            tempDistance = Vector3.Magnitude(nearestPlanet.transform.position - this.transform.position);
-        }
 
         foreach (GameObject planet in planets)
         {
-            //if we only want the nearest panet to attract, then use the loop only to find the nearest planet
-            if (GameManager.getOnlyNearest() && planets.Length > 0)
+            //calculate the gravity of every planet into the equation 
+            Rigidbody planetRb = planet.GetComponent<Rigidbody>();
+            direction = Vector3.Normalize(planet.transform.position - this.transform.position);
+            distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
+
+            //limit range of gravity
+            if (Vector3.Distance(transform.position, planet.transform.position) <= planet.GetComponent<PlanetScript>().range)
             {
-                if (Vector3.Magnitude(planet.transform.position - this.transform.position) < tempDistance)
-                {
-                    nearestPlanet = planet;
-                    tempDistance = Vector3.Magnitude(planet.transform.position - this.transform.position);
-                }
-            }
-            //otherwise calculate the gravity of every planet into the equation
-            else
-            { 
-                Rigidbody planetRb = planet.GetComponent<Rigidbody>();
-                direction = Vector3.Normalize(planet.transform.position - this.transform.position);
-                distance = Vector3.Magnitude(planet.transform.position - this.transform.position);
-
-                //limit range of gravity
-                if (Vector3.Distance(transform.position, planet.transform.position) <= planet.GetComponent<PlanetScript>().range)
-                {
-                    rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
-                }
-                       
-            }
+                rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
+            }           
         }
 
-
-        //if only the nearest planet should be used, calc same equation as above, but for the nearest planet only
-        if (GameManager.getOnlyNearest() && planets.Length > 0)
-        {
-            Rigidbody planetRb = nearestPlanet.GetComponent<Rigidbody>();
-            direction = Vector3.Normalize(nearestPlanet.transform.position - this.transform.position);
-            distance = Vector3.Magnitude(nearestPlanet.transform.position - this.transform.position);
-            rb.velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;         
-        }
 
     }
 
@@ -188,10 +194,7 @@ public class TurretScript : Agent, IHittable {
 			}
 			break;
 		case "Player":
-            if(GameManager.player.input.placingTurret())
-            {
-                guiVisible = true;
-            }
+            playerInRange = true;
 			break;
 		}
 	}
@@ -202,7 +205,7 @@ public class TurretScript : Agent, IHittable {
 			enemiesInRange.Remove(other.GetComponent<EnemyScript>());
 			break;
 		case "Player":
-            guiVisible = false;
+            playerInRange = false;
 			break;
 		}
 	}
@@ -363,4 +366,50 @@ public class TurretScript : Agent, IHittable {
 		Destroy(this);
 	}
 
+
+    protected void showProjection()
+    {
+        Vector3 position = transform.position;
+        Vector3 vel = GameManager.player.getCurrentVelocity();
+        float speedPercent;
+
+        if (GameManager.player.speed > 0.0f)
+        {
+            speedPercent = GameManager.player.speed / GameManager.player.maxSpeed;
+        }
+        else
+        {
+            speedPercent = 1.0f;
+        }
+        
+        int numPoints = 200 + ((int)(600 * (1.0f - speedPercent)));
+
+        lR.SetVertexCount(numPoints);
+
+        for (int i = 0; i < numPoints; i++)
+        {
+            position = nextStep(position, ref vel);
+            lR.SetPosition(i, position);
+        }
+    }
+
+    protected Vector3 nextStep(Vector3 pos, ref Vector3 velocity)
+    {
+
+        foreach (GameObject planet in planets)
+        {
+            //calculate the gravity of every planet into the equation 
+            Rigidbody planetRb = planet.GetComponent<Rigidbody>();
+            direction = Vector3.Normalize(planet.transform.position - pos);
+            distance = Vector3.Magnitude(planet.transform.position - pos);
+
+            //limit range of gravity
+            if (Vector3.Distance(pos, planet.transform.position) <= planet.GetComponent<PlanetScript>().range)
+            {
+                velocity += ((GameManager.getGravitationalConstant() * planetRb.mass / Mathf.Pow(distance, 2)) * direction) * Time.deltaTime;
+            }
+        }
+
+        return pos + Time.fixedDeltaTime*velocity;
+    }
 }

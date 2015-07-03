@@ -97,6 +97,7 @@ public class GUIGame : MonoBehaviour
             pauseImage.gameObject.SetActive(paused);
         }
 
-        playerSpeed.gameObject.SetActive(input.placingTurret());
+        //playerSpeed.gameObject.SetActive(input.placingTurret());
+        playerSpeed.gameObject.SetActive(false);
     }
 }

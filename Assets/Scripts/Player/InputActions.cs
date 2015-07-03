@@ -15,7 +15,7 @@ public class InputActions : MonoBehaviour
     private float boostCooldown;
 
     public float turretSpeed = 5;
-    private float currentMaxSpeed, maxSpeed = 5.0f;
+    public float currentMaxSpeed, maxSpeed = 5.0f;
     private Quaternion rot;
     private GameObject tempTurret;
 
@@ -148,7 +148,7 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.showRadius = true;
+                    GameManager.showRadius = false;
                 }
                 triggerPressed = true;
                 triggerReleased = false;
@@ -248,7 +248,7 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.showRadius = true;
+                    GameManager.showRadius = false;
                 }
                 triggerPressed = true;
                 triggerReleased = false;

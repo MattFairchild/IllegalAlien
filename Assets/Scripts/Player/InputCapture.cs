@@ -82,7 +82,6 @@ public class InputCapture : MonoBehaviour {
 
             if (Input.GetAxis("TurretGamepad") > 0.1f)
             {
-                Debug.Log("bub");
                 turret = true;
             }
             else
