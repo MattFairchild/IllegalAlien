@@ -111,17 +111,13 @@ public class TurretScript : Agent, IHittable {
         if (launched && affectedByGravity)
         {
             Gravity();
-        }
-
-
-        if (!launched)
-        {
-            showProjection();
+            lR.enabled = false;
         }
         else
         {
-            lR.enabled = false;
+            showProjection();
         }
+
     }
 
     public void SetVelocity(Vector3 vel)
