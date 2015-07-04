@@ -369,16 +369,10 @@ public class TurretScript : Agent, IHittable {
         Vector3 vel = GameManager.player.getCurrentVelocity();
         float speedPercent;
 
-        if (GameManager.player.speed > 0.0f)
-        {
-            speedPercent = GameManager.player.speed / GameManager.player.maxSpeed;
-        }
-        else
-        {
-            speedPercent = 1.0f;
-        }
+        speedPercent = GameManager.player.speed / GameManager.player.maxSpeed;
+
         
-        int numPoints = 200 + ((int)(600 * (1.0f - speedPercent)));
+        int numPoints = 50 + ((int)(600 * (1.0f - speedPercent)));
 
         lR.SetVertexCount(numPoints);
 
@@ -386,6 +380,11 @@ public class TurretScript : Agent, IHittable {
         {
             position = nextStep(position, ref vel);
             lR.SetPosition(i, position);
+            if (collidesWithPlanet(position))
+            {
+                lR.SetVertexCount(i+1);
+                break;
+            }
         }
     }
 
@@ -407,5 +406,19 @@ public class TurretScript : Agent, IHittable {
         }
 
         return pos + Time.fixedDeltaTime*velocity;
+    }
+
+
+    protected bool collidesWithPlanet(Vector3 position)
+    {
+        foreach (GameObject planet in planets)
+        {
+            if (Vector3.Magnitude(position - planet.transform.position) <= planet.transform.localScale.x)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
