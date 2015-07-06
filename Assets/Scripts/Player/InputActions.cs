@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq.Expressions;
 
 public class InputActions : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class InputActions : MonoBehaviour
     public float currentMaxSpeed, maxSpeed = 5.0f;
     private Quaternion rot;
     private GameObject tempTurret;
+    private int turretLvl;
+
+    private Transform centerTurret;
+    private int previousTurretLevel;
+
+    private bool turretLevelChanged;
+    private const float spawnCountdownStartValue = 1f;
+    private float currentCountdownValue;
+    private Material normalTurretMaterial;
+    private Material spawnTurretMaterial;
 
     private bool triggerPressed = false, triggerReleased = false;
     private bool boost = false;
@@ -30,6 +41,10 @@ public class InputActions : MonoBehaviour
         Transform thrustParent = transform.FindChild("Thrust");
         thrustParticleSystem[0] = thrustParent.FindChild("Thrust Left").GetComponent<ParticleSystem>();
         thrustParticleSystem[1] = thrustParent.FindChild("Thrust Right").GetComponent<ParticleSystem>();
+
+        centerTurret = transform.FindChild("CenterTurret");
+        normalTurretMaterial = centerTurret.GetComponent<MeshRenderer>().materials[0];
+        spawnTurretMaterial = centerTurret.GetComponent<MeshRenderer>().materials[1];
 
     }
 
@@ -51,14 +66,47 @@ public class InputActions : MonoBehaviour
             particleSystem.emissionRate = (input.getSpeed() * currentMaxSpeed) * 4;
         }
 
+
+        turretLvl = GameManager.maxCurAvailableTowerLevel;
+
+        if (turretLvl > previousTurretLevel)
+            turretLevelChanged = true;
+
+        if (turretLevelChanged && currentCountdownValue > 0)
+        {
+            for (int i = 1; i <= turretLvl; i++)
+            {
+                centerTurret.FindChild("Level" + (i > 4 ? 4 : i)).GetComponent<MeshRenderer>().material = spawnTurretMaterial;
+                centerTurret.FindChild("Level" + (i > 4 ? 4 : i)).GetComponent<MeshRenderer>().enabled = true;
+            }
+
+            currentCountdownValue -= Time.deltaTime;
+        }
+        else
+        {
+            for (int i = 1; i <= turretLvl; i++)
+            {
+                centerTurret.FindChild("Level" + (i > 4 ? 4 : i)).GetComponent<MeshRenderer>().material = normalTurretMaterial;
+            }
+
+            currentCountdownValue = spawnCountdownStartValue;
+            turretLevelChanged = false;
+        }
+
+        spawnTurretMaterial.mainTextureOffset = new Vector2(0, Time.time);
+        previousTurretLevel = turretLvl;
     }
 
     protected void TryToSpawnTurret()
     {
-        int lvl = GameManager.BuyMaxCurAvailableTower();
-        if (lvl > 0)
+        turretLvl = GameManager.BuyMaxCurAvailableTower();
+        if (turretLvl > 0)
         {
-            SpawnTurret(lvl);
+            SpawnTurret(turretLvl);
+            for (int i = 1; i <= turretLvl; i++)
+            {
+                centerTurret.FindChild("Level" + i).GetComponent<MeshRenderer>().enabled = false;
+            }
         }
         else
         {

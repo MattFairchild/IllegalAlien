@@ -6,12 +6,22 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: cannon
+    100004: interceptor
     400000: //RootNode
+    400002: cannon
+    400004: interceptor
     2300000: //RootNode
+    2300002: cannon
+    2300004: interceptor
     3300000: //RootNode
+    3300002: cannon
+    3300004: interceptor
     4300000: eShip
     4300002: Box002
     4300004: inceptorShip
+    4300006: interceptor
+    4300008: cannon
   materials:
     importMaterials: 0
     materialName: 0
@@ -21,6 +31,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
