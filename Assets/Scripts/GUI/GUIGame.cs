@@ -88,8 +88,10 @@ public class GUIGame : MonoBehaviour
         playerSpeed.value = input.getSpeedNormalizedLength(); //player.speed; //input.getSpeed() * (input.placingTurret() ? 0.5f : 1);
         playerHealth.fillAmount = playerHealthOverlay.fillAmount = player.percentOfHealth;
         baseHealth.fillAmount = baseHealthOverlay.fillAmount = spaceStation.percentOfHealth;
+
         //set opacity of injure overlay to > 0 when either player or space station has less health than the lowHealthPercentage threshold
-        injureOverlay.CrossFadeAlpha(Mathf.Clamp01(2 * Mathf.Max(spaceStation.lowHealthPercentage - spaceStation.percentOfHealth, player.lowHealthPercentage - player.percentOfHealth)), 0.0f, true);
+        float impulseMultipier = Mathf.Sin(5 * Time.time) / 4f + 0.75f;
+        injureOverlay.CrossFadeAlpha(Mathf.Clamp01(2 * Mathf.Max(spaceStation.lowHealthPercentage - spaceStation.percentOfHealth, player.lowHealthPercentage - player.percentOfHealth) * impulseMultipier), 0.1f, true);
 
         bool paused = GameManager.gamePaused;
         if (paused != lastPaused)
