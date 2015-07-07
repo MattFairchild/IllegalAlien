@@ -1276,7 +1276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186940
 GameObject:
   m_ObjectHideFlags: 1
@@ -1473,6 +1473,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!81 &8118252
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1537,7 +1538,7 @@ MonoBehaviour:
   m_Color: {r: 0, g: .666666687, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1545,9 +1546,11 @@ MonoBehaviour:
     m_Alignment: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Resources
+    m_VerticalOverflow: 1
+    m_LineSpacing: .699999988
+  m_Text: 'Turret
+
+    Resources'
 --- !u!114 &11404992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1789,7 +1792,7 @@ MonoBehaviour:
   m_Color: {r: .0703729317, g: .815686285, b: .0994380414, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1797,9 +1800,9 @@ MonoBehaviour:
     m_Alignment: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Health
+    m_VerticalOverflow: 1
+    m_LineSpacing: .699999988
+  m_Text: "Ship \nHealth"
 --- !u!114 &11417648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1981,7 +1984,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: .889655232, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1989,9 +1992,11 @@ MonoBehaviour:
     m_Alignment: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Boost
+    m_VerticalOverflow: 1
+    m_LineSpacing: .699999988
+  m_Text: 'Speed
+
+    Boost'
 --- !u!114 &11423632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2633,7 +2638,7 @@ MonoBehaviour:
   m_Color: {r: .240087017, g: .786764741, b: .121485755, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2641,9 +2646,9 @@ MonoBehaviour:
     m_Alignment: 2
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Base Health
+    m_VerticalOverflow: 1
+    m_LineSpacing: .699999988
+  m_Text: "Base \nHealth"
 --- !u!114 &11455458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2655,8 +2660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ad99ba433735d4faa0d8a326f5dc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xBounds: 30
-  zBounds: 30
+  xBounds: 35
+  zBounds: 35
   yDistance: 20
 --- !u!114 &11456910
 MonoBehaviour:
@@ -2969,7 +2974,7 @@ MonoBehaviour:
   m_Color: {r: .688256919, g: .936129332, b: .985294104, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2977,9 +2982,11 @@ MonoBehaviour:
     m_Alignment: 2
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Time
+    m_VerticalOverflow: 1
+    m_LineSpacing: .699999988
+  m_Text: 'Time
+
+    ###'
 --- !u!114 &11467724
 MonoBehaviour:
   m_ObjectHideFlags: 1
