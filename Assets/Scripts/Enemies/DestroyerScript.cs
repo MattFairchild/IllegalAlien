@@ -68,11 +68,7 @@ public class DestroyerScript : EnemyScript
         GameObject pickedEnemy = null;
         float distance = 100f;
 		for (int i = 0; i < enemiesInRange.Count; i++ ) {
-			//this code doesn't make sense!!
-            /*if (enemiesInRange[i] == null)
-            {
-                enemiesInRange.Remove(enemiesInRange[i]);
-            }*/
+
             if (Vector3.Distance(transform.position, enemiesInRange[i].transform.position) < distance)
             {
                 distance = Vector3.Distance(transform.position, enemiesInRange[i].transform.position);

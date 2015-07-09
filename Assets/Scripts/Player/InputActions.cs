@@ -21,11 +21,12 @@ public class InputActions : MonoBehaviour
     private GameObject tempTurret;
     private int turretLvl;
 
-    private Transform centerTurret;
+    private Transform[] centerTurrets;
     private int previousTurretLevel;
 
     private bool turretLevelChanged;
     private const float spawnCountdownStartValue = 1f;
+    private Vector3 spawnStartScale;
     private float currentCountdownValue;
     private Material normalTurretMaterial;
     private Material spawnTurretMaterial;
@@ -42,10 +43,16 @@ public class InputActions : MonoBehaviour
         thrustParticleSystem[0] = thrustParent.FindChild("Thrust Left").GetComponent<ParticleSystem>();
         thrustParticleSystem[1] = thrustParent.FindChild("Thrust Right").GetComponent<ParticleSystem>();
 
-        centerTurret = transform.FindChild("CenterTurret");
+        Transform centerTurret = transform.FindChild("CenterTurret");
         normalTurretMaterial = centerTurret.GetComponent<MeshRenderer>().materials[0];
         spawnTurretMaterial = centerTurret.GetComponent<MeshRenderer>().materials[1];
 
+        centerTurrets = new Transform[centerTurret.childCount];
+        for (int i = 0; i < centerTurrets.Length; i++)
+        {
+            centerTurrets[i] = centerTurret.FindChild("Level" + (i + 1));
+        }
+        spawnStartScale = Vector3.one * 2;
     }
 
 
@@ -72,21 +79,24 @@ public class InputActions : MonoBehaviour
         if (turretLvl > previousTurretLevel)
             turretLevelChanged = true;
 
+        int cappedturretLvl = turretLvl > 4 ? 4 : turretLvl;
+
         if (turretLevelChanged && currentCountdownValue > 0)
         {
-            for (int i = 1; i <= turretLvl; i++)
+            for (int i = 0; i < cappedturretLvl; i++)
             {
-                centerTurret.FindChild("Level" + (i > 4 ? 4 : i)).GetComponent<MeshRenderer>().material = spawnTurretMaterial;
-                centerTurret.FindChild("Level" + (i > 4 ? 4 : i)).GetComponent<MeshRenderer>().enabled = true;
+                centerTurrets[i].GetComponent<MeshRenderer>().material = spawnTurretMaterial;
+                centerTurrets[i].GetComponent<MeshRenderer>().enabled = true;
+                centerTurrets[i].transform.localScale = Vector3.Lerp(spawnStartScale, Vector3.one, (spawnCountdownStartValue - currentCountdownValue) * 3);
             }
 
             currentCountdownValue -= Time.deltaTime;
         }
         else
         {
-            for (int i = 1; i <= turretLvl; i++)
+            for (int i = 0; i < cappedturretLvl; i++)
             {
-                centerTurret.FindChild("Level" + (i > 4 ? 4 : i)).GetComponent<MeshRenderer>().material = normalTurretMaterial;
+                centerTurrets[i].GetComponent<MeshRenderer>().material = normalTurretMaterial;
             }
 
             currentCountdownValue = spawnCountdownStartValue;
@@ -103,9 +113,9 @@ public class InputActions : MonoBehaviour
         if (turretLvl > 0)
         {
             SpawnTurret(turretLvl);
-            for (int i = 1; i <= turretLvl; i++)
+            for (int i = 0; i < 4; i++)
             {
-                centerTurret.FindChild("Level" + i).GetComponent<MeshRenderer>().enabled = false;
+                centerTurrets[i].GetComponent<MeshRenderer>().enabled = false;
             }
         }
         else

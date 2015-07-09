@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 250
-  lowHealthPercentage: .200000003
+  lowHealthPercentage: .400000006
   collisionEffectPrefab: {fileID: 145410, guid: fc7f04fa0b9420c42b0a8444b0310827,
     type: 2}
   deathExplosionPrefab: {fileID: 195572, guid: 27535dd6d493e2b4b93a65b8715f58b0, type: 2}
