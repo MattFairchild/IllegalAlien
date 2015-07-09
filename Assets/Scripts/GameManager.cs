@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     private static GameManager instance;
 
-	public static float soundMasterVolume = 1;
+	public static float soundMasterVolume = 0.5f;
 	public static float gameMasterDuration = 300;
 
 	public static float lastTime = 0;
@@ -282,9 +282,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void SetSoundMasterVolume (float newVolume) {
+
 		soundMasterVolume = newVolume;//Mathf.Log10(Mathf.Clamp01(newVolume)*20);
 		AudioListener.volume = soundMasterVolume;
-		//Debug.Log(soundMasterVolume);
 	}
 
 	public void SetGameMasterDuration (float newDuration) {
