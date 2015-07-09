@@ -60,6 +60,10 @@ public class GUIGame : MonoBehaviour
 
     protected bool lastPaused = false;
 
+    private CanvasRenderer[] allCanvasRenderers;
+    private const float GUITransitionDuration = 1;
+    private const float GUIStartTransitionTime = 3.5f;
+
     // Use this for initialization
     void Start()
     {
@@ -72,6 +76,13 @@ public class GUIGame : MonoBehaviour
         pauseOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
         pauseImage.gameObject.SetActive(false);
         injureOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+
+        allCanvasRenderers = this.GetComponentsInChildren<CanvasRenderer>();
+        foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)
+        {
+            canvasRenderer.SetAlpha(0);
+        }
+
     }
 
     // Update is called once per frame
@@ -84,7 +95,7 @@ public class GUIGame : MonoBehaviour
         timer.text = "Time\n" + (int)timeLeft;
         timerCircle.fillAmount = timeLeft / GameManager.gameDuration;
         playerShield.fillAmount = GameManager.boostTimer;
-        playerShards.fillAmount = 1.0f * GameManager.curResources / GameManager.maxResources;
+        playerShards.fillAmount = 1.0f * GameManager.curResources / GameManager.maxResources - 0.01f;
         playerSpeed.value = input.getSpeedNormalizedLength(); //player.speed; //input.getSpeed() * (input.placingTurret() ? 0.5f : 1);
         playerHealth.fillAmount = playerHealthOverlay.fillAmount = player.percentOfHealth;
         baseHealth.fillAmount = baseHealthOverlay.fillAmount = spaceStation.percentOfHealth;
@@ -104,5 +115,19 @@ public class GUIGame : MonoBehaviour
 
         //playerSpeed.gameObject.SetActive(input.placingTurret());
         playerSpeed.gameObject.SetActive(false);
+
+        float timeSinceStart = GameManager.TimeSinceStart;
+
+        if (GUIStartTransitionTime <= timeSinceStart && timeSinceStart < GUIStartTransitionTime + GUITransitionDuration)
+        {
+            float lerpFactor = Mathf.Clamp01((timeSinceStart - GUIStartTransitionTime) / GUITransitionDuration);
+            foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)
+            {
+                canvasRenderer.SetAlpha(lerpFactor);
+            }
+
+            injureOverlay.CrossFadeAlpha(0, 0, true);
+            pauseOverlay.CrossFadeAlpha(0, 0, true);
+        }
     }
 }

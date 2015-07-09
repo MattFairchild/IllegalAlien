@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class CameraScript : MonoBehaviour
@@ -8,8 +9,15 @@ public class CameraScript : MonoBehaviour
     public float zBounds = 20.0f;
     public float yDistance = 20.0f;
 
+    public Vector3 startPosition;
+    public Vector3 startRotation;
+
     private Transform player;
     private Camera cam;
+
+    private const float camTransitionDuration = 4;
+    private const float camStartTransitionTime = 0;
+
 
     void OnDrawGizmos()
     {
@@ -26,14 +34,18 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        this.transform.position = new Vector3(player.position.x, yDistance, player.position.z - 2);
+        //this.transform.position = new Vector3(player.position.x, yDistance, player.position.z - 2);
+        this.transform.position = startPosition;
+        this.transform.rotation = Quaternion.Euler(startRotation);
         cam = GetComponent<Camera>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        float correctX, correctZ, correctY = 20.0f;
+        float correctX, correctZ;
+        const float correctY = 20.0f;
         bool correct = false;
         this.transform.position = new Vector3(player.position.x, this.transform.position.y, player.position.z - 2);
 
@@ -68,11 +80,21 @@ public class CameraScript : MonoBehaviour
             correctZ = transform.position.z;
         }
 
-
         if (correct)
         {
             this.transform.position = new Vector3(correctX, correctY, correctZ);
         }
+
+        float timeSinceStart = GameManager.TimeSinceStart;
+
+        if (camStartTransitionTime <= timeSinceStart && timeSinceStart < camStartTransitionTime + camTransitionDuration)
+        {
+            float lerpFactor = Mathf.Clamp01((timeSinceStart - camStartTransitionTime) / camTransitionDuration);
+            this.transform.position = Vector3.Slerp(startPosition, new Vector3(correctX, correctY, correctZ), lerpFactor);
+            this.transform.rotation = Quaternion.Slerp(Quaternion.Euler(startRotation), Quaternion.Euler(90, 0, 0), lerpFactor);
+        }
+
+
 
     }
 }
