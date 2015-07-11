@@ -294,6 +294,8 @@ public class GameManager : MonoBehaviour
         lastScore = score;
         lastGameWon = won;
 
+		gui.ShowGameOverOverlay(won);
+
         instance.StartCoroutine(LoadLevelWithDelay(0, 2.5f));
     }
 
@@ -314,6 +316,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(m_gameDuration);
         GameOver(true);
     }
+
+	public void ReturnToMainMenu () {
+		lastScore = 0;
+		Application.LoadLevel(0);
+	}
 
     public void ExitGame()
     {

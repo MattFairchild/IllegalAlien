@@ -46,11 +46,20 @@ public class GUIGame : MonoBehaviour
     protected Image bossShield;
 
     [SerializeField]
-    protected Image pauseOverlay;
-    [SerializeField]
-    protected Image injureOverlay;
+	protected Image injureOverlay;
+	[SerializeField]
+	protected Image pauseOverlay;
     [SerializeField]
     protected RectTransform pauseImage;
+	[SerializeField]
+	protected Image winOverlay;
+	[SerializeField]
+	protected RectTransform winImage;
+	[SerializeField]
+	protected Image loseOverlay;
+	[SerializeField]
+	protected RectTransform loseImage;
+
 
     protected Player player;
     protected SpaceStationScript spaceStation;
@@ -73,11 +82,18 @@ public class GUIGame : MonoBehaviour
         baseHealthOverlay = spaceStation.healthBarOverlay;
         input = player.input;
         bossGUIParent.gameObject.SetActive(false);
-        pauseOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
-        pauseOverlay.gameObject.SetActive(true);
-        pauseImage.gameObject.SetActive(false);
-        injureOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+        
+		injureOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
         injureOverlay.gameObject.SetActive(true);
+		pauseOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+		pauseOverlay.gameObject.SetActive(true);
+		pauseImage.gameObject.SetActive(false);
+		winOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+		winOverlay.gameObject.SetActive(true);
+		winImage.gameObject.SetActive(false);
+		loseOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+		loseOverlay.gameObject.SetActive(true);
+		loseImage.gameObject.SetActive(false);
 
         allCanvasRenderers = this.GetComponentsInChildren<CanvasRenderer>();
         foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)
@@ -85,6 +101,7 @@ public class GUIGame : MonoBehaviour
             canvasRenderer.SetAlpha(0);
         }
 
+		playerSpeed.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -116,8 +133,7 @@ public class GUIGame : MonoBehaviour
         }
 
         //playerSpeed.gameObject.SetActive(input.placingTurret());
-        playerSpeed.gameObject.SetActive(false);
-
+        
         float timeSinceStart = GameManager.TimeSinceStart;
 
         if (GUIStartTransitionTime <= timeSinceStart && timeSinceStart < GUIStartTransitionTime + GUITransitionDuration)
@@ -130,6 +146,19 @@ public class GUIGame : MonoBehaviour
 
             injureOverlay.CrossFadeAlpha(0, 0, true);
             pauseOverlay.CrossFadeAlpha(0, 0, true);
+			loseOverlay.CrossFadeAlpha(0, 0, true);
+			winOverlay.CrossFadeAlpha(0, 0, true);
         }
     }
+
+	public void ShowGameOverOverlay (bool won) {
+		if(won){
+			winOverlay.CrossFadeAlpha(1.0f, 1.0f, true);
+			winImage.gameObject.SetActive(true);
+		}
+		else{
+			loseOverlay.CrossFadeAlpha(1.0f, 1.0f, true);
+			loseImage.gameObject.SetActive(true);
+		}
+	}
 }

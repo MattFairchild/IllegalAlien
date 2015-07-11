@@ -85,6 +85,9 @@ public class Player : Agent, IHittable
 
         Debug.Log("Game Over!");
         GameManager.GameOver();
+
+		gameObject.SetActive(false);
+		Camera.main.GetComponent<AudioListener>().enabled = true;
     }
 
     public void Hit(float damage, Agent attacker = null)
