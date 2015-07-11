@@ -29,7 +29,8 @@ public class InputCapture : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+		camera = Camera.main;
         screenUp = GameManager.getScreenUp();//camera.transform.up;
         screenRight = GameManager.getScreenRight();//camera.transform.right;
         plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f)); // X-Z plane

@@ -64,6 +64,8 @@ public class SpaceStationScript : Agent, IHittable
 
         Debug.Log("Game Over!");
         GameManager.GameOver();
+
+		gameObject.SetActive(false);
     }
 
     public void Hit(float damage, Agent attacker = null)
