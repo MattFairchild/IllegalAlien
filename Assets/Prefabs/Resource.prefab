@@ -155,10 +155,10 @@ MonoBehaviour:
   Colors:
     key0:
       serializedVersion: 2
-      rgba: 4278204579
+      rgba: 4294939136
     key1:
       serializedVersion: 2
-      rgba: 4278219263
+      rgba: 4294966528
     key2:
       serializedVersion: 2
       rgba: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  Frequence: 5.66666651
+  Frequence: 2.83333302
   MaterialParameterName: _EmissionColor
 --- !u!114 &11479532
 MonoBehaviour:
@@ -245,15 +245,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Colors.key0.rgba
-      value: 4278204579
+      value: 4294939136
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Colors.key1.rgba
-      value: 4278219263
+      value: 4294966528
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Frequence
-      value: 5.66666651
+      value: 2.83333302
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaterialParameterName
