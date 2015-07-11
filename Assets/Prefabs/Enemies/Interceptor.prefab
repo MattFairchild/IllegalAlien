@@ -763,7 +763,7 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  Frequence: 4
+  Frequence: 5.66666651
   MaterialParameterName: _EmissionColor
   Materials:
   - {fileID: 2100000, guid: 026f5bde0144e1043b3091efc78175f4, type: 2}
@@ -3128,6 +3128,10 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300006, guid: 90d128e5f54461e4e8c30d9ecf68c53e, type: 3}
+    - target: {fileID: 0}
+      propertyPath: Frequence
+      value: 5.66666651
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114966}

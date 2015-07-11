@@ -17,7 +17,7 @@ public class Player : Agent, IHittable
     //protected Vector3 lastPos = Vector3.zero;
     public float speed;
 
-    public MaterialColorController playerMaterialController;
+    public MaterialColorController MaterialControllerForLowHealth;
     private Gradient normalGradient;
     private Gradient warningGradient;
 
@@ -30,7 +30,7 @@ public class Player : Agent, IHittable
         InitializeAgent();
 
         normalGradient = new Gradient();
-        normalGradient.colorKeys = (GradientColorKey[])playerMaterialController.Colors.colorKeys.Clone();
+        normalGradient.colorKeys = (GradientColorKey[])MaterialControllerForLowHealth.Colors.colorKeys.Clone();
 
         warningGradient = new Gradient();
         warningGradient.colorKeys = new[] { new GradientColorKey(new Color(0.5f, 0, 0), 0), new GradientColorKey(new Color(1, 0, 0), 1) };
@@ -58,8 +58,8 @@ public class Player : Agent, IHittable
 
         if (percentOfHealth > lowHealthPercentage)
         {
-            playerMaterialController.Colors.colorKeys = normalGradient.colorKeys;
-            playerMaterialController.Frequence = 2;
+            MaterialControllerForLowHealth.Colors.colorKeys = normalGradient.colorKeys;
+            MaterialControllerForLowHealth.Frequence = 2.833333f;
         }
         else
         {
@@ -70,8 +70,8 @@ public class Player : Agent, IHittable
             GradientColorKey endColorKey =
                 new GradientColorKey(Color.Lerp(normalGradient.Evaluate(1), warningGradient.Evaluate(1), dramatist), 1);
 
-            playerMaterialController.Colors.colorKeys = new[] { startColorKey, endColorKey };
-            playerMaterialController.Frequence = 5;
+            MaterialControllerForLowHealth.Colors.colorKeys = new[] { startColorKey, endColorKey };
+            MaterialControllerForLowHealth.Frequence = 5.666667f;
         }
     }
 

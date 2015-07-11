@@ -74,8 +74,10 @@ public class GUIGame : MonoBehaviour
         input = player.input;
         bossGUIParent.gameObject.SetActive(false);
         pauseOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+        pauseOverlay.gameObject.SetActive(true);
         pauseImage.gameObject.SetActive(false);
         injureOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
+        injureOverlay.gameObject.SetActive(true);
 
         allCanvasRenderers = this.GetComponentsInChildren<CanvasRenderer>();
         foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)
@@ -101,7 +103,7 @@ public class GUIGame : MonoBehaviour
         baseHealth.fillAmount = baseHealthOverlay.fillAmount = spaceStation.percentOfHealth;
 
         //set opacity of injure overlay to > 0 when either player or space station has less health than the lowHealthPercentage threshold
-        float impulseMultipier = Mathf.Sin(5 * Time.time) / 4f + 0.75f;
+        float impulseMultipier = Mathf.Sin(5.666667f * Time.time) / 4f + 0.75f;
         injureOverlay.CrossFadeAlpha(Mathf.Clamp01(2 * Mathf.Max(spaceStation.lowHealthPercentage - spaceStation.percentOfHealth, player.lowHealthPercentage - player.percentOfHealth) * impulseMultipier), 0.1f, true);
 
         bool paused = GameManager.gamePaused;

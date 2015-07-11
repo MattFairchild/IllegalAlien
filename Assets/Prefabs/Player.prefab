@@ -898,7 +898,7 @@ MonoBehaviour:
   healthBarOverlay: {fileID: 11491252}
   input: {fileID: 11441072}
   speed: 0
-  playerMaterialController: {fileID: 11436514}
+  MaterialControllerForLowHealth: {fileID: 11436514}
   lowHealthWarningPrefab: {fileID: 122670, guid: 09e98d045b7aac841b1046518a3bd8bd,
     type: 2}
 --- !u!114 &11432344
@@ -973,7 +973,7 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  Frequence: 2
+  Frequence: 2.83333325
   MaterialParameterName: _EmissionColor
   Materials:
   - {fileID: 2100000, guid: 554c97bb20e16e943bb1d832189d43cc, type: 2}
@@ -1061,7 +1061,7 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  Frequence: 2
+  Frequence: 2.83333325
   MaterialParameterName: _EmissionColor
   Materials:
   - {fileID: 2100000, guid: d2e345ab7dfa13e43ae59fa133260976, type: 2}
