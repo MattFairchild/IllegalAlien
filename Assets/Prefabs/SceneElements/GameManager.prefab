@@ -157,9 +157,9 @@ MonoBehaviour:
   m_showRadius: 0
   alwayShowRadius: 0
   onlyNearest: 0
-  screenUp: {x: 0, y: 0, z: 0}
-  screenRight: {x: 0, y: 0, z: 0}
-  screenNormal: {x: 0, y: 0, z: 0}
+  screenUp: {x: 0, y: 0, z: 1}
+  screenRight: {x: 1, y: 0, z: 0}
+  screenNormal: {x: 0, y: -1, z: 0}
   autoShoot: 0
   m_curResources: 0
   m_maxResources: 100
