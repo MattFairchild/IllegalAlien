@@ -59,6 +59,8 @@ public class SpaceStationScript : Agent, IHittable
         Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
         Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
         //gameObject.GetComponent<AudioSource>().PlayOneShot(deathClip, 2.0f);
+        this.transform.localScale = Vector3.zero;
+
 
         Debug.Log("Game Over!");
         GameManager.GameOver();

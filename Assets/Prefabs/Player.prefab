@@ -52,7 +52,6 @@ GameObject:
   - 81: {fileID: 8135302}
   - 208: {fileID: 20893522}
   - 114: {fileID: 11436514}
-  - 114: {fileID: 11442762}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -975,8 +974,6 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   Frequence: 2.83333325
   MaterialParameterName: _EmissionColor
-  Materials:
-  - {fileID: 2100000, guid: 554c97bb20e16e943bb1d832189d43cc, type: 2}
 --- !u!114 &11441072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1006,65 +1003,6 @@ MonoBehaviour:
   parent: {fileID: 0}
   bulletCooldown: 0
   projectileOffset: 1.75
---- !u!114 &11442762
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a290f5a607ac1184c99031e02830c572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animate: 1
-  Colors:
-    key0:
-      serializedVersion: 2
-      rgba: 4294939136
-    key1:
-      serializedVersion: 2
-      rgba: 4294966528
-    key2:
-      serializedVersion: 2
-      rgba: 0
-    key3:
-      serializedVersion: 2
-      rgba: 0
-    key4:
-      serializedVersion: 2
-      rgba: 0
-    key5:
-      serializedVersion: 2
-      rgba: 0
-    key6:
-      serializedVersion: 2
-      rgba: 0
-    key7:
-      serializedVersion: 2
-      rgba: 0
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  Frequence: 2.83333325
-  MaterialParameterName: _EmissionColor
-  Materials:
-  - {fileID: 2100000, guid: d2e345ab7dfa13e43ae59fa133260976, type: 2}
 --- !u!114 &11446582
 MonoBehaviour:
   m_ObjectHideFlags: 1

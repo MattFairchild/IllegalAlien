@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GUIGame : MonoBehaviour
 {
+    public bool AnimateUI;
 
     [SerializeField]
     protected RectTransform scoreGUIParent;
@@ -79,10 +80,13 @@ public class GUIGame : MonoBehaviour
         injureOverlay.CrossFadeAlpha(0.0f, 0.0f, true);
         injureOverlay.gameObject.SetActive(true);
 
-        allCanvasRenderers = this.GetComponentsInChildren<CanvasRenderer>();
-        foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)
+        if (AnimateUI)
         {
-            canvasRenderer.SetAlpha(0);
+            allCanvasRenderers = this.GetComponentsInChildren<CanvasRenderer>();
+            foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)
+            {
+                canvasRenderer.SetAlpha(0);
+            }
         }
 
     }
@@ -120,7 +124,7 @@ public class GUIGame : MonoBehaviour
 
         float timeSinceStart = GameManager.TimeSinceStart;
 
-        if (GUIStartTransitionTime <= timeSinceStart && timeSinceStart < GUIStartTransitionTime + GUITransitionDuration)
+        if (AnimateUI && GUIStartTransitionTime <= timeSinceStart && timeSinceStart < GUIStartTransitionTime + GUITransitionDuration)
         {
             float lerpFactor = Mathf.Clamp01((timeSinceStart - GUIStartTransitionTime) / GUITransitionDuration);
             foreach (CanvasRenderer canvasRenderer in allCanvasRenderers)

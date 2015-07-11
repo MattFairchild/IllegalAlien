@@ -104,7 +104,6 @@ GameObject:
   - 195: {fileID: 19548546}
   - 82: {fileID: 8242102}
   - 114: {fileID: 11469374}
-  - 114: {fileID: 11458300}
   m_Layer: 0
   m_Name: Interceptor
   m_TagString: Enemy
@@ -708,65 +707,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 3
---- !u!114 &11458300
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a290f5a607ac1184c99031e02830c572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animate: 1
-  Colors:
-    key0:
-      serializedVersion: 2
-      rgba: 4278204579
-    key1:
-      serializedVersion: 2
-      rgba: 4278219263
-    key2:
-      serializedVersion: 2
-      rgba: 0
-    key3:
-      serializedVersion: 2
-      rgba: 0
-    key4:
-      serializedVersion: 2
-      rgba: 0
-    key5:
-      serializedVersion: 2
-      rgba: 0
-    key6:
-      serializedVersion: 2
-      rgba: 0
-    key7:
-      serializedVersion: 2
-      rgba: 0
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  Frequence: 5.66666651
-  MaterialParameterName: _EmissionColor
-  Materials:
-  - {fileID: 2100000, guid: 026f5bde0144e1043b3091efc78175f4, type: 2}
 --- !u!114 &11459508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -826,6 +766,12 @@ MonoBehaviour:
   shootingFrequency: 1
   shootingRange: 20
   projectileSpeed: 25
+  meshes:
+  - {fileID: 4300008, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+  - {fileID: 4300000, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+  - {fileID: 4300004, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+  - {fileID: 4300006, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+  - {fileID: 4300002, guid: b70521a1d55362341bf06240523bacd5, type: 3}
 --- !u!114 &11469374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3125,6 +3071,14 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: meshes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fracturedMeshes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300006, guid: 90d128e5f54461e4e8c30d9ecf68c53e, type: 3}
@@ -3132,6 +3086,54 @@ Prefab:
       propertyPath: Frequence
       value: 5.66666651
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fracturedMesh
+      value: 
+      objectReference: {fileID: 4300008, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: fracturedMeshes.Array.data[0]
+      value: 
+      objectReference: {fileID: 105056, guid: 1cbe1c19ef1f67240898f1fe99452000, type: 2}
+    - target: {fileID: 0}
+      propertyPath: fracturedMeshes.Array.data[1]
+      value: 
+      objectReference: {fileID: 4300000, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: fracturedMeshes.Array.data[2]
+      value: 
+      objectReference: {fileID: 4300004, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: fracturedMeshes.Array.data[3]
+      value: 
+      objectReference: {fileID: 4300006, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: fracturedMeshes.Array.data[4]
+      value: 
+      objectReference: {fileID: 4300002, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: hierarcalyMesh
+      value: 
+      objectReference: {fileID: 100010, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: meshes.Array.data[0]
+      value: 
+      objectReference: {fileID: 4300008, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: meshes.Array.data[1]
+      value: 
+      objectReference: {fileID: 4300000, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: meshes.Array.data[2]
+      value: 
+      objectReference: {fileID: 4300004, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: meshes.Array.data[3]
+      value: 
+      objectReference: {fileID: 4300006, guid: b70521a1d55362341bf06240523bacd5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: meshes.Array.data[4]
+      value: 
+      objectReference: {fileID: 4300002, guid: b70521a1d55362341bf06240523bacd5, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114966}

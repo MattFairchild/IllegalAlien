@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 
 public abstract class EnemyScript : Agent, IHittable
 {
@@ -32,6 +34,9 @@ public abstract class EnemyScript : Agent, IHittable
     [SerializeField]
     protected float projectileSpeed = 25.0f;
 
+    [SerializeField]
+    protected Mesh[] meshes;
+
     protected new AudioSource[] audio;
 
     protected void InitializeEnemy()
@@ -50,6 +55,7 @@ public abstract class EnemyScript : Agent, IHittable
             source.maxDistance = shootingRange * 2f;
         }
         GameManager.incrementEnemyCount();
+
     }
 
     public void Hit(float damage, Agent attacker = null)
@@ -118,25 +124,20 @@ public abstract class EnemyScript : Agent, IHittable
 
     protected void SpawnResources()
     {
-        int numberOfShards = Random.Range(2, 6); //returns values of 2-5!
-        int remainingResourceCount = resources;
-        int tmpSum = 0;
 
-        for (int i = 0; i < numberOfShards && remainingResourceCount > 0; i++)
+        for (int i = 0; i < resources; i++)
         {
-            int resourceCountOfShard = (i < numberOfShards - 1) ? Random.Range(Mathf.Min(i, remainingResourceCount), remainingResourceCount) : remainingResourceCount;
-            remainingResourceCount -= resourceCountOfShard;
-            GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position, Random.rotationUniform);
-            ResourcesScript rs = shard.GetComponent<ResourcesScript>();
-            rs.resources = resourceCountOfShard;
-            tmpSum += rs.resources;
+            GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position + Random.insideUnitSphere, Random.rotationUniform);
+
+            shard.GetComponent<ResourcesScript>().resources = 1;
+            shard.GetComponent<MeshFilter>().mesh = meshes[i % meshes.Length];
+            shard.GetComponent<MeshRenderer>().material = agent.GetComponent<MeshRenderer>().material;
 
             Rigidbody rbS = shard.GetComponent<Rigidbody>();
 
             rbS.velocity = agent.velocity + Random.insideUnitSphere;
             rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
         }
-        //Debug.Log(this.GetType().ToString() + ": " + tmpSum);
     }
 
     public override void IncreaseKillCount()

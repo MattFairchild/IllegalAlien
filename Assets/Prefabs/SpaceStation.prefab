@@ -96,13 +96,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 440250}
-  - 136: {fileID: 13688562}
+  - 136: {fileID: 13645192}
   - 54: {fileID: 5417234}
   - 208: {fileID: 20863474}
   - 114: {fileID: 11411036}
   - 82: {fileID: 8285838}
-  - 114: {fileID: 11440956}
-  - 114: {fileID: 11487368}
   m_Layer: 0
   m_Name: SpaceStation
   m_TagString: SpaceStation
@@ -118,6 +116,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 462444}
+  - 114: {fileID: 11451816}
+  - 23: {fileID: 2347232}
   m_Layer: 0
   m_Name: Meshes
   m_TagString: Untagged
@@ -335,6 +335,30 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140962}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: b0c21c9af6d289a4d90a16a8bf5ec771, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &2347232
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158086}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -672,7 +696,7 @@ MonoBehaviour:
   deathSoundPrefab: {fileID: 104842, guid: 697efab2723e18540a19bd98bcd7fe2a, type: 2}
   percentOfHealth: 0
   healthBarOverlay: {fileID: 11457970}
-  MaterialControllerForLowHealth: {fileID: 11487368}
+  MaterialControllerForLowHealth: {fileID: 0}
 --- !u!114 &11411628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -694,17 +718,63 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 3
---- !u!114 &11440956
+--- !u!114 &11451816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 143846}
+  m_GameObject: {fileID: 158086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fa49ac9aeb63247aa5be88ab740659, type: 3}
+  m_Script: {fileID: 11500000, guid: a290f5a607ac1184c99031e02830c572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animate: 1
+  Colors:
+    key0:
+      serializedVersion: 2
+      rgba: 4294939136
+    key1:
+      serializedVersion: 2
+      rgba: 4294966528
+    key2:
+      serializedVersion: 2
+      rgba: 0
+    key3:
+      serializedVersion: 2
+      rgba: 0
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  Frequence: 2.83333325
+  MaterialParameterName: _EmissionColor
 --- !u!114 &11454936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -792,65 +862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4288d89e3564fa44a70273d0940cc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11487368
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 143846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a290f5a607ac1184c99031e02830c572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animate: 1
-  Colors:
-    key0:
-      serializedVersion: 2
-      rgba: 4294939136
-    key1:
-      serializedVersion: 2
-      rgba: 4294966528
-    key2:
-      serializedVersion: 2
-      rgba: 0
-    key3:
-      serializedVersion: 2
-      rgba: 0
-    key4:
-      serializedVersion: 2
-      rgba: 0
-    key5:
-      serializedVersion: 2
-      rgba: 0
-    key6:
-      serializedVersion: 2
-      rgba: 0
-    key7:
-      serializedVersion: 2
-      rgba: 0
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  Frequence: 2.83333325
-  MaterialParameterName: _EmissionColor
-  Materials:
-  - {fileID: 2100000, guid: b0c21c9af6d289a4d90a16a8bf5ec771, type: 2}
 --- !u!114 &11488140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -888,7 +899,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!136 &13688562
+--- !u!136 &13645192
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

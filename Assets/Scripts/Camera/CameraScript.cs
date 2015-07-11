@@ -4,6 +4,7 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour
 {
+    public bool AnimateCamera;
 
     public float xBounds = 50.0f;
     public float zBounds = 20.0f;
@@ -34,9 +35,7 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //this.transform.position = new Vector3(player.position.x, yDistance, player.position.z - 2);
-        this.transform.position = startPosition;
-        this.transform.rotation = Quaternion.Euler(startRotation);
+        this.transform.position = new Vector3(player.position.x, yDistance, player.position.z - 2);
         cam = GetComponent<Camera>();
 
     }
@@ -87,7 +86,7 @@ public class CameraScript : MonoBehaviour
 
         float timeSinceStart = GameManager.TimeSinceStart;
 
-        if (camStartTransitionTime <= timeSinceStart && timeSinceStart < camStartTransitionTime + camTransitionDuration)
+        if (AnimateCamera && camStartTransitionTime <= timeSinceStart && timeSinceStart < camStartTransitionTime + camTransitionDuration)
         {
             float lerpFactor = Mathf.Clamp01((timeSinceStart - camStartTransitionTime) / camTransitionDuration);
             this.transform.position = Vector3.Slerp(startPosition, new Vector3(correctX, correctY, correctZ), lerpFactor);

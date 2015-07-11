@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MaterialColorController : MonoBehaviour
+public abstract class MaterialColorController : MonoBehaviour
 {
     public bool Animate = true;
 
@@ -11,22 +11,10 @@ public class MaterialColorController : MonoBehaviour
 
     public string MaterialParameterName;
 
-    public Material[] Materials;
-
-    private float sinTime;
+    protected float sinTime;
 
     void Update()
     {
-        if (Animate)
-        {
-            sinTime = Mathf.Sin(Time.time * Frequence);
-            sinTime = sinTime / 2f + 0.5f;
-            sinTime = Mathf.Clamp01(sinTime);
 
-            foreach (Material material in Materials)
-            {
-                material.SetColor(MaterialParameterName, Colors.Evaluate(sinTime));
-            }
-        }
     }
 }
