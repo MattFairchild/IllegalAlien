@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class GameManager : MonoBehaviour
@@ -58,6 +59,8 @@ public class GameManager : MonoBehaviour
         None
     }
 
+    public static List<GameObject> turretList;
+
     public static string[] FactionTagsPlayer = { "Player", "Turret", "SpaceStation" };
     public static string[] FactionTagsEnemy = { "Enemy" };
     public static string[] FactionTagsNeutral = { "Planet" };
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
         m_endTime = m_startTime + m_gameDuration;
         timeSinceStart = 0;
         m_boostTimer = 1.0f;
+        turretList = new List<GameObject>();
         StartCoroutine(EndGame());
     }
 

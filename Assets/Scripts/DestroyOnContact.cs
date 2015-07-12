@@ -9,7 +9,8 @@ public class DestroyOnContact : MonoBehaviour {
 		if(other.tag.Equals("Player")){
 			lastTimeOfPlayerEnter = Time.time;
 		}
-		else{
+        else if (!other.tag.Equals("Unkillable"))
+        {
 			Destroy(other.gameObject);
 		}
 	}

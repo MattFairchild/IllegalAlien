@@ -335,6 +335,8 @@ public class TurretScript : Agent, IHittable {
 	}
 
 	protected void Die () {
+        GameManager.turretList.Remove(this.gameObject);
+
 		alive = false;
 
 		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);

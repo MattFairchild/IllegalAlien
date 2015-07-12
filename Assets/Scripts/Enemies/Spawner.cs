@@ -87,6 +87,8 @@ public class Spawner : MonoBehaviour {
                 case SpawnableShips.interceptor:
                     GameObject small = Instantiate(interceptor, spawnPos, Quaternion.identity) as GameObject;
                     small.GetComponent<AI>().changeState("ChasePlayer");
+                    small.GetComponent<InterceptorScript>().attackPlayer = true;
+                    small.GetComponent<InterceptorScript>().attackTurrets = false;
                     enemies.Add(small.GetComponent<EnemyScript>());
                     break;
 
@@ -102,7 +104,12 @@ public class Spawner : MonoBehaviour {
                     small2 = Instantiate(interceptor, big.transform.TransformPoint(new Vector3(5f, 0, 0)), Quaternion.identity) as GameObject;               
                     
                     small1.GetComponent<AI>().SetupConvoy(big, true);
-                    small2.GetComponent<AI>().SetupConvoy(big, false);
+                    small1.GetComponent<InterceptorScript>().attackPlayer = true;
+                    small1.GetComponent<InterceptorScript>().attackTurrets = true;
+
+                    small2.GetComponent<AI>().SetupConvoy(big, false);         
+                    small2.GetComponent<InterceptorScript>().attackPlayer = true;
+                    small2.GetComponent<InterceptorScript>().attackTurrets = true;
 
                     enemies.Add(big.GetComponent<EnemyScript>());
                     enemies.Add(small1.GetComponent<EnemyScript>());

@@ -142,6 +142,7 @@ public class InputActions : MonoBehaviour
             {
                 //trt.SetVelocity(this.transform.forward * input.getSpeed() * maxSpeed);
                 trt.SetVelocity(this.transform.forward * input.getSpeedNormalizedLength() * maxSpeed);
+                GameManager.turretList.Add(tempTurret);
             }
             tempTurret = null;
         }

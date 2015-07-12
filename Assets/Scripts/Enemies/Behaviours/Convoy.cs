@@ -6,7 +6,6 @@ public class Convoy : State {
     protected GameObject convoyLeader;
     protected bool wingman;
     protected DestroyerScript ds;
-    protected bool combat;
 
     void Awake()
     {
@@ -51,9 +50,25 @@ public class Convoy : State {
     void Attack()
     {
         GameObject target = ChooseTarget();
-        agent.autoBraking = true;
-        agent.destination = target.transform.position;
-        agent.stoppingDistance = 6f;
+        {
+            if (target != null)
+            {
+                agent.autoBraking = true;
+                agent.destination = target.transform.position;
+                if (target.tag.Equals("Player"))
+                {
+                    agent.stoppingDistance = 6f;
+                }
+                else
+                {
+                    agent.stoppingDistance = 9f;
+                }
+            }
+            else
+            {
+                Escort();
+            }
+        } 
     }
 
     GameObject ChooseTarget()
@@ -63,10 +78,13 @@ public class Convoy : State {
         float distance = 100f;
         for (int i = 0; i < ds.enemiesInRange.Count; i++)
         {
-            if (Vector3.Distance(convoyLeader.transform.position, ds.enemiesInRange[i].transform.position) < distance)
+            if (ds.enemiesInRange[i] != null)
             {
-                distance = Vector3.Distance(convoyLeader.transform.position, ds.enemiesInRange[i].transform.position);
-                pickedEnemy = ds.enemiesInRange[i];
+                if (Vector3.Distance(convoyLeader.transform.position, ds.enemiesInRange[i].transform.position) < distance)
+                {
+                    distance = Vector3.Distance(convoyLeader.transform.position, ds.enemiesInRange[i].transform.position);
+                    pickedEnemy = ds.enemiesInRange[i];
+                }
             }
         }
         return pickedEnemy;
