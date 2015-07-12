@@ -11,14 +11,14 @@ public class DestroyerScript : EnemyScript
     [SerializeField]protected float torpedoSpeed = 10.0f;
     [SerializeField]protected SphereCollider trigger;
 
-    private List<GameObject> enemiesInRange = new List<GameObject>();
+    public List<GameObject> enemiesInRange = new List<GameObject>();
 
 	// Use this for initialization
 	void Start ()
     {
 		InitializeEnemy();
 		target = spaceStation;
-        trigger.radius = shootingRange;
+        trigger.radius = 2.5f * shootingRange;
         StartCoroutine(Fight());
         StartCoroutine(FightSpaceStation());
 	}
@@ -66,7 +66,7 @@ public class DestroyerScript : EnemyScript
     GameObject PickTarget()
     {
         GameObject pickedEnemy = null;
-        float distance = 100f;
+        float distance = shootingRange;
 		for (int i = 0; i < enemiesInRange.Count; i++ ) {
 
             if (Vector3.Distance(transform.position, enemiesInRange[i].transform.position) < distance)
