@@ -47,7 +47,7 @@ GameObject:
   - 114: {fileID: 11477744}
   - 114: {fileID: 11438772}
   m_Layer: 0
-  m_Name: CollisionSparks
+  m_Name: CollisionSparksSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,7 +330,7 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 0
+    maxNumParticles: 50
   ShapeModule:
     serializedVersion: 2
     enabled: 1
@@ -1150,29 +1150,19 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - time: 1
-          value: 0
-          inSlope: -2.86069465
-          outSlope: -2.86069465
-          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
       minCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
-          value: 0
+          value: .25
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-      minMaxState: 0
+      minMaxState: 3
     startSpeed:
       scalar: 1
       maxCurve:
@@ -1348,7 +1338,7 @@ ParticleSystem:
       minMaxState: 2
     gravityModifier: -.0500000007
     inheritVelocity: 0
-    maxNumParticles: 0
+    maxNumParticles: 50
   ShapeModule:
     serializedVersion: 2
     enabled: 1

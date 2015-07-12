@@ -192,6 +192,12 @@ public class InputActions : MonoBehaviour
         rigidbody.MovePosition(newPos);
     }
 
+	protected void RotatePlayer (Quaternion rot) {
+		//transform.rotation = rot;
+		//rigidbody.MoveRotation(rot);
+		rigidbody.MoveRotation(Quaternion.Slerp(rigidbody.rotation, rot, 5*Time.deltaTime));
+	}
+
 
     // Update is called once per frame
     void normalMovement()
@@ -288,8 +294,7 @@ public class InputActions : MonoBehaviour
 
         MovePlayer();
 
-        //transform.rotation = rot;
-        rigidbody.MoveRotation(rot);
+		RotatePlayer(rot);
     }
 
 
@@ -352,8 +357,7 @@ public class InputActions : MonoBehaviour
         }
 
 
-        //transform.rotation = rot;
-        rigidbody.MoveRotation(rot);
+		RotatePlayer(rot);
 
 
         if (triggerPressed && !triggerReleased)

@@ -67,6 +67,7 @@ GameObject:
   - 4: {fileID: 406952}
   - 33: {fileID: 3318002}
   - 23: {fileID: 2357206}
+  - 114: {fileID: 11425888}
   m_Layer: 8
   m_Name: MinimapSphere
   m_TagString: Untagged
@@ -85,7 +86,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children: []
   m_Father: {fileID: 481632}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &430630
 Transform:
   m_ObjectHideFlags: 1
@@ -98,7 +99,7 @@ Transform:
   m_Children:
   - {fileID: 493916}
   m_Father: {fileID: 481632}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &481632
 Transform:
   m_ObjectHideFlags: 1
@@ -109,8 +110,8 @@ Transform:
   m_LocalPosition: {x: -28.7036457, y: 0, z: -32.1702652}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
-  - {fileID: 430630}
   - {fileID: 406952}
+  - {fileID: 430630}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &493916
@@ -203,7 +204,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -264,6 +265,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &11425888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdef4018701cb94ca55e43960d9ccb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dotSphereYvalue: 40
 --- !u!114 &11431470
 MonoBehaviour:
   m_ObjectHideFlags: 1

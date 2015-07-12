@@ -16,6 +16,6 @@ public class ResourcesScript : MonoBehaviour {
 
 	public int resources {
 		get { return m_resources; }
-		set { m_resources = value; transform.localScale = Vector3.one * 0.66f * Mathf.Sqrt((float)m_resources); }
+		set { m_resources = value; transform.localScale = Vector3.one * Mathf.Sqrt((float)m_resources); }
 	}
 }

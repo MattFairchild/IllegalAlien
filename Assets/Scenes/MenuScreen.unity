@@ -368,6 +368,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 247810854}
+  - 114: {fileID: 247810855}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -396,6 +397,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &247810855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 247810853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00477c293a8d51e499e6868fe59eb678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &279623627
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +602,7 @@ Canvas:
   m_GameObject: {fileID: 308216652}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1595209511}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -639,12 +651,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 308216652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bdb950168670604dad917600baba3ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c452ee2eca01a349a860dd2d35b6eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  main: {fileID: 247810853}
-  options: {fileID: 1382220673}
-  button: {fileID: 935374709}
 --- !u!1 &317703690
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,7 +774,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Game Length
+  m_Text: NORMAL
 --- !u!222 &327055411
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -966,8 +975,9 @@ GameObject:
   - 114: {fileID: 711944479}
   - 222: {fileID: 711944478}
   - 95: {fileID: 711944480}
+  - 114: {fileID: 711944481}
   m_Layer: 5
-  m_Name: Game Length Slider
+  m_Name: Game Difficulty Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,16 +1052,17 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 3
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 910933359}
-        m_MethodName: SetGameMasterDuration
-        m_Mode: 0
+      - m_Target: {fileID: 711944481}
+        m_MethodName: updateDifficulty
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1076,6 +1087,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &711944481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 711944476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99c713029dcf16478b8c5ea39517b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &760608177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1231,6 @@ GameObject:
   - 222: {fileID: 792990740}
   - 114: {fileID: 792990738}
   - 95: {fileID: 792990741}
-  - 114: {fileID: 792990742}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -1276,17 +1297,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792990742}
-        m_MethodName: SwitchObjects
+      - m_Target: {fileID: 308216659}
+        m_MethodName: switchFocus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 1595209515}
         m_MethodName: changeFocus
         m_Mode: 1
@@ -1324,17 +1346,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &792990742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 792990736}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb1389cdbde2e84f968af8e3cf286c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &812006988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1453,7 @@ MonoBehaviour:
   m_resourceCostPerTowerLevel: 20
   m_score: 0
   m_enemyCountOnMap: 0
+  gameDiffculty: 1
   controlsMixed: 0
   m_boostTimer: 0
   m_gameDuration: 300
@@ -1504,7 +1516,7 @@ MonoBehaviour:
   m_VerticalAxis: VerticalLeft
   m_SubmitButton: Submit
   m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
+  m_InputActionsPerSecond: 7
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &911933385
 MonoBehaviour:
@@ -1626,17 +1638,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SwitchObjects
+      - m_Target: {fileID: 308216659}
+        m_MethodName: switchFocus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 1595209515}
         m_MethodName: changeFocus
         m_Mode: 1
@@ -1669,7 +1682,7 @@ GameObject:
   - 114: {fileID: 939583404}
   - 95: {fileID: 939583405}
   m_Layer: 5
-  m_Name: StartGame
+  m_Name: Start Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,6 +2051,7 @@ GameObject:
   - 224: {fileID: 1382220674}
   - 222: {fileID: 1382220676}
   - 114: {fileID: 1382220675}
+  - 114: {fileID: 1382220677}
   m_Layer: 5
   m_Name: Options Menu
   m_TagString: Untagged
@@ -2052,7 +2066,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1382220673}
   m_LocalRotation: {x: 0, y: -.1305262, z: 0, w: .991444886}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 711944477}
@@ -2062,7 +2076,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -1, y: 0}
+  m_AnchoredPosition: {x: 1574, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1382220675
@@ -2092,6 +2106,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1382220673}
+--- !u!114 &1382220677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1382220673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50294220ee61ba459ad682e9d85149f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1455231037
 GameObject:
   m_ObjectHideFlags: 0

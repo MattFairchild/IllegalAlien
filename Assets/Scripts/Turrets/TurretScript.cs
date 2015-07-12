@@ -95,19 +95,8 @@ public class TurretScript : Agent, IHittable {
 
     void FixedUpdate()
     {
-        if (playerInRange)
-        { 
-            if (!GameManager.player.input.placingTurret())
-            {
-                guiVisible = false;
-            }
-            else if (GameManager.player.input.placingTurret())
-            {
-                guiVisible = true;
-            }        
-        }
-
-
+        guiVisible = GameManager.player.input.placingTurret();
+        
         if (launched && affectedByGravity)
         {
             Gravity();
@@ -210,7 +199,7 @@ public class TurretScript : Agent, IHittable {
         //towerGUICanvas.enabled = visible;
         CanvasGroup gui = towerGUICanvas.GetComponent<CanvasGroup>();
         while (enabled) {
-            gui.alpha = Mathf.Clamp01(gui.alpha + (guiVisible ? Time.fixedDeltaTime : -Time.fixedDeltaTime));
+            gui.alpha = Mathf.Clamp01(gui.alpha + ((guiVisible && playerInRange) ? Time.fixedDeltaTime : -Time.fixedDeltaTime));
             yield return new WaitForFixedUpdate();
         }
     }

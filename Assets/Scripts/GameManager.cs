@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public int m_resourceCostPerTowerLevel = 20;
     public int m_score;
     public int m_enemyCountOnMap = 0;
+    public int gameDiffculty = 1;
 
     public bool controlsMixed = false;
     public float m_boostTimer;
@@ -296,6 +297,8 @@ public class GameManager : MonoBehaviour
         lastScore = score;
         lastGameWon = won;
 
+		gui.ShowGameOverOverlay(won);
+
         instance.StartCoroutine(LoadLevelWithDelay(0, 2.5f));
     }
 
@@ -316,6 +319,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(m_gameDuration);
         GameOver(true);
     }
+
+	public void ReturnToMainMenu () {
+		lastScore = 0;
+		Application.LoadLevel(0);
+	}
 
     public void ExitGame()
     {
@@ -338,8 +346,8 @@ public class GameManager : MonoBehaviour
         AudioListener.volume = soundMasterVolume;
     }
 
-    public void SetGameMasterDuration(float newDuration)
+    public void SetGameDifficulty(int newDifficulty)
     {
-        gameMasterDuration = newDuration;
+        instance.gameDiffculty = newDifficulty;
     }
 }

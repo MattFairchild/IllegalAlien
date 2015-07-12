@@ -17,14 +17,13 @@ public class TestSwitch : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void changeFocus () {
         time -= Time.deltaTime;
 
         if (time < 0.0f)
         {
             main.SetActive(false);
             options.SetActive(true);
-            EventSystem.current.firstSelectedGameObject = button;
         }
 	}
 }
