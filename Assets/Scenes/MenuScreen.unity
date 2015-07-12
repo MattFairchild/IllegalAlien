@@ -531,6 +531,7 @@ GameObject:
   - 114: {fileID: 308216654}
   - 222: {fileID: 308216653}
   - 114: {fileID: 308216658}
+  - 114: {fileID: 308216659}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -630,6 +631,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastScoreUI: {fileID: 1475294912}
   lastScoreText: {fileID: 1363516635}
+--- !u!114 &308216659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308216652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bdb950168670604dad917600baba3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  main: {fileID: 247810853}
+  options: {fileID: 1382220673}
+  button: {fileID: 935374709}
 --- !u!1 &317703690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,9 +1335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb1389cdbde2e84f968af8e3cf286c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToSwitch:
-  - {fileID: 1382220673}
-  objectsActive: 0
 --- !u!1 &812006988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameOver: 0
   m_gamePaused: 0
+  m_gameStarted: 0
   m_player: {fileID: 0}
   m_spaceStation: {fileID: 0}
   m_gui: {fileID: 0}
@@ -2039,7 +2052,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1382220673}
   m_LocalRotation: {x: 0, y: -.1305262, z: 0, w: .991444886}
-  m_LocalPosition: {x: 0, y: 0, z: 499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 711944477}
@@ -2049,7 +2062,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 1860, y: 0}
+  m_AnchoredPosition: {x: -1, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1382220675

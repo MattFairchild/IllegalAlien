@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputCapture : MonoBehaviour {
+public class InputCapture : MonoBehaviour
+{
 
     private float speed;
     private float flightAngle;
@@ -17,7 +18,7 @@ public class InputCapture : MonoBehaviour {
     private int numOfPads;
     private new Camera camera;
     private Vector3 screenUp, screenRight;
-	private Vector3 speedNormalized;
+    private Vector3 speedNormalized;
 
     //variables for mouse rotation
     private Plane plane;
@@ -25,21 +26,24 @@ public class InputCapture : MonoBehaviour {
     private float hit;
     public Vector3 mouseAngle;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        screenUp = camera.transform.up;
-        screenRight = camera.transform.right;
+        screenUp = GameManager.getScreenUp();//camera.transform.up;
+        screenRight = GameManager.getScreenRight();//camera.transform.right;
         plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f)); // X-Z plane
-		turret = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        turret = false;
+    }
 
-		if(Input.GetKeyDown(KeyCode.JoystickButton1) || Input.GetKeyDown(KeyCode.Escape)){
-			GameManager.UnPauseGame();
-		}
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.UnPauseGame();
+        }
 
         //update the angle to rotate
         //Gamepad
@@ -52,10 +56,10 @@ public class InputCapture : MonoBehaviour {
 
 
             //rotate towards how the right analog stick is facing
-            
+
             float y = Input.GetAxis("HorizontalRight");
             float x = Input.GetAxis("VerticalRight");
- 
+
             shootAngle = (Mathf.Atan2(y, x) * Mathf.Rad2Deg) + 90.0f;
 
             if (Input.GetAxis("HorizontalLeft") != 0 || Input.GetAxis("VerticalLeft") != 0)
@@ -139,28 +143,30 @@ public class InputCapture : MonoBehaviour {
             }
         }
 
-		Vector3 rawInput = (speedU * GameManager.getScreenUp() + speedR * GameManager.getScreenRight());
-		if(rawInput != Vector3.zero){
-			float normalizationFactor = Mathf.Max(Mathf.Abs(rawInput.x), Mathf.Abs(rawInput.z));
-			Vector3 normalizedInput = rawInput.normalized * normalizationFactor;
-			speedNormalized = normalizedInput;
+        Vector3 rawInput = (speedU * GameManager.getScreenUp() + speedR * GameManager.getScreenRight());
+        if (rawInput != Vector3.zero)
+        {
+            float normalizationFactor = Mathf.Max(Mathf.Abs(rawInput.x), Mathf.Abs(rawInput.z));
+            Vector3 normalizedInput = rawInput.normalized * normalizationFactor;
+            speedNormalized = normalizedInput;
 
-			//float rawInputMaxComponent = Mathf.Max(Mathf.Abs(rawInput.x), Mathf.Abs(rawInput.z));
-			//Vector3 maxInputInDir = rawInput * (1.0f / rawInputMaxComponent);
-			//float normalizationFactor = rawInput.magnitude / maxInputInDir.magnitude;
-			//float normalizationFactor = rawInput.magnitude / (rawInput.magnitude * (1.0f / rawInputMaxComponent));
-			//float normalizationFactor = rawInputMaxComponent;
-			//Vector3 dirRawInput = rawInput.normalized;
-			//int rawInputMaxIdx = Mathf.Abs(rawInput[0]) > Mathf.Abs(rawInput[2]) ? 0 : 2;
-			//Vector3 maxMovementInDir = rawInput * (1.0f / (Mathf.Abs(rawInput[rawInputMaxIdx])));
-			//float normalizedSpeed = rawInput.magnitude / maxMovementInDir.magnitude;
-			//Vector3 normalizedInput = dirRawInput * normalizedSpeed;
-		}
-		else{
-			speedNormalized = Vector3.zero;
-		}
+            //float rawInputMaxComponent = Mathf.Max(Mathf.Abs(rawInput.x), Mathf.Abs(rawInput.z));
+            //Vector3 maxInputInDir = rawInput * (1.0f / rawInputMaxComponent);
+            //float normalizationFactor = rawInput.magnitude / maxInputInDir.magnitude;
+            //float normalizationFactor = rawInput.magnitude / (rawInput.magnitude * (1.0f / rawInputMaxComponent));
+            //float normalizationFactor = rawInputMaxComponent;
+            //Vector3 dirRawInput = rawInput.normalized;
+            //int rawInputMaxIdx = Mathf.Abs(rawInput[0]) > Mathf.Abs(rawInput[2]) ? 0 : 2;
+            //Vector3 maxMovementInDir = rawInput * (1.0f / (Mathf.Abs(rawInput[rawInputMaxIdx])));
+            //float normalizedSpeed = rawInput.magnitude / maxMovementInDir.magnitude;
+            //Vector3 normalizedInput = dirRawInput * normalizedSpeed;
+        }
+        else
+        {
+            speedNormalized = Vector3.zero;
+        }
 
-	}
+    }
 
 
     //go through the Joystick array and check if any entries are non-empty.
@@ -215,26 +221,28 @@ public class InputCapture : MonoBehaviour {
         return speedR;
     }
 
-    public float getSpeedUp() 
+    public float getSpeedUp()
     {
         return speedU;
     }
 
-	public float getSpeedNormalizedLength(){
-		return speedNormalized.magnitude;
-	}
+    public float getSpeedNormalizedLength()
+    {
+        return speedNormalized.magnitude;
+    }
 
-	public Vector3 getSpeedNormalized(){
-		return speedNormalized;
-	}
+    public Vector3 getSpeedNormalized()
+    {
+        return speedNormalized;
+    }
 
-	public bool leftBumper()
-	{
-		if (Input.GetAxis("Bumper Left") > 0.1f || Input.GetKey(KeyCode.LeftShift))
-			return true;
-		else
-			return false;
-	}
+    public bool leftBumper()
+    {
+        if (Input.GetAxis("Bumper Left") > 0.1f || Input.GetKey(KeyCode.LeftShift))
+            return true;
+        else
+            return false;
+    }
 
     public bool rightAnalogMoving()
     {

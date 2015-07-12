@@ -41,11 +41,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b499420eb5a8a94ebbd92890468a3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallShip: {fileID: 114966, guid: 0f43af1da613e514db75f6ef5428dffa, type: 2}
-  bigShip: {fileID: 197038, guid: ce5c7e1fbd1f4f347a4bb789905a881c, type: 2}
+  interceptor: {fileID: 114966, guid: 0f43af1da613e514db75f6ef5428dffa, type: 2}
+  destroyer: {fileID: 197038, guid: ce5c7e1fbd1f4f347a4bb789905a881c, type: 2}
   spawnInterval: 5
   spawnBorderX: 50
   spawnBorderZ: 50
+  level:
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 15
+  - ship: 1
+    timeTillNext: 5
 --- !u!114 &11444128
 MonoBehaviour:
   m_ObjectHideFlags: 1
