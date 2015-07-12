@@ -85,7 +85,9 @@ public class Spawner : MonoBehaviour {
             switch (ship)
             {
                 case SpawnableShips.interceptor:
-                    enemies.Add((Instantiate(interceptor, spawnPos, Quaternion.identity) as GameObject).GetComponent<EnemyScript>());
+                    GameObject small = Instantiate(interceptor, spawnPos, Quaternion.identity) as GameObject;
+                    small.GetComponent<AI>().changeState("ChasePlayer");
+                    enemies.Add(small.GetComponent<EnemyScript>());
                     break;
 
                 case SpawnableShips.destroyer:
@@ -93,23 +95,18 @@ public class Spawner : MonoBehaviour {
                     break;
 
                 case SpawnableShips.convoy:
-                    //GameObject big = Instantiate(destroyer, spawnPos, Quaternion.identity) as GameObject;
-                    //GameObject small1, small2 = null;
-                    //if (Mathf.Abs(spawnPos.x) < Mathf.Abs(spawnPos.z))
-                    //{
-                    //    small1 = Instantiate(interceptorConvoy, new Vector3(spawnPos.x + 4f, 0, spawnPos.z), Quaternion.identity) as GameObject;
-                    //    small2 = Instantiate(interceptorConvoy, new Vector3(spawnPos.x - 4f, 0, spawnPos.z), Quaternion.identity) as GameObject;
-                    //}
-                    //else
-                    //{
-                    //    small1 = Instantiate(interceptorConvoy, new Vector3(spawnPos.x, 0, spawnPos.z + 2f), Quaternion.identity) as GameObject;
-                    //    small2 = Instantiate(interceptorConvoy, new Vector3(spawnPos.x, 0, spawnPos.z - 2f), Quaternion.identity) as GameObject;
-                    //}
+                    GameObject big = Instantiate(destroyer, spawnPos, Quaternion.identity) as GameObject;
+                    GameObject small1, small2 = null;
 
+                    small1 = Instantiate(interceptor, big.transform.TransformPoint(new Vector3(-5f, 0, 0)), Quaternion.identity) as GameObject;
+                    small2 = Instantiate(interceptor, big.transform.TransformPoint(new Vector3(5f, 0, 0)), Quaternion.identity) as GameObject;               
+                    
+                    small1.GetComponent<AI>().SetupConvoy(big, true);
+                    small2.GetComponent<AI>().SetupConvoy(big, false);
 
-                    //enemies.Add(big.GetComponent<EnemyScript>());
-                    //enemies.Add(small1.GetComponent<EnemyScript>());
-                    //enemies.Add(small2.GetComponent<EnemyScript>());
+                    enemies.Add(big.GetComponent<EnemyScript>());
+                    enemies.Add(small1.GetComponent<EnemyScript>());
+                    enemies.Add(small2.GetComponent<EnemyScript>());
                     break;
 
                 case SpawnableShips.spreadAttack:

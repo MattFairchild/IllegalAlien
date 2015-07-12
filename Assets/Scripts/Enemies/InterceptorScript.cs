@@ -12,12 +12,6 @@ public class InterceptorScript : EnemyScript
         StartCoroutine(Fight());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        agent.destination = target.transform.position;
-    }
-
     IEnumerator Fight()
     {
         while (true)

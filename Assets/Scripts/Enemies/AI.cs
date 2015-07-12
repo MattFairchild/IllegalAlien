@@ -11,11 +11,15 @@ public class AI : MonoBehaviour
     public float minRange = 30.0f;
 
     public State[] allStates;
-    private State currentState;
+    public State currentState;
 
     private Transform player, station;
     private float playerDistance, stationDistance;
 
+    void Awake()
+    {
+        currentState = allStates[1];
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -25,7 +29,7 @@ public class AI : MonoBehaviour
         playerDistance = Vector3.Magnitude(player.position - transform.position);
         stationDistance = Vector3.Magnitude(station.position - transform.position);
 
-        currentState = allStates[0];
+        //currentState = allStates[1];
     }
 
     // Update is called once per frame
@@ -38,7 +42,7 @@ public class AI : MonoBehaviour
             change = !change;
         }
 
-        decide();
+        //decide();
         run();
     }
 
@@ -76,6 +80,14 @@ public class AI : MonoBehaviour
                 currentState = state;
             }
         }
+    }
+
+    public void SetupConvoy(GameObject leader, bool wingman)
+    {
+        Convoy convoyState = allStates[0] as Convoy;
+        convoyState.SetLeader(leader);
+        convoyState.SetWingman(wingman);
+        currentState = convoyState;
     }
 
 }
