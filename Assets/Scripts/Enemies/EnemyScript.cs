@@ -97,8 +97,8 @@ public abstract class EnemyScript : Agent, IHittable
         GameManager.decrementEnemyCount();
 
         GameObject explosion = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity) as GameObject;
-        explosion.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
-        Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
+		explosion.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = GetTypeSpecificSizeModifier();
+		Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject, 0.01f);
         //audio[0].PlayOneShot(deathClip, 5);
 
@@ -127,7 +127,8 @@ public abstract class EnemyScript : Agent, IHittable
 
         for (int i = 0; i < resources; i++)
         {
-            GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position + Random.insideUnitSphere, Random.rotationUniform);
+			Vector3 pos = 0.75f * GetTypeSpecificSizeModifier() * Random.insideUnitSphere; pos.y = 0;
+			GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position + pos, Random.rotationUniform);
 
             shard.GetComponent<ResourcesScript>().resources = 1;
             shard.GetComponent<MeshFilter>().mesh = meshes[i % meshes.Length];
@@ -135,10 +136,15 @@ public abstract class EnemyScript : Agent, IHittable
 
             Rigidbody rbS = shard.GetComponent<Rigidbody>();
 
-            rbS.velocity = agent.velocity + Random.insideUnitSphere;
+			Vector3 vel = agent.velocity + Random.insideUnitSphere; vel.y = 0;
+			rbS.velocity = vel;
             rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
         }
     }
+
+	protected float GetTypeSpecificSizeModifier () {
+		return (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
+	}
 
     public override void IncreaseKillCount()
     {

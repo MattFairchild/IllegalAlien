@@ -61,11 +61,11 @@ public class Spawner : MonoBehaviour {
             //yield return new WaitForSeconds(spawnInterval);
             //SpawnShip(Random.value > 0.75f);
 
-            SpawnShip2(level[spawnIndex].ship);          
+            SpawnShipSophisticated(level[spawnIndex].ship);          
             yield return new WaitForSeconds(level[spawnIndex].timeTillNext);
 		}
 	}
-    protected void SpawnShip2(SpawnableShips ship)
+	protected void SpawnShipSophisticated(SpawnableShips ship)
     {
         {
             float spawnX, spawnZ;
@@ -132,10 +132,11 @@ public class Spawner : MonoBehaviour {
 
             }
             spawnIndex++;
+			spawnIndex %= level.Length;
         }
     }
 
-	protected void SpawnShip (bool big) {
+	protected void SpawnShipSimple (bool big) {
 		float spawnX, spawnZ;
 
 		if(Random.value > 0.5f){

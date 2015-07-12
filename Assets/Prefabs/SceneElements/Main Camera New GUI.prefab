@@ -2815,6 +2815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ad99ba433735d4faa0d8a326f5dc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimateCamera: 0
   xBounds: 35
   zBounds: 35
   yDistance: 20
@@ -2950,6 +2951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bb1b851f2444b40812fbef9a16fa38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimateUI: 0
   scoreGUIParent: {fileID: 0}
   score: {fileID: 11451474}
   enemiesGUIParent: {fileID: 0}

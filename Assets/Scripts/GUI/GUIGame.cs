@@ -159,12 +159,12 @@ public class GUIGame : MonoBehaviour
     {
         if (won)
         {
-            winOverlay.CrossFadeAlpha(1.0f, 1.0f, true);
+            winOverlay.CrossFadeAlpha(1.0f, 2.0f, true);
             winImage.gameObject.SetActive(true);
         }
         else
         {
-            loseOverlay.CrossFadeAlpha(1.0f, 1.0f, true);
+            loseOverlay.CrossFadeAlpha(1.0f, 2.0f, true);
             loseImage.gameObject.SetActive(true);
         }
     }
