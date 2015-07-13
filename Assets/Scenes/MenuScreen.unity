@@ -2955,7 +2955,8 @@ MonoBehaviour:
   m_resourceCostPerTowerLevel: 20
   m_score: 0
   m_enemyCountOnMap: 0
-  gameDiffculty: 1
+  m_scoreModifierRemainingHealth: 1
+  m_scoreModifierLoss: .5
   controlsMixed: 0
   m_boostTimer: 0
   m_gameDuration: 300
@@ -4547,7 +4548,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f658a20fd6368204e9d071b95e8ba44b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .400000006
   m_Pitch: 1
   Loop: 1
   Mute: 0
