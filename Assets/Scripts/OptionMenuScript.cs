@@ -3,7 +3,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
-public class OptionMenuScript : MonoBehaviour {
+public class OptionMenuScript : MonoBehaviour
+{
 
     private GameObject difficultySlider;
     private GameObject soundSlider;
@@ -13,12 +14,12 @@ public class OptionMenuScript : MonoBehaviour {
     void Awake()
     {
         difficultySlider = GameObject.Find("Options Menu/Game Length Slider");
-        difficultySlider = GameObject.Find("Options Menu/Sound Volume Slider");
-        difficultySlider = GameObject.Find("Options Menu/Back");
+        soundSlider = GameObject.Find("Options Menu/Sound Volume Slider");
+        backButton = GameObject.Find("Options Menu/Back");
     }
 
 
-	// Use this for initialization
+    // Use this for initialization
     void OnEnable()
     {
         EventSystem.current.SetSelectedGameObject(difficultySlider);
