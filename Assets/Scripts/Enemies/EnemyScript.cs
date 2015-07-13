@@ -42,7 +42,7 @@ public abstract class EnemyScript : Agent, IHittable
     protected void InitializeEnemy()
     {
 		//difficulty 1 = 0.75 health, difficulty 2 = 1 health, difficulty 3 = 1.25 health
-		maxHealth *= 0.5f + 0.5f * GameManager.difficultyMasterLevel;
+		maxHealth *= 0.5f + 0.25f * GameManager.difficultyMasterLevel;
         InitializeAgent();
         player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
         spaceStation = GameManager.spaceStation.gameObject;//GameObject.FindGameObjectWithTag("SpaceStation");
