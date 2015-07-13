@@ -415,7 +415,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11438948, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
       propertyPath: borderCubeRadius
-      value: 65
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 11438948, guid: 88264fdc0c64bd645be4c7409d085629, type: 2}
       propertyPath: borderThickness
@@ -468,14 +468,6 @@ Prefab:
     - target: {fileID: 440250, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 135984, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2369096, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fabe049f17b3a3242a90cc0cb34bb03d, type: 2}

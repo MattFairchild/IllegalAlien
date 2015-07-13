@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static float soundMasterVolume = 0.5f;
     public static float gameMasterDuration = 300;
+	public static int difficultyMasterLevel = 2;
 
     public static float lastTime = 0;
     public static int lastScore = 0;
@@ -93,7 +94,8 @@ public class GameManager : MonoBehaviour
         m_curResources = 0;
         m_score = 0;
         m_startTime = Time.time;
-        m_gameDuration = gameMasterDuration;
+		//difficulty 1 = half time, difficulty 2 = full time, difficulty 3 = double time
+		m_gameDuration = gameMasterDuration * Mathf.Pow(2, difficultyMasterLevel-2);
         m_endTime = m_startTime + m_gameDuration;
         timeSinceStart = 0;
         m_boostTimer = 1.0f;

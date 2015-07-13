@@ -37,8 +37,13 @@ public class DestroyerScript : EnemyScript
             if (enemiesInRange.Count > 0)
             {
                 GameObject pickedTarget = PickTarget();
-                ShootProjectile(pickedTarget);
-                yield return new WaitForSeconds(1f / shootingFrequency);
+                if(pickedTarget){
+					ShootProjectile(pickedTarget);
+					yield return new WaitForSeconds(1f / shootingFrequency);
+				}
+				else{
+					yield return new WaitForSeconds(0.1f);
+				}
             }
             else
             {
@@ -73,6 +78,7 @@ public class DestroyerScript : EnemyScript
             {
                 distance = Vector3.Distance(transform.position, enemiesInRange[i].transform.position);
                 pickedEnemy = enemiesInRange[i];
+				//Debug.Log(pickedEnemy);
             }
         }
         return pickedEnemy;

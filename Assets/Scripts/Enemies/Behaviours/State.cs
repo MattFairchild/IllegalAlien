@@ -13,8 +13,11 @@ public abstract class State : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        station = GameObject.FindGameObjectWithTag("SpaceStation").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //station = GameObject.FindGameObjectWithTag("SpaceStation").transform;
+		player = GameManager.player.transform;
+		station = GameManager.spaceStation.transform;
+
         parent = transform.root.gameObject;
         agent = parent.GetComponent<NavMeshAgent>();
 
