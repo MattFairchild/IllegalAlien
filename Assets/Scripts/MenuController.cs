@@ -31,7 +31,7 @@ public class MenuController : MonoBehaviour
 
         GameObject camera = GameObject.Find("Main Camera");
 
-        safetyOffset = mainMenu.transform.position - camera.transform.position + new Vector3(440, 0, -458);
+        safetyOffset = mainMenu.transform.position - camera.transform.position + new Vector3(Screen.width / 4f, 0, 0);
     }
 
 
@@ -81,6 +81,7 @@ public class MenuController : MonoBehaviour
                 targetPos = helpPos;
                 break;
         }
+
     }
 
 }
