@@ -22,6 +22,7 @@ public class InterceptorScript : EnemyScript
         {
             if (attackTurrets)
             {
+                GameManager.turretList.RemoveAll(item => item == null);
                 foreach (GameObject turret in GameManager.turretList)
                 {
                     if (Vector3.Distance(turret.transform.position, transform.position) <= shootingRange && Vector3.Angle(transform.forward, turret.transform.position - transform.position) < 15f)
@@ -50,14 +51,14 @@ public class InterceptorScript : EnemyScript
 
     void Shoot()
     {
-        Vector3 position = transform.TransformPoint(new Vector3(0.7f, 0, 2.0f));
+        Vector3 position = transform.TransformPoint(new Vector3(0.4f, 0, 2.0f));
 
         BulletScript bs1 = (GameObject.Instantiate(bulletPrefab, position, Quaternion.LookRotation(transform.forward)) as GameObject).GetComponent<BulletScript>();
         bs1.sender = this;
         bs1.damage = damagePerShot;
         bs1.speed = projectileSpeed;
 
-        position = transform.TransformPoint(new Vector3(-0.7f, 0, 2.0f));
+        position = transform.TransformPoint(new Vector3(-0.4f, 0, 2.0f));
         BulletScript bs2 = (GameObject.Instantiate(bulletPrefab, position, Quaternion.LookRotation(transform.forward)) as GameObject).GetComponent<BulletScript>();
         bs2.sender = this;
         bs2.damage = damagePerShot;

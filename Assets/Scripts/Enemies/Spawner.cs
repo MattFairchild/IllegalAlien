@@ -63,6 +63,8 @@ public class Spawner : MonoBehaviour {
 
             SpawnShipSophisticated(level[spawnIndex].ship);          
             yield return new WaitForSeconds(level[spawnIndex].timeTillNext);
+            spawnIndex++;
+            spawnIndex %= level.Length;
 		}
 	}
 	protected void SpawnShipSophisticated(SpawnableShips ship)
@@ -135,8 +137,6 @@ public class Spawner : MonoBehaviour {
                     break;
 
             }
-            spawnIndex++;
-			spawnIndex %= level.Length;
         }
     }
 

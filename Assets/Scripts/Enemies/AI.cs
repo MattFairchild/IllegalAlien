@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AI : MonoBehaviour
 {
-
+    private NavMeshAgent agent;
     private float time = 0.0f;
     private bool change = false;
 
@@ -26,6 +26,7 @@ public class AI : MonoBehaviour
         //station = GameObject.FindGameObjectWithTag("SpaceStation").transform;
 		player = GameManager.player.transform;
 		station = GameManager.spaceStation.transform;
+        agent = GetComponent<NavMeshAgent>();
 
         //update variables needed to decide on next state
         playerDistance = Vector3.Magnitude(player.position - transform.position);
@@ -46,6 +47,7 @@ public class AI : MonoBehaviour
 
         //decide();
         run();
+        turnToTarget();
     }
 
     public void run()
@@ -90,6 +92,20 @@ public class AI : MonoBehaviour
         convoyState.SetLeader(leader);
         convoyState.SetWingman(wingman);
         currentState = convoyState;
+    }
+    void turnToTarget()
+    {
+        //turns to target if destination is reached
+
+        if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.1f)
+        {
+            agent.updateRotation = false;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(agent.destination - transform.position), Time.deltaTime * agent.angularSpeed * 0.005f);
+        }
+        else
+        {
+            agent.updateRotation = true;
+        }
     }
 
 }
