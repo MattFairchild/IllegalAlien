@@ -22,8 +22,10 @@ public class AI : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        station = GameObject.FindGameObjectWithTag("SpaceStation").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //station = GameObject.FindGameObjectWithTag("SpaceStation").transform;
+		player = GameManager.player.transform;
+		station = GameManager.spaceStation.transform;
 
         //update variables needed to decide on next state
         playerDistance = Vector3.Magnitude(player.position - transform.position);
