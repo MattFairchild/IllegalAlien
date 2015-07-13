@@ -45,7 +45,9 @@ public class GameManager : MonoBehaviour
     public int m_resourceCostPerTowerLevel = 20;
     public int m_score;
     public int m_enemyCountOnMap = 0;
-    public int gameDiffculty = 1;
+    //public int gameDiffculty = 1;
+	public float m_scoreModifierRemainingHealth = 1;
+	public float m_scoreModifierLoss = 0.5f;
 
     public bool controlsMixed = false;
     public float m_boostTimer;
@@ -101,11 +103,24 @@ public class GameManager : MonoBehaviour
         m_boostTimer = 1.0f;
         turretList = new List<GameObject>();
         StartCoroutine(EndGame());
+
+		if(instance.m_gamePaused){
+			UnPauseGame();
+		}
     }
 
     void Update()
     {
         timeSinceStart += Time.deltaTime;
+
+		if(Input.GetKey(KeyCode.K)){
+			if(Input.GetKeyDown(KeyCode.P)){
+				player.Hit(9001);
+			}
+			if(Input.GetKeyDown(KeyCode.S)){
+				spaceStation.Hit(9001);
+			}
+		}
     }
 
     public static float getGravitationalConstant()
@@ -294,9 +309,15 @@ public class GameManager : MonoBehaviour
         }
         instance.m_gameOver = true;
 
-        if (score > PlayerPrefs.GetInt("highscore", 0))
-        {
-            PlayerPrefs.SetInt("highscore", score);
+		float remainingHealthPercentage = 0.5f * (player.percentOfHealth + spaceStation.percentOfHealth);
+		float scoreModifier = (1 + instance.m_scoreModifierRemainingHealth * remainingHealthPercentage) * (won ? 1.0f : instance.m_scoreModifierLoss);
+
+		score = (int)(score * scoreModifier);
+
+		string highscore = GetHighscoreName();
+		if (score > PlayerPrefs.GetInt(highscore, 0))
+		{
+			PlayerPrefs.SetInt(highscore, score);
         }
 
         lastTime = Time.time - startTime;
@@ -307,6 +328,10 @@ public class GameManager : MonoBehaviour
 
         instance.StartCoroutine(LoadLevelWithDelay(0, 2.5f));
     }
+
+	public static string GetHighscoreName () {
+		return "highscore" + difficultyMasterLevel;
+	}
 
     public static void UnPauseGame()
     {
@@ -352,8 +377,8 @@ public class GameManager : MonoBehaviour
         AudioListener.volume = soundMasterVolume;
     }
 
-    public void SetGameDifficulty(int newDifficulty)
+    /*public void SetGameDifficulty(int newDifficulty)
     {
         instance.gameDiffculty = newDifficulty;
-    }
+    }*/
 }

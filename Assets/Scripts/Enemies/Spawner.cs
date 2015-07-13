@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.K)){
+		if(Input.GetKey(KeyCode.K) && Input.GetKeyDown(KeyCode.E)){
 			foreach(EnemyScript enemy in enemies){
 				if(enemy) { enemy.Hit(9001); }
 			}
