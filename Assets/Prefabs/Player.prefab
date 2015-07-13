@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdef4018701cb94ca55e43960d9ccb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dotSphereYvalue: 40
+  dotSphereYoffset: 40
 --- !u!114 &11432344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3276,12 +3276,12 @@ NavMeshObstacle:
   m_GameObject: {fileID: 110952}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1.25, z: 1.25}
+  m_Shape: 0
+  m_Extents: {x: 1.10000002, y: .5, z: 1.10000002}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: .13000001}
   m_TimeToStationary: .5
 --- !u!222 &22202914
 CanvasRenderer:

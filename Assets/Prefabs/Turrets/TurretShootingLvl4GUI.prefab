@@ -431,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.40103102, y: 0, z: -11.1748934}
+  m_LocalPosition: {x: -.486999989, y: 0, z: -11.1750002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 463280}
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdef4018701cb94ca55e43960d9ccb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dotSphereYvalue: 40
+  dotSphereYoffset: 40
 --- !u!114 &11434502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1342,8 +1342,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 138148}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: .5, y: .5, z: .5}
+  m_Shape: 0
+  m_Extents: {x: 1.5, y: .5, z: 1.5}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
