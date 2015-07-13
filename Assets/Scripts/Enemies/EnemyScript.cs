@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using UnityStandardAssets.Effects;
 
 public abstract class EnemyScript : Agent, IHittable
 {
@@ -41,8 +39,8 @@ public abstract class EnemyScript : Agent, IHittable
 
     protected void InitializeEnemy()
     {
-		//difficulty 1 = 0.75 health, difficulty 2 = 1 health, difficulty 3 = 1.25 health
-		maxHealth *= 0.5f + 0.25f * GameManager.difficultyMasterLevel;
+        //difficulty 1 = 0.75 health, difficulty 2 = 1 health, difficulty 3 = 1.25 health
+        maxHealth *= 0.5f + 0.25f * GameManager.difficultyMasterLevel;
         InitializeAgent();
         player = GameManager.player.gameObject;//GameObject.FindGameObjectWithTag("Player");
         spaceStation = GameManager.spaceStation.gameObject;//GameObject.FindGameObjectWithTag("SpaceStation");
@@ -99,8 +97,8 @@ public abstract class EnemyScript : Agent, IHittable
         GameManager.decrementEnemyCount();
 
         GameObject explosion = Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity) as GameObject;
-		explosion.GetComponent<UnityStandardAssets.Effects.ParticleSystemMultiplier>().multiplier = GetTypeSpecificSizeModifier();
-		Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
+        explosion.GetComponent<ParticleSystemMultiplier>().multiplier = GetTypeSpecificSizeModifier();
+        Instantiate(deathSoundPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject, 0.01f);
         //audio[0].PlayOneShot(deathClip, 5);
 
@@ -129,8 +127,8 @@ public abstract class EnemyScript : Agent, IHittable
 
         for (int i = 0; i < resources; i++)
         {
-			Vector3 pos = 0.75f * GetTypeSpecificSizeModifier() * Random.insideUnitSphere; pos.y = 0;
-			GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position + pos, Random.rotationUniform);
+            Vector3 pos = 0.75f * GetTypeSpecificSizeModifier() * Random.insideUnitSphere; pos.y = 0;
+            GameObject shard = (GameObject)Instantiate(shardPrefab, transform.position + pos, Random.rotationUniform);
 
             shard.GetComponent<ResourcesScript>().resources = 1;
             shard.GetComponent<MeshFilter>().mesh = meshes[i % meshes.Length];
@@ -138,15 +136,16 @@ public abstract class EnemyScript : Agent, IHittable
 
             Rigidbody rbS = shard.GetComponent<Rigidbody>();
 
-			Vector3 vel = agent.velocity + Random.insideUnitSphere; vel.y = 0;
-			rbS.velocity = vel;
+            Vector3 vel = agent.velocity + Random.insideUnitSphere; vel.y = 0;
+            rbS.velocity = vel;
             rbS.angularVelocity = rigid.angularVelocity + Random.insideUnitSphere;
         }
     }
 
-	protected float GetTypeSpecificSizeModifier () {
-		return (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
-	}
+    protected float GetTypeSpecificSizeModifier()
+    {
+        return (this.GetType().Equals(typeof(InterceptorScript)) ? 1.5f : 2.5f);
+    }
 
     public override void IncreaseKillCount()
     {

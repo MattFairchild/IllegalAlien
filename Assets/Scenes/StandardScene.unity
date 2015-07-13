@@ -317,6 +317,10 @@ Prefab:
       propertyPath: AnimateCamera
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11462530, guid: 8cf07f9921e6ad844b6dc66baf3be74f, type: 2}
+      propertyPath: AnimateUI
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8cf07f9921e6ad844b6dc66baf3be74f, type: 2}
   m_IsPrefabParent: 0

@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEditor;
 
 public class FrameActivator : MonoBehaviour
 {
