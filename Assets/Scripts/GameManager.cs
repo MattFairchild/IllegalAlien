@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public bool m_showRadius = false;
     public bool alwayShowRadius = false;
+	public bool m_showPrediction = true;
     public bool onlyNearest = false;
 
     //vectors that indicate the different directions on the screen
@@ -134,7 +135,13 @@ public class GameManager : MonoBehaviour
         set { instance.m_showRadius = value; }
     }
 
-    public static bool getOnlyNearest()
+	public static bool showPrediction
+	{
+		get { return instance.m_showPrediction; }
+		set { instance.m_showPrediction = value; }
+	}
+	
+	public static bool getOnlyNearest()
     {
         return instance.onlyNearest;
     }

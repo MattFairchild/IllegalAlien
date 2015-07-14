@@ -870,8 +870,7 @@ MonoBehaviour:
   turretPrefabLvl2: {fileID: 185624, guid: 352b0d4e6a33d9349a01d0990d863fb2, type: 2}
   turretPrefabLvl3: {fileID: 185624, guid: 6edaaafeede668347bd3298f7c3d017b, type: 2}
   turretPrefabLvl4: {fileID: 185624, guid: 1590fd5120ae4da49b231e259a7ad7a9, type: 2}
-  warningParticlePrefab: {fileID: 122670, guid: 09e98d045b7aac841b1046518a3bd8bd,
-    type: 2}
+  warningParticlePrefab: {fileID: 0}
   input: {fileID: 11441072}
   rigidbody: {fileID: 5457934}
   turretSpeed: 5

@@ -46,7 +46,7 @@ MonoBehaviour:
   interceptor: {fileID: 114966, guid: 0f43af1da613e514db75f6ef5428dffa, type: 2}
   destroyer: {fileID: 197038, guid: ce5c7e1fbd1f4f347a4bb789905a881c, type: 2}
   spawnInterval: 5
-  spawnBorderX: 50
+  spawnBorderX: 65
   spawnBorderZ: 50
   level:
   - ship: 0
@@ -65,79 +65,61 @@ MonoBehaviour:
     timeTillNext: 5
   - ship: 0
     timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 4
-    timeTillNext: 20
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 4
-    timeTillNext: 20
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 4
-    timeTillNext: 20
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 20
-  - ship: 1
-    timeTillNext: 5
-  - ship: 0
-    timeTillNext: 5
-  - ship: 1
-    timeTillNext: 5
-  - ship: 4
+  - ship: 2
     timeTillNext: 15
   - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 2
+    timeTillNext: 15
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 20
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 2
+    timeTillNext: 15
+  - ship: 0
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 4
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 5
+  - ship: 2
+    timeTillNext: 15
+  - ship: 0
+    timeTillNext: 5
+  - ship: 1
+    timeTillNext: 5
+  - ship: 0
+    timeTillNext: 20
+  - ship: 1
+    timeTillNext: 5
+  - ship: 2
+    timeTillNext: 15
+  - ship: 4
+    timeTillNext: 15
+  - ship: 0
     timeTillNext: 5
 --- !u!114 &11441112
 MonoBehaviour:
@@ -212,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameOver: 0
   m_gamePaused: 0
+  m_gameStarted: 0
   m_player: {fileID: 0}
   m_spaceStation: {fileID: 0}
   m_gui: {fileID: 0}
@@ -228,6 +211,8 @@ MonoBehaviour:
   m_resourceCostPerTowerLevel: 20
   m_score: 0
   m_enemyCountOnMap: 0
+  m_scoreModifierRemainingHealth: 1
+  m_scoreModifierLoss: .5
   controlsMixed: 0
   m_boostTimer: 0
   m_gameDuration: 300
@@ -306,8 +291,8 @@ MonoBehaviour:
   testPrefab: {fileID: 0}
   tempPrefab: {fileID: 163214, guid: c66b07eb556f9984e86316baccaa81b7, type: 2}
   showBoxCorners: 0
-  distanceToOrigin: 15
-  offsetRange: 10
+  distanceToOrigin: 20
+  offsetRange: 8
   drawGizmos: 1
 --- !u!1001 &100100000
 Prefab:

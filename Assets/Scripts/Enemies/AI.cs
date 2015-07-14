@@ -97,10 +97,12 @@ public class AI : MonoBehaviour
     {
         //turns to target if destination is reached
 
-        if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.1f)
+        if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.25f)
         {
             agent.updateRotation = false;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(agent.destination - transform.position), Time.deltaTime * agent.angularSpeed * 0.005f);
+			Quaternion newRot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(agent.destination - transform.position), Time.deltaTime * agent.angularSpeed * 0.005f);
+			newRot.eulerAngles = new Vector3(0, newRot.eulerAngles.y, 0);
+			transform.rotation = newRot;
         }
         else
         {

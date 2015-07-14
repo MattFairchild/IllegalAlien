@@ -118,7 +118,7 @@ public class InputActions : MonoBehaviour
                 centerTurrets[i].GetComponent<MeshRenderer>().enabled = false;
             }
         }
-        else
+        else if(warningParticlePrefab)
         {
             ShowWarning();
         }
@@ -213,7 +213,7 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.showRadius = false;
+                    GameManager.showRadius = true;
                 }
                 triggerPressed = true;
                 triggerReleased = false;
@@ -312,7 +312,7 @@ public class InputActions : MonoBehaviour
                 //if radius should only be shown while having turret hovering, set variable
                 if (!GameManager.getAlwaysShowRadius())
                 {
-                    GameManager.showRadius = false;
+                    GameManager.showRadius = true;
                 }
                 triggerPressed = true;
                 triggerReleased = false;

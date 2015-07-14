@@ -102,7 +102,7 @@ public class TurretScript : Agent, IHittable {
             Gravity();
             lR.enabled = false;
         }
-        else
+        else if (GameManager.showPrediction)
         {
             showProjection();
         }
@@ -335,10 +335,10 @@ public class TurretScript : Agent, IHittable {
 	}
 
 	protected void Die () {
-        GameManager.turretList.Remove(this.gameObject);
+        alive = false;
 
-		alive = false;
-
+		GameManager.turretList.Remove(this.gameObject);
+		
 		Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
 
 		Destroy(turretObject);

@@ -12,6 +12,7 @@ public class PlanetScript : MonoBehaviour
     {
 		rb = this.GetComponent<Rigidbody> ();
         rb.mass = transform.localScale.x;
+		transform.Rotate(Vector3.up, Random.Range(0.0f, 360.0f), Space.World);
     }
 
 	public void scale(float val)

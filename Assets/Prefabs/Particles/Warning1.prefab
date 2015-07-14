@@ -306,7 +306,7 @@ ParticleSystem:
     m_Mesh: {fileID: 0}
     randomDirection: 0
   EmissionModule:
-    enabled: 0
+    enabled: 1
     m_Type: 0
     rate:
       scalar: 0
