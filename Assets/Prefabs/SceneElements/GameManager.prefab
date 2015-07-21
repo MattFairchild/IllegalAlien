@@ -198,9 +198,10 @@ MonoBehaviour:
   m_player: {fileID: 0}
   m_spaceStation: {fileID: 0}
   m_gui: {fileID: 0}
-  gravitationalConstant: 30
+  gravitationalConstant: 25
   m_showRadius: 0
-  alwayShowRadius: 0
+  alwayShowRadius: 1
+  m_showPrediction: 1
   onlyNearest: 0
   screenUp: {x: 0, y: 0, z: 1}
   screenRight: {x: 1, y: 0, z: 0}

@@ -568,6 +568,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1827688118
 MonoBehaviour:
@@ -748,18 +749,6 @@ Prefab:
       propertyPath: m_gui
       value: 
       objectReference: {fileID: 997557133}
-    - target: {fileID: 11444128, guid: d3ac0e5f57442774b9ec4f43263f99ee, type: 2}
-      propertyPath: gravitationalConstant
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11444128, guid: d3ac0e5f57442774b9ec4f43263f99ee, type: 2}
-      propertyPath: m_showRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11444128, guid: d3ac0e5f57442774b9ec4f43263f99ee, type: 2}
-      propertyPath: alwayShowRadius
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3ac0e5f57442774b9ec4f43263f99ee, type: 2}
   m_IsPrefabParent: 0
