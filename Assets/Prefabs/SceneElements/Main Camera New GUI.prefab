@@ -1543,6 +1543,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!81 &8118252
 AudioListener:
   m_ObjectHideFlags: 1
@@ -2313,7 +2314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .0470588244, g: .129411772, b: .188235298, a: .70588237}
+  m_Color: {r: .0689999983, g: .189749926, b: .275999993, a: .824999988}
   m_Sprite: {fileID: 21300000, guid: 6b1a11159be4e0d43926ba369dabcc0c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
@@ -2815,7 +2816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ad99ba433735d4faa0d8a326f5dc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimateCamera: 0
+  AnimateCamera: 1
   xBounds: 35
   zBounds: 35
   yDistance: 20
@@ -2951,7 +2952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bb1b851f2444b40812fbef9a16fa38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimateUI: 0
+  AnimateUI: 1
   scoreGUIParent: {fileID: 0}
   score: {fileID: 11451474}
   enemiesGUIParent: {fileID: 0}
@@ -3346,8 +3347,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

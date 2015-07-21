@@ -48,9 +48,9 @@ public class MotionController : MonoBehaviour
 
         if (UseSinusTime)
         {
-            sinusTranslationTime = 2 * Mathf.Sin((Time.time + SinusTimeOffset) * TranslationSpeed + (TranslationSinusOffset * Mathf.PI));
-            sinusRotationTime = 2 * Mathf.Sin((Time.time + SinusTimeOffset) * RotationSpeed + (RotationSinusOffset * Mathf.PI));
-            sinusScaleTime = 2 * Mathf.Sin((Time.time + SinusTimeOffset) * ScaleSpeed + (ScaleSpeedSinusOffset * Mathf.PI));
+            sinusTranslationTime = 2 * Mathf.Sin((Time.time * TranslationSpeed + SinusTimeOffset) + (TranslationSinusOffset * Mathf.PI));
+            sinusRotationTime = 2 * Mathf.Sin((Time.time * RotationSpeed + SinusTimeOffset) + (RotationSinusOffset * Mathf.PI));
+            sinusScaleTime = 2 * Mathf.Sin((Time.time * ScaleSpeed + SinusTimeOffset) + (ScaleSpeedSinusOffset * Mathf.PI));
 
             transform.position = Vector3.Lerp(startTranslation, startTranslation + TranslationOverTime * sinusTranslationTime, 0.5f);
             transform.rotation = Quaternion.Lerp(startRotation, startRotation * Quaternion.Euler(RotationOverTime * sinusRotationTime), 0.5f);
